@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
+	<!ENTITY E1 'stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E16 'stroke:none;font-size:25.43555pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E20 'matrix(-4.371139E-08 -1 1 -4.371139E-08 58.79086 377 ) '>
+	<!ENTITY E7 'clip-path:url(#LC80_SetClip);stroke:none;opacity:0;fill:rgb(255,255,255);'>
+	<!ENTITY E32 '192.5 54.59808 191.4019 53.5 194 52 '>
+	<!ENTITY E30 'clip-path:url(#LC240_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E35 '925 867.4 1364.6 867.4 1364.6 969 '>
+	<!ENTITY E3 'stroke-linecap:butt;stroke:rgb(0,0,0);stroke-width:1;opacity:1;fill:none;'>
+	<!ENTITY E22 'stroke:rgb(0,0,0);clip-path:url(#LC188_SetClip);fill:none;stroke-linecap:round;opacity:1;stroke-width:1.2;stroke-linejoin:round;'>
+	<!ENTITY E2 'clip-path:url(#LC4_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E9 'stroke:none;font-size:14.66667pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E29 'clip-path:url(#LC230_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E5 'stroke:rgb(0,0,255);clip-path:url(#LC4_SetClip);fill:none;stroke-linecap:round;opacity:1;stroke-width:2.4;stroke-linejoin:round;'>
+	<!ENTITY E21 'clip-path:url(#LC188_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E31 '191.4019 24.5 192.5 23.40192 194 26 '>
+	<!ENTITY E27 'clip-path:url(#LC222_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E12 'stroke:none;font-size:19.7395pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E18 'stroke-linecap:butt;stroke:rgb(255,255,255);stroke-width:1;opacity:1;fill:none;'>
+	<!ENTITY E23 '0 831 1386 831 1386 1039 0 1039 0 831 '>
+	<!ENTITY E10 'clip-path:url(#LC104_SetClip);stroke:none;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E19 'stroke:none;font-size:21.93278pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E11 'stroke:rgb(255,255,255);clip-path:url(#LC104_SetClip);fill:none;stroke-linecap:round;opacity:1;stroke-width:1;stroke-linejoin:round;'>
+	<!ENTITY E13 'matrix(1 0 0 1 1109 719.9074 ) '>
+	<!ENTITY E15 'matrix(1 0 0 1 1338 719.9074 ) '>
+	<!ENTITY E8 'stroke:none;font-size:14.66667pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(211,211,211);'>
+	<!ENTITY E26 'stroke:none;font-size:17.25pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E6 '191 64 248 68 306 111 363 117 420 81 478 90 535 106 592 81 649 101 707 84 764 106 821 94 879 83 936 137 993 232 1051 359 1108 509 1165 639 1222 688 1280 688 1337 688 '>
+	<!ENTITY E33 '506.5981 53.5 505.5 54.59808 504 52 '>
+	<!ENTITY E25 'clip-path:url(#LC210_SetClip);stroke:none;opacity:1;fill:rgb(255,255,255);'>
+	<!ENTITY E17 'stroke:none;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E4 'stroke:rgb(234,234,234);clip-path:url(#LC4_SetClip);fill:none;stroke-linecap:round;opacity:1;stroke-width:3.6;stroke-linejoin:round;'>
+	<!ENTITY E36 '925 971.4 1364.6 1037.8 925 1037.8 '>
+	<!ENTITY E34 '505.5 23.40192 506.5981 24.5 504 26 '>
+	<!ENTITY E28 'stroke:none;font-size:17.78636pt;font-family:Lucida Sans Typewriter;opacity:1;fill:rgb(0,0,0);'>
+	<!ENTITY E24 'stroke:rgb(0,0,0);clip-path:url(#LC78_SetClip);fill:none;stroke-linecap:round;opacity:1;stroke-width:1.2;stroke-linejoin:round;'>
+	<!ENTITY E14 'matrix(1 0 0 1 1223 719.9074 ) '>
+	<!ENTITY E37 '925 971.4 1364.6 971.4 1364.6 1037.8 '>
+]>
+<svg xmlns="http://www.w3.org/2000/svg" height="1040" width="1386" id="SvgGdi_output" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" zoomAndPan="magnify" version="1.1" contentScriptType="application/ecmascript" contentStyleType="text/css">
+  <g style="shape-rendering:crispEdges;" id="root_group">
+    <rect id="LC3" height="1041" style="&E1;" width="1387" y="-1" x="-1" />
+    <rect id="LC6" height="627" style="&E2;" width="1147" y="63" x="191" />
+    <line y1="63" style="&E3;" id="LC7" x2="1337" y2="63" x1="191" />
+    <line y1="689" style="&E3;" id="LC8" x2="1337" y2="689" x1="191" />
+    <line y1="63" style="&E3;" id="LC9" x2="191" y2="689" x1="191" />
+    <line y1="63" style="&E3;" id="LC10" x2="1337" y2="689" x1="1337" />
+    <line y1="688" style="&E4;" id="LC37" x2="191" y2="64" x1="191" />
+    <line y1="688" style="&E4;" id="LC38" x2="306" y2="64" x1="306" />
+    <line y1="688" style="&E4;" id="LC39" x2="420" y2="64" x1="420" />
+    <line y1="688" style="&E4;" id="LC40" x2="535" y2="64" x1="535" />
+    <line y1="688" style="&E4;" id="LC41" x2="650" y2="64" x1="650" />
+    <line y1="688" style="&E4;" id="LC42" x2="764" y2="64" x1="764" />
+    <line y1="688" style="&E4;" id="LC43" x2="879" y2="64" x1="879" />
+    <line y1="688" style="&E4;" id="LC44" x2="994" y2="64" x1="994" />
+    <line y1="688" style="&E4;" id="LC45" x2="1109" y2="64" x1="1109" />
+    <line y1="688" style="&E4;" id="LC46" x2="1223" y2="64" x1="1223" />
+    <line y1="688" style="&E4;" id="LC47" x2="1338" y2="64" x1="1338" />
+    <line y1="688" style="&E4;" id="LC48" x2="1338" y2="688" x1="191" />
+    <line y1="626" style="&E4;" id="LC49" x2="1338" y2="626" x1="191" />
+    <line y1="563" style="&E4;" id="LC50" x2="1338" y2="563" x1="191" />
+    <line y1="501" style="&E4;" id="LC51" x2="1338" y2="501" x1="191" />
+    <line y1="438" style="&E4;" id="LC52" x2="1338" y2="438" x1="191" />
+    <line y1="376" style="&E4;" id="LC53" x2="1338" y2="376" x1="191" />
+    <line y1="314" style="&E4;" id="LC54" x2="1338" y2="314" x1="191" />
+    <line y1="251" style="&E4;" id="LC55" x2="1338" y2="251" x1="191" />
+    <line y1="189" style="&E4;" id="LC56" x2="1338" y2="189" x1="191" />
+    <line y1="126" style="&E4;" id="LC57" x2="1338" y2="126" x1="191" />
+    <line y1="64" style="&E4;" id="LC58" x2="1338" y2="64" x1="191" />
+    <polyline style="&E5;" points="&E6;" id="LC67" />
+    <rect id="LC99" height="32" style="&E7;" width="316" y="23" x="191" />
+    <text id="LC100" style="&E8;" transform="matrix(1 0 0 1 350 40 ) " x="-153" y="7.142361">Field = 0.911, RI = 0.9119</text>
+    <text id="LC102" style="&E9;" transform="matrix(1 0 0 1 349 39 ) " x="-153" y="7.142361">Field = 0.911, RI = 0.9119</text>
+    <rect id="LC124" height="3.599976" style="&E10;" width="1147" y="689" x="191" />
+    <line y1="689.5" style="&E11;" id="LC125" x2="191" y2="699.5" x1="191" />
+    <line y1="689.5" style="&E11;" id="LC126" x2="306" y2="699.5" x1="306" />
+    <line y1="689.5" style="&E11;" id="LC127" x2="420" y2="699.5" x1="420" />
+    <line y1="689.5" style="&E11;" id="LC128" x2="535" y2="699.5" x1="535" />
+    <line y1="689.5" style="&E11;" id="LC129" x2="650" y2="699.5" x1="650" />
+    <line y1="689.5" style="&E11;" id="LC130" x2="764" y2="699.5" x1="764" />
+    <line y1="689.5" style="&E11;" id="LC131" x2="879" y2="699.5" x1="879" />
+    <line y1="689.5" style="&E11;" id="LC132" x2="994" y2="699.5" x1="994" />
+    <line y1="689.5" style="&E11;" id="LC133" x2="1109" y2="699.5" x1="1109" />
+    <line y1="689.5" style="&E11;" id="LC134" x2="1223" y2="699.5" x1="1223" />
+    <line y1="689.5" style="&E11;" id="LC135" x2="1338" y2="699.5" x1="1338" />
+    <text id="LC136" style="&E12;" transform="matrix(1 0 0 1 191 719.9074 ) " x="-7.929212" y="9.509916">0</text>
+    <text id="LC138" style="&E12;" transform="matrix(1 0 0 1 306 719.9074 ) " x="-23.78764" y="9.509916">1.2</text>
+    <text id="LC140" style="&E12;" transform="matrix(1 0 0 1 420 719.9074 ) " x="-23.78764" y="9.509916">2.4</text>
+    <text id="LC142" style="&E12;" transform="matrix(1 0 0 1 535 719.9074 ) " x="-23.78764" y="9.509916">3.6</text>
+    <text id="LC144" style="&E12;" transform="matrix(1 0 0 1 650 719.9074 ) " x="-23.78764" y="9.509916">4.8</text>
+    <text id="LC146" style="&E12;" transform="matrix(1 0 0 1 764 719.9074 ) " x="-23.78764" y="9.509916">6.0</text>
+    <text id="LC148" style="&E12;" transform="matrix(1 0 0 1 879 719.9074 ) " x="-23.78764" y="9.509916">7.2</text>
+    <text id="LC150" style="&E12;" transform="matrix(1 0 0 1 994 719.9074 ) " x="-23.78764" y="9.509916">8.4</text>
+    <text id="LC152" style="&E12;" transform="&E13;" x="-23.78764" y="9.509916">9.6</text>
+    <text id="LC154" style="&E12;" transform="&E14;" x="-31.71685" y="9.509916">10.8</text>
+    <text id="LC156" style="&E12;" transform="&E15;" x="-31.71685" y="9.509916">12.0</text>
+    <text id="LC158" style="&E16;" transform="matrix(1 0 0 1 764 763.2092 ) " x="-183.911" y="12.25411">Y Field in Degrees</text>
+    <rect id="LC160" height="625" style="&E17;" width="3.600006" y="63.5" x="188" />
+    <line y1="688" style="&E18;" id="LC161" x2="191" y2="688" x1="181" />
+    <line y1="625.6" style="&E18;" id="LC162" x2="191" y2="625.6" x1="181" />
+    <line y1="563.2" style="&E18;" id="LC163" x2="191" y2="563.2" x1="181" />
+    <line y1="500.8" style="&E18;" id="LC164" x2="191" y2="500.8" x1="181" />
+    <line y1="438.4" style="&E18;" id="LC165" x2="191" y2="438.4" x1="181" />
+    <line y1="376" style="&E18;" id="LC166" x2="191" y2="376" x1="181" />
+    <line y1="313.6" style="&E18;" id="LC167" x2="191" y2="313.6" x1="181" />
+    <line y1="251.2" style="&E18;" id="LC168" x2="191" y2="251.2" x1="181" />
+    <line y1="188.8" style="&E18;" id="LC169" x2="191" y2="188.8" x1="181" />
+    <line y1="126.4" style="&E18;" id="LC170" x2="191" y2="126.4" x1="181" />
+    <line y1="64.00061" style="&E18;" id="LC171" x2="191" y2="64.00061" x1="181" />
+    <text id="LC172" style="&E19;" transform="matrix(1 0 0 1 167.1898 688 ) " x="-8.810235" y="10.56657">0</text>
+    <text id="LC174" style="&E19;" transform="matrix(1 0 0 1 149.5693 563 ) " x="-26.43071" y="10.56657">0.2</text>
+    <text id="LC176" style="&E19;" transform="matrix(1 0 0 1 149.5693 438 ) " x="-26.43071" y="10.56657">0.4</text>
+    <text id="LC178" style="&E19;" transform="matrix(1 0 0 1 149.5693 314 ) " x="-26.43071" y="10.56657">0.6</text>
+    <text id="LC180" style="&E19;" transform="matrix(1 0 0 1 149.5693 189 ) " x="-26.43071" y="10.56657">0.8</text>
+    <text id="LC182" style="&E19;" transform="matrix(1 0 0 1 149.5693 64 ) " x="-26.43071" y="10.56657">1.0</text>
+    <text id="LC184" style="&E16;" transform="&E20;" x="-214.5628" y="12.25411">Relative Illumination</text>
+    <rect id="LC191" height="208" style="&E21;" width="1386" y="831" x="0" />
+    <polyline style="&E22;" points="&E23;" id="LC192" />
+    <polyline style="&E24;" points="0 865.0001 1386 865 " id="LC195" />
+    <polyline style="&E24;" points="924.0001 865 924 1039 " id="LC200" />
+    <polyline style="&E24;" points="924 969.0001 1386 969 " id="LC205" />
+    <rect id="LC213" height="170.4" style="&E25;" width="893.2" y="866.8" x="19.39999" />
+    <text id="LC214" style="&E26;" transform="matrix(1 0 0 1 179 880 ) " x="-159" y="8.337891">317704000 PX-AS 18/22.4</text>
+    <text id="LC216" style="&E26;" transform="matrix(1 0 0 1 82 906 ) " x="-62" y="8.337891">7/12/2024</text>
+    <text id="LC218" style="&E26;" transform="matrix(1 0 0 1 179 932 ) " x="-159" y="8.337891">Wavelength: 0.546074 µm</text>
+    <rect id="LC225" height="30" style="&E27;" width="1373.6" y="832" x="9.200012" />
+    <text id="LC226" style="&E28;" transform="matrix(1 0 0 1 697 847 ) " x="-150" y="9.001358">Relative Illumination</text>
+    <rect id="LC233" height="101.6" style="&E29;" width="439.6" y="866.6" x="924.2" />
+    <text id="LC234" style="&E26;" transform="matrix(1 0 0 1 1145 880 ) " x="-35" y="8.337891">Zemax</text>
+    <text id="LC236" style="&E26;" transform="matrix(1 0 0 1 1145 906 ) " x="-187" y="8.337891">Zemax OpticStudio 22.2.1   </text>
+    <rect id="LC243" height="66.39996" style="&E30;" width="439.6" y="971.2" x="924.2" />
+    <text id="LC244" style="&E26;" transform="matrix(1 0 0 1 1145 984 ) " x="-146" y="8.337891">collection_optics.zmx</text>
+    <text id="LC246" style="&E26;" transform="matrix(1 0 0 1 1145 1010 ) " x="-139" y="8.337891">Configuration 1 of 1</text>
+  </g>
+  <defs id="clips_hatches_and_gradients">
+    <clipPath id="LC4_SetClip">
+      <rect x="191" y="63" width="1147" height="627" id="LC5" />
+    </clipPath>
+    <clipPath id="LC11_SetClip">
+      <rect x="192" y="64" width="1145" height="625" id="LC12" />
+    </clipPath>
+    <clipPath id="LC74_SetClip">
+      <rect x="191" y="0" width="1147" height="1040" id="LC75" />
+    </clipPath>
+    <clipPath id="LC78_SetClip">
+      <rect x="0" y="0" width="1386" height="1040" id="LC79" />
+    </clipPath>
+    <clipPath clip-path="url(#LC78_SetClip)" id="LC80_SetClip">
+      <polygon points="191 26 191.4019 24.5 194 26 " id="LC81" />
+      <polygon points="&E31;" id="LC82" />
+      <polygon points="192.5 23.40192 194 23 194 26 " id="LC83" />
+      <polygon points="194 55 192.5 54.59808 194 52 " id="LC84" />
+      <polygon points="&E32;" id="LC85" />
+      <polygon points="191.4019 53.5 191 52 194 52 " id="LC86" />
+      <polygon points="507 52 506.5981 53.5 504 52 " id="LC87" />
+      <polygon points="&E33;" id="LC88" />
+      <polygon points="505.5 54.59808 504 55 504 52 " id="LC89" />
+      <polygon points="504 23 505.5 23.40192 504 26 " id="LC90" />
+      <polygon points="&E34;" id="LC91" />
+      <polygon points="506.5981 24.5 507 26 504 26 " id="LC92" />
+      <polygon points="194 23 504 26 194 26 " id="LC93" />
+      <polygon points="194 23 504 23 504 26 " id="LC94" />
+      <polygon points="194 52 504 55 194 55 " id="LC95" />
+      <polygon points="194 52 504 52 504 55 " id="LC96" />
+      <polygon points="191 26 507 52 191 52 " id="LC97" />
+      <polygon points="191 26 507 26 507 52 " id="LC98" />
+    </clipPath>
+    <clipPath clip-path="url(#LC186_SetClip)" id="LC188_SetClip">
+      <polygon points="0 831 1386 1039 0 1039 " id="LC189" />
+      <polygon points="0 831 1386 831 1386 1039 " id="LC190" />
+    </clipPath>
+    <clipPath clip-path="url(#LC208_SetClip)" id="LC210_SetClip">
+      <polygon points="20 867 913.2 1037.4 20 1037.4 " id="LC211" />
+      <polygon points="20 867 913.2 867 913.2 1037.4 " id="LC212" />
+    </clipPath>
+    <clipPath clip-path="url(#LC220_SetClip)" id="LC222_SetClip">
+      <polygon points="10 832 1383.6 862 10 862 " id="LC223" />
+      <polygon points="10 832 1383.6 832 1383.6 862 " id="LC224" />
+    </clipPath>
+    <clipPath clip-path="url(#LC228_SetClip)" id="LC230_SetClip">
+      <polygon points="925 867.4 1364.6 969 925 969 " id="LC231" />
+      <polygon points="&E35;" id="LC232" />
+    </clipPath>
+    <clipPath clip-path="url(#LC238_SetClip)" id="LC240_SetClip">
+      <polygon points="&E36;" id="LC241" />
+      <polygon points="&E37;" id="LC242" />
+    </clipPath>
+  </defs>
+</svg>
