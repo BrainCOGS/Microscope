@@ -12,11 +12,12 @@ Design and documentation for the TWINKLE 2p microscope.
     └── okh-manifest.yml        # Open Know-How manifest files   
 
 ### Source files
-
+The CAD files are provided in two formats:
+- The Fusion 360 native format as `FullAssembly.f3d`
+- For Autodesk Inventor. When using the Inventor folder, open the master assembly `FullAssembly.iam`.
 
 ### To Do
-
-- Make Bill of Materials
+- Make Bill of Materials.
 - Take measurements to check whether Edward's corrections are correct.
 
 
