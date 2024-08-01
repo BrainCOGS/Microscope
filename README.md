@@ -7,7 +7,20 @@ Design and documentation for the TWINKLE 2p microscope.
     ├── zemax                   # Optics Simulation
     ├── documentation           # Built instructions
     ├── manuscript              # Latex code and figures for the manuscript
-    ├── LICENSE
-    └── README.md               # Info file
+    ├── LICENSE                 # This work is licensed under a CC Attribution 4.0 International License.
+    ├── README.md               # Info file
+    └── okh-manifest.yml        # Open Know-How manifest files   
 
 ### Source files
+
+
+### To Do
+
+- Make Bill of Materials
+- Take measurements to check whether Edward's corrections are correct.
+
+
+### License
+This work is free: you can redistribute it and/or modify it under the terms of the Creative Commons Attribution 4.0 International license, version 4 of the License, or
+(at your option) any later version (CC-BY-4.0). This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. A copy of the License is provided in this repository.  For more details, see <http://www.gnu.org/licenses/>.

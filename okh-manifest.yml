@@ -1,0 +1,49 @@
+title: "TWINKLE: An open-source two-photon microscope for teaching and research"
+description: We document a fully open, high-performance and cost-effective research and
+  teaching microscope without any custom parts beyond what can be fabricated in
+  a university machine shop. The instrument features a large field of view,
+  using modern objectives with a long working distance and large back-aperture
+  to maximize the fluorescence signal.
+intended-use: Two-photon Imaging in Neuroscience, and as an instrument for training,
+  learning and education.
+keywords:
+  - microscope
+  - imaging
+  - optics
+  - non-linear optics
+  - microscopy
+  - neuroscience
+  - teaching
+  - scanning microscopy
+  - fluorescence microscopy
+project-link: https://github.com/BrainCOGS/Microscope
+image: https://github.com/BrainCOGS/Microscope/blob/main/documentation/overview.jpg
+made: true
+made-independently: false
+license:
+  hardware: CC-BY-4.0
+  documentation: CC-BY-4.0
+  software: CC-BY-4.0
+licensor:
+  name: Manuel Schottdorf
+  affiliation: Princeton University
+  email: ms81@princeton.edu
+okh-manifest-version: 1.0.0
+date-created: 2024-08-01
+date-updated: 2024-08-01
+manifest-author:
+  name: Manuel Schottdorf
+  affiliation: Princeton University
+  email: manuel.schottdorf@gmail.com
+manifest-language: en-US
+design-files:
+  - path: https://github.com/BrainCOGS/Microscope/tree/main/cad
+    title: CAD Files of the Assembly
+documentation-language: en-US
+bom: https://github.com/BrainCOGS/Microscope/tree/main/billofmaterials
+making-instructions:
+  - path: Documentation
+    title: https://github.com/BrainCOGS/Microscope/tree/main/documentation
+manufacturing-files:
+  - path: https://github.com/BrainCOGS/Microscope/tree/main/cad/Drawings
+    title: Custom machine parts
