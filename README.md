@@ -1,6 +1,7 @@
 # Microscope
-Design and documentation for the TWINKLE 2p microscope.
+Design and documentation for the TWINKLE two photon microscope:
 
+![img](./documentation/overview.jpg)
 ### Folder Layout
     .
     ├── cad                     # CAD files of the instrument in various Autodesk formats
@@ -19,6 +20,8 @@ The CAD files are provided in two formats:
 ### To Do
 - Make Bill of Materials.
 - Take measurements to check whether Edward's corrections are correct.
+- Check shaved holder height.
+- check 3/4'' feet of galvo box vs. drawings.
 
 
 ### License
