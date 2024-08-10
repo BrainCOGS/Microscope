@@ -18,10 +18,16 @@ The CAD files are provided in two formats:
 - For Autodesk Inventor. When using the Inventor folder, open the master assembly `FullAssembly.iam`.
 
 ### To Do
-- Make Bill of Materials.
-- Take measurements to check whether Edward's corrections are correct.
-- Check shaved holder height.
-- check 3/4'' feet of galvo box vs. drawings.
+
+(1) Writing:
+    - Make Repo public for OSHWA Certified Projects List (eg. https://certification.oshwa.org/us002073.html)
+
+(2) Content:
+    - Find connector for the PMT control?
+    - double-check Imperial and metric screws.
+    - Bill of Materials.
+    - Make sure the list of drawings are a complete set of the custom parts.
+    - Check that all pdfs are in order; including corrections
 
 
 ### License
