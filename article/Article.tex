@@ -1,0 +1,558 @@
+% Template for PLoS
+% Version 3.5 March 2018
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+\usepackage{changepage}
+\usepackage[utf8x]{inputenc}
+\usepackage{textcomp,marvosym}
+\usepackage{cite}
+\usepackage{nameref,hyperref}
+\usepackage[right]{lineno}
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+\usepackage[table]{xcolor}
+\usepackage{array}
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+\usepackage{figchild}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+
+\bibliographystyle{plos2015}
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
+
+%% Include all macros below
+\newcommand{\microns}{~\textmu m~} % ALL UNITS UPRIGHT WITH SPACE
+\newcommand{\invivo}{\textit{in vivo}~}
+%% END MACROS SECTION
+
+\begin{document}
+\vspace*{0.2in}
+
+% Title must be 250 characters or less.
+\begin{flushleft}
+{\Large
+\textbf\newline{TWINKLE: An open-source two-photon microscope for teaching and research}
+}
+\newline
+% Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
+\\
+Manuel Schottdorf\textsuperscript{1,*},
+P. Dylan Rich\textsuperscript{1},
+E. Mika Diamanti\textsuperscript{1}, 
+Albert Lin\textsuperscript{1,4}, 
+Sina Tafazoli\textsuperscript{1},
+Edward H. Nieh\textsuperscript{1,2},
+Stephan Y. Thiberge\textsuperscript{1,3*}
+\\
+\bigskip
+\textbf{1} Princeton Neuroscience Institute, Princeton University, Princeton, NJ, USA\\
+\textbf{2} School of Medicine, University of Virginia, Charlottesville, VA, USA \\
+\textbf{3} Bezos Center for Neural Circuit Dynamics, Princeton University, Princeton, NJ, USA\\
+\textbf{4} Center for the Physics of Biological Function, Princeton University, Princeton, NJ, USA\\
+\bigskip
+
+% Use the asterisk to denote corresponding authorship and provide email address in note below.
+* mschottdorf@princeton.edu\\
+* thiberge@princeton.edu
+
+\end{flushleft}
+% Please keep the abstract below 300 words
+\section*{Abstract}
+Many laboratories use two-photon microscopy through commercial suppliers, or open designs of considerable complexity. The integrated nature of these systems complicates customization, troubleshooting as well as grasping the principles of two-photon microscopy. Here, we present ``Twinkle'': a microscope for Two-photon Imaging in Neuroscience, and Kit for Learning and Education. It is a fully open, high-performance and cost-effective research and teaching microscope without any custom parts beyond what can be fabricated in a university machine shop. The instrument features a large field of view, using modern objectives with a long working distance and large back-aperture to maximize the fluorescence signal. We document our experiences using this systems as a teaching tool in several two week long workshops, exemplify scientific use cases, and conclude with a broader note on the place of our work in the growing space of open-source scientific instrumentation.
+
+\linenumbers
+
+\section*{Introduction}
+%
+Two-photon microscopy\cite{Denk1990, Svoboda1997, So2000, Helmchen2005} is a workhorse of modern systems neuroscience across species, and two-photon microscopes exist in many system neuroscience laboratories\cite{Luu2024, Grienberger2022}. For example, in \textit{Mus musculus}, two-photon microscopes have been used to classify the function and neural inventory of the retina \cite{Baden2016}, study sequential activity in cortex \cite{Harvey2012} and subcortical structures \cite{Nieh2021}, led to transformative insights into signals in the dopaminergic reward system \cite{Engelhard2019}, and revealed an organized map among grid cells \cite{Yu2018}. In non-human primates, two-photon microscopes have been used as optical brain computer interfaces \cite{Trautmann2021}, and to survey the spatial organization of motor cortex in reach movements \cite{Ebina2018}. They also have potential to further our understanding of the function of the primate retina \cite{Sharma2016, Schottdorf2021}. In Zebrafish, \textit{Danio rerio}, two-photon microscopy can image the entire brain with single cell resolution \cite{Renninger2013}. Two-photon microscopy has also become a standard method for monitoring neural activity in invertebrates. In the fruit fly, \textit{Drosophila melanogaster}, imaging from sparse, genetically specified neuron populations \cite{Seelig2010, Lin2022} has enabled many circuits to be functionally mapped, including auditory \cite{Baker2022}, courtship \cite{Deutsch2020, Roemschied2023}, and navigation circuits \cite{Kim2017}. Two-photon microscopes have also enabled volumetric pan-neuronal imaging, in which large portions of the whole fly brain can be recorded from with high temporal resolution \cite{Pacheco2021,Brezovec2024}. In \textit{Caenorhabditis elegans}, it allowed to measure an atlas of neural signal propagation \cite{Randi2023}.\newline
+However, these systems are expensive and usually hard to customize \cite{Diamanti2021}, while improvements and new inventions are published regularly, such as the incorporation of adaptive optics \cite{Yao2023}, the use of multiple beams for more effective sampling\cite{Song2017}, the combination with two-photon stimulation for all-optical interrogation of neural circuits \cite{Rickgauer2014}, extremely large fields of view for mesoscopic imaging across brain areas \cite{Sofroniew2016}, or the use of delays for effective sampling through extremely large volumes of cortical tissue \cite{Demas2021}.\newline
+This popularity suggests the need for a simple platform, at reasonable cost, for practical education, dissemination, methods development and research. We developed a high-performance and cost-effective two-photon microscope that can easily be built in any neuroscience laboratory over the course of several days and can be effectively used for both teaching and research purposes. Reflecting its use for ``\textbf{TW}o-photon \textbf{I}maging in \textbf{N}euroscience, and \textbf{K}it for \textbf{L}earning and \textbf{E}ducation'', we chose the acronym Twinkle. Twinkle's open design makes the building experience ideal for teaching the principles of two-photon microscopy to the next generation of researchers. Here, we share our design, document system performance, explore possible research applications, and report our experiences collected during several teaching workshops.
+
+\section*{Materials and methods}
+In two-photon laser-scanning microscopy\cite{Denk1990}, laser light is focused to a small volume. The product of the interaction of light and sample, fluorescent light, is then measured with a sensitive light detector. Moving the volume of light through the sample and combining the detected fluorescence from different $x$ and $y$ positions produces a picture. The key to two-photon microscopy is the light source: A femtosecond-pulsed infrared laser restricts the volume in which fluorescence occurs to a tiny region in the sample with sufficiently high photon density for the near-simultaneous absorption of two photons by a fluorescent molecule \cite{Denk1990, Svoboda1997, So2000, Helmchen2005}.\newline
+Here, we design an open and high-performing microscope that uses these principles. As such we have made all optical and mechanical designs, electronics, bill-of-materials, CAD assembly, testing results, and relevant schematics open to the public. Excluding laser and optical table, the cost is around US-\$ 110,000 (2024). A narrative of the design and high-level view is presented here. For further technical details, and complete built documentation, we refer the reader to \nameref{S1_Appendix}, and the repository at \url{https://github.com/BrainCOGS/Microscope}.
+
+\subsection*{Design specifications}
+To summarize our design goals, we aimed for a mechanical and optical assembly using as many off-the-shelf components as possible, with only few custom aluminium parts that can be machined in any university machine shop. Our design lacks a microscope body, which is  advantageous for two reasons: it aids the use as a teaching instrument, and facilitates adaptation for \invivo imaging because it provides space for the organism and ancillary hardware. We also avoid any custom optics to aid transparency of the function of the optical system. Our system is also made cost-effective, in part, by the availability of femtosecond laser systems based on fiber technology. Operating at a fixed wavelength, these systems come at the fraction of the cost of a more traditional tunable Ti:Sapphire laser \cite{Bueno2019}.\newline
+We aimed for (1) $\gtrapprox20\text{ cm}$ of free space around the objective in all directions to aid integration of the microscope into custom behavior boxes, or sample container, and (2) resolution limited imaging of at least $\approx 700\times 700\text{ \textmu m}^2$ field of view which is typical for imaging brain tissue at cellular resolution. (3) Compared to previous open designs\cite{Rosenegger2014, Mayrhofer2015}, our system can make use of the large back aperture of modern long-working-distance objectives to collect more fluorescence and (4) uses GaAsP photomultiplier tubes to maximize signal to noise.\newline
+An overview of the microscope is shown in Fig.~\ref{fig1}. Fig.~\ref{fig1}A shows the system as a cartoon. Full details will be provided below. In short, we chose a Spark Alcor 920 nm pulsed femtosecond laser, whose beam, after $2\times$ magnification with a telescope, reaches the scanning mirrors. The scanning mirrors are geometrically close together in the focal plane of the scan lens. This simplifies the design, but leads to minor distortions across the field of view (a few percent at low magnifications, see below). The combined scan and tube lenses magnify the beam further to fill the back aperture of the objective. Fluorescence from the specimen is then collected and focused on the aperture of two GaAsP photomultiplier tubes with suitable color filters. Fig.~\ref{fig1}B shows the CAD design of the entire assembly with important parts of the optical path labelled. Fig.~\ref{fig1}C shows an annotated picture of the microscope head. Notice that compared to the cartoon in Fig.~\ref{fig1}A, the optical path is folded with several mirrors. These mirrors significantly simplify alignment, and make the design more compact.
+
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig1.jpg}
+    \caption{{\bf System overview.} \textbf{A)} Cartoon of the layout. \textbf{B)}
+    CAD drawing of the system on an optical table with several key components in the optical path highlighted. The spacing between two holes on the table is 1 inch. \textbf{C)} Photograph of the microscope head with key elements labelled. This section is visible in panel B.}
+    \label{fig1}
+\end{figure}
+
+\subsection*{Assembly on the table}
+Various components are used between the laser and the microscope head to condition the beam, and  for intensity control, Fig.~\ref{fig1}B. Out of the laser head, the beam first encounters a waveplate (AHWP10M-980, Thorlabs). This is a birefringent crystal that can rotate the polarization of the laser. Next, the beam travels through a polarizing beamsplitter cube (PBS103, Thorlabs). This splits the beam into two beams whose relative intensity can be adjusted by the orientation of the waveplate. We set the orientation of the waveplate to split the beam into two beams with 50\% power each to feed a second experimental setup. In the CAD drawing, this beam is sent to a beam block (LB1, Thorlabs). Next, the beam passes through an electro-optic modulator, a Pockels cell (350-80-LA-02, Conoptics). This device allows rapid and electronic control of the laser's power level. It uses a crystal whose refractive index is controlled by an external electric field, combined with a polarizer. This can be thought of as a voltage-controlled wave plate, in which the electric field controls how much light travels through the polarizer. Next, the beam travels through an open mechanical shutter (LS6S2ZM1, Vincent Associates). When closed, the reflection from the shutter is used for calibrating the Pockels cell with a photodiode (PDA36A2, Thorlabs). Following the shutter, the beam travels though a $2\times$ telescope (GBE02-B, Thorlabs). This magnifies the beam diameter by a factor of 2. Past the telescope, the beam is then reflected off several mirrors in a periscope configuration before entering a custom aluminium box housing, mounted to a 95 mm optical rail, that houses the two scanning mirrors (CRS8K/6215H scanning mirror Set, Novanta), shown in blue in  Fig.~\ref{fig1}C. Based on their angles, the two mirrors deflect the beam in x and y position. The beam then travels through scan lens (green) and tube lens (red), the collection optics (yellow) and finally the objective (cyan). The design of these components is covered in the next paragraphs. The steering mirrors in our system are all silver mirrors from Thorlabs. Silver mirrors contribute minimally to dispersion which is inevitable when light travels through various optical components. Limiting the dispersion makes it possible to correct for it with the laser's built-in dispersion compensation. 
+
+\subsection*{Optical design: Scan and tube lens}
+When using infinity-corrected objectives, the incident light has to be collimated at the back aperture of the objective. In other words, the light rays have to arrive as parallel beams at the back aperture of the objective. When using a collimated laser beam, then scan and tube lens must be configured as a telescope with the scanning mirrors positioned in the conjugated plane of objective back aperture. A typical scan angle of $\pm10\text{ deg}$ positioned at the focal point of the scan lens, combined with two inch diameter optics, determines the scan lens focal length to $f_S=100\text{ mm}$ (cf. Fig.~\ref{fig1}A). To fill the back aperture of the objective with our laser beam, we aimed for a combined magnification of $M=3.75\times=f_T/f_S$. This determined the focal length of the tube lens to $f_T=375\text{ mm}$. This reduces the scan angles at the back aperture of the objective to $20\text{ deg}/3.75\approx 5.3\text{ deg}$ and with a given objective (e.g. Nikon $16\times$ with $f_O=12.5\text{ mm}$) this determines the expected approximate field of view ($\approx 1.2\text{ mm}$).\newline
+We assembled the scan and tube these as lens groups from groups of off-the-shelf parts, using the same elements as in \cite{Yao2023}, and further optimizing lenses and spacing in Zemax (an optics design software). Details are provided below. After optimization, the focal lengths of scan and tube lens were 99 mm and 378 mm respectively, deviating around 1\% from their target values (Zemax simulation at 920 nm).
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig2.jpg}
+    \caption{{\bf Optical design of the excitation pathway.} \textbf{A)} Zemax design with the scanning mirror, tube and scan lens groups. Colors indicate light rays produced by different mirror angles of the scanning mirror. Notice how the rays converge in the focal plane. \textbf{B)} CAD design built around the optical design in A, see also Fig.~\ref{fig1}B. \textbf{C)} Cuts through the scan and tube lens assemblies, which are fabricated from off-the-shelf lenses housed in SM2 lens tubes. The specific lenses are stated in the text. \textbf{D)} Simulation of the optical system's two-photon point spread function (PSF-2p) for 0 deg deflection angle, and two example radial sections. \textbf{E)} PSF-2p in xz direction across the full range of deflection angles, and quantification of Petzval field curvature (blue), and radial (purple) and axial (yellow) full-width-at-half-maximum of the PSF-2p. Error bars are resolution limits of the Huygens PSF estimates in sequential mode.}
+    \label{fig2}
+\end{figure}
+%
+Fig.~\ref{fig2}A shows the propagation of light rays for various deflection angles of the scanning mirrors converging on points along a line in the focal plane. The Zemax design was then exported into CAD, and the optomechanics assembled around it, see Fig.~\ref{fig2}B. The CAD design and lens groups are highlighted in Fig.~\ref{fig2}B,C (see Fig.~\ref{fig1}C of a photograph of the same part of the instrument). The key property that we optimized when designing the excitation system was an essentially flat, and diffraction limited focal volume across a wide range of deflection angles of the scanning mirrors. Fig.~\ref{fig2}D shows an estimate of the two-photon point spread function (PSF-2p), computed as the square of the Huygens PSF in Zemax. The maximum scan angle of $\pm 10\text{ deg}$ is limited by vignetting of the two inch diameter optics. Analyzing the PSF-2p across optical deflection angles, Fig.~\ref{fig2}E, suggests very small field curvature. In this simulation, the axial resolution was $\delta z = 5.0\text{ \textmu m}$, and the radial resolution $\delta r = 0.75\text{ \textmu m}$ across a wide range of deflection angles.\newline
+The specific elements that allowed for this performance were as follows: For the scan lens, we used an assembly of four lenses, see Fig.~\ref{fig2}C, 1: KPC070AR (Newport); 2: LB1199-B (Thorlabs) and 3\&4: $2\times$ ACT508-200-B (Thorlabs). The $2\times$ ACT508-200-B lenses are arranged back-to-back and provide the majority of the optical power. The symmetric Pl\"ossl design corrects for the odd aberrations: coma, distortion, and lateral colors \cite{Negrean2014, Kidger2001}. The two additional lenses provide corrections to the even aberrations: spherical aberration, astigmatism, and field curvature. We chose the specific lenses and their spacing based on availability from established optics suppliers and the simulation of dozens of combinations in Zemax. The tube lens is inspired by a Petzval design \cite{Smith2007, Kidger2001}, consisting of a pair of achromatic doublets with the same orientation, $2\times$ ACT508-750-A, Thorlabs. We found in simulation that this design performed better than a Pl\"ossl pair where the doublets are symmetric (this was observed by others as well \cite{Hong2022, Bumstead2018, Mayrhofer2015}).\newline
+The two lens groups combined provide a magnification of $M=3.75\times$ to produce a beam that slightly underfills the back aperture of the Nikon NA 0.8 $16\times$ LWD objective, effectively reducing its excitation NA to $\approx0.7$. This has various advantages for \invivo imaging (see discussion). Of further note, we used a piezoelectrical collar to mount the objective. The collar can move the objective along the optical axis at a fast rate for imaging across multiple planes. 
+
+\subsection*{Optical design: Collection optics}
+%
+The aim of the collection optics is to collect the most florescence with a small sized sensor. For our system, this is a 5 mm diameter window of the Hamamatsu H16201-40 Photomultiplier tube (PMT) module. This is achieved by imaging the back aperture of the objective on the aperture of the PMT. Since two-photon microscopes form a picture scanning pixel by pixel, there is no strict requirement for the collection optics to be image forming \cite{Tsai2015}. They should, however, collect as much fluorescent light as possible.
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig3.jpg}
+    \caption{{\bf Optical design of collection system.} \textbf{A)} Zemax design of the collection optics. Colors indicate different emission angles. These rays were computed for the green emission light path. Small letters denote filters: a is a FF665-Di02-40x55; b: an IR block (not shown in the Zemax simulation); c: FF562-Di03-40x52 and d: FF01-525/45-32 (BrightLine; AVR Optics). Small numbers  denote lenses. 1 is a LA1384-A; 2: LB1607-A and 3: ACL25416U-A (all Thorlabs). \textbf{B)} CAD design built around the Zemax model in A, with several covers removed to expose the interior. The light paths from the laser and fluorescent emission are indicated in transparent colors. Notice how the dichroic mirror splits fluorescence and excitation light, and directs the former to the photomultiplier tubes (PMTs). The mirrors/filters and lenses are numbered/lettered as in A). Two more filters were added relative to the simulation. b blocks residual IR excitation light $\lambda>680\text{ nm}$ (FF01-680/SP-50), and e is a FF01-600/52-32 filter for the red channel. \textbf{C)} Shown is the angle collection graph of the collection optics, which shows the fraction of collected light as function of the angle to the optical axis. This was simulated in Zemax for the design in A. The collection optics were optimized to collect essentially all light over an $\approx\pm 8\text{ deg}$ emission angle.}
+    \label{fig3}
+\end{figure}
+%
+We incorporated four design principles into our assembly: (1) Fluorescence light must fall approximately perpendicularly on the optical filters. Narrow filters are particularly susceptible to these effect. Although light emitted from the focal plane of an infinity-corrected objective is collimated as it returns from the sample, actual fluorescence weakly diverges due to scattering and diffraction in the material between focal plane and objective (e.g. brain tissue \cite{Zipfel2003, Taddeucci1996}). The detector assembly should therefore be placed as close as possible to the objective where fluorescent light will be nearly collimated. This placement reduces sensitivity to spurious light and allows IR light to travel through the collection optics unimpeded, while fluorescent light is reflected into the optical assembly. This arrangement also has the advantage that possible astigmatism, introduced by curvature of the dichroic in the reflected light, only affects the collection optics which does not have to form an image. (2) The collection lens should be large to maximize the collection of as much fluorescent light as possible. This implies that the collection lens should follow the dichroic mirror as closely as possible. (3) Having the collected photons collimated on the aperture of the photomultiplier tubes reduces the sensitivity of the system on surface inhomogeneities of the detector\cite{Tsai2002, Young2015}. In scanning microscopy, an image is produced as a time series of intensities. It is therefore more important to collect a consistently large portion of fluorescent light, rather than to minimize aberration in the collection optics. We therefore optimized relative illumination as function of the field angle in Zemax. (4) All dichroic mirrors and optical band-pass filters have finite performance. It it therefore advantageous to combine multiple band-pass filters to isolate relevant fluorescence ranges. We aimed to record fluorescence from two well-separated spectral ranges, a green ($525\pm25\text{ nm}$) and a red channel ($600\pm25\text{ nm}$). Beyond an IR block in the collection optics, we chose to only use simple long-pass filters, which means that the red channel is operated in the transmission, and the green channel in the reflection mode (cf. Fig.~\ref{fig1}A).\newline
+With these considerations in mind, we assembled the collection optics from off-the-shelf components that were optimized in Zemax, building on previous work \cite{Tsai2002,Tsai2015}. A cartoon is shown in Fig.~\ref{fig3}A. The colors illustrate different sources of fluorescent light. Notice the mild divergence, and approximately collimated beams that enter the aperture of the photomultiplier tube. As previously, this design was exported into CAD, and the optomechanics assembled around it, see Fig.~\ref{fig3}B. Fig.~\ref{fig3}C shows a simulation in Zemax demonstrating that essentially all light up to $\approx\pm 8\text{ deg}$ is arrives at the aperture of the photomultiplier tubes.
+
+\subsection*{Mechanical design}
+As mounting system of our microscope, we chose a standard 8 inch thick optical table. The design was done in CAD, and the results shown in Fig.~\ref{fig1}B. The aim was a mechanical assembly that uses as few custom parts as possible. We discuss this further in the discussion section. The components in the CAD files can be assembled and aligned by an experienced researcher in a few days. When used for teaching, a careful assembly and alignment is viable with about a week of work. Regarding the footprint, the system can comfortably be built on an $4\times4$ ft area of table. The microscope documented here was setup on a $4\times8$ ft table, shared with a second microscope. The beam-splitting hardware is shown in Fig.~\ref{fig1}B as well.\newline
+The custom mechanical components (e.g. the light-tight aluminium housing of the collection optics) were built in the university's machine shop from aluminium stock or Thorlabs parts. Some parts have tight tolerances which suggests manufacturing in a professional machine shop is preferred. If useful for training, this could however be done by students. An example are the aluminium parts that hold the large dichroic mirrors and optical filters in the collection optics. After drilling the apertures for light to pass through, not much metal is left on the part which can lead to warping and distortions.\newline
+Finally, we want to emphasize the difference between a theoretically optimal design in Zemax and finite tolerances in real-world optomechanical parts. It is key for a good microscope design to be robust against such errors. In our design, the objective is fixed, while the mirrors, the tube and scan lens assemblies, and the scanning mirrors can move along the optical axis for alignment. This allows the mechanical components sufficient degrees of freedom to optically align all key parts of the microscope. In the supplement, we go through this alignment procedure which allows a user to find the optimal position of the scanning mirrors in the conjugated plane of the back-aperture of the objective.
+
+\subsection*{Electronic design}
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig4.jpg}
+    \caption{{\bf Custom electronic control circuit and box.} \textbf{A)} Control circuit to set and read the gain of the two H16201P-40 photomultiplier tube modules used for red and green channel. The two modules are connected with two 4-wire connectors, and their current gain is displayed on a small digital panel meter. \textbf{B)} Wiring of the panel meter for single-ended configuration. \textbf{C)} The circuit in a prototype-box, and mounted to the side of a rack. The two gains for green (top) and red (bottom) channel are visible. A gain of around $\approx0.8$ is typical for Calcium imaging to maximize the faint signal. A gain of $\approx0.6$ is appropriate for very bright samples.}
+    \label{fig4}
+\end{figure}
+%
+A simple circuit, see Fig.~\ref{fig4}A, is used to control and display the photomultiplier gain. The H16201P-40 photomultiplier tube module comes with four cables, two for power supply, and two for gain control. These leads are color-coded. We designed a small circuit for resistance programming of the gain, and to display the gain setting voltage on small digital panel meter (Murata DMS-20PC). The circuit for controlling two channels (red and green) is shown in Fig.~\ref{fig4}A. For the tube module, the +15 V supply voltage and ground are provided via the black and red cables. The blue cable is connected to ground via a potentiometer to act as a voltage divider. The gain voltage is then fed back to the module via the white input line, and used for display on the panel meter. We added a 12k resistor between the PMT module, and the potentiometer to limit the control voltage which is safer for the PMT. Optimal signal-to-noise ratio for our systems is usually $\approx 0.7-0.8\text{ V}$. The panel meter needs an additional +5 V supply that we obtain from the +15 V via a resistive divider. The meter is operating in Single-Ended Input Conﬁgurations, see Fig.~\ref{fig4}B. Due to the simplicity of this circuit, we do not solder this on a circuit board, but rather in a prototype development box directly, see Fig.~\ref{fig4}C, which is attached to the rig.\newline
+This circuit and the driver boards for the xy scanners need a well regulated power supply, as any noise would directly translate to image noise and distortions. We use an Agilent E3630A supply. The PMT outputs were amplified with two Transimpedance Amplifiers (TIA60, Thorlabs), and directly connected to the data acquisition system.
+
+\subsection*{Ancillary hardware}
+Our microscope is controlled with ScanImage \cite{Pologruto2003} running on a Windows PC and this data acquisition (DAQ) system was provided by Vidrio. In our experience, this reduces software issues.\newline
+A typical femtosecond pulsed laser source is expensive. Ti:Sapphire lasers are tunable, but particularly expensive. For the work demonstrated here, we used a fixed-wavelength femtosecond laser systems, based on fiber technology (e.g.\cite{Bueno2019,Limpert2006,Wise2012,Young2015}). Operating at a fixed wavelength, these systems come at a fraction of the cost of a more traditional tunable Ti-Sapphire laser, and they take up significantly less real estate on an optical table. The laser was controlled with the same PC as ScanImage through a USB connection. As the beam travels through a number of crystals, lenses, and mirrors with various chromatic properties, significant dispersion is introduced which increases pulse length, reducing the two-photon absorption efficiency. It is possible to compensate for the group-delay dispersion of the microscope by giving the short-wavelength components a sufficient head start so that blue and red components arrive at the sample at the same time. We found, empirically, that the built-in group velocity dispersion compensation of the laser was more than sufficient to tune the system to an optimum, which we found close to $\varphi=-20200\pm170\text{ fs}^2$. Details of this measurement, and some theory, are provided below as a teaching example (cf. Fig.~\ref{fig9}). Regarding light transmission, we found the Spark laser to produce $\approx 2.1\text{ W}$ of light. After the wave plate and beamsplitter cube, $\approx 1.0\text{ W}$ enter the Pockels cell (cf. Fig.~\ref{fig1}B). The Pockels cell is rotated so that the control voltage produces the largest dynamic range of transmitted laser power (we go through the alignment procedure in depth below). At maximum transmission setting of the Pockels cell, we obtain $\approx 260\text{ mW}$ below the objective, corresponding to $\approx1/4$ of the available light. In our hands, this is more than enough for imaging. All pictures presented in this article were obtained with $\approx 15\text{ mW}$ below the objective.
+
+\subsection*{Animal procedure}
+All procedures performed in this study were approved by the Institutional Animal Care and Use Committee at Princeton University and were performed in accordance with the Guide for the Care and Use of Laboratory Animals \cite{Guide2011}.
+
+\section*{Results}
+
+\subsection*{System performance}
+%
+Here, we document the performance of the microscope and a few example applications using a Nikon NA 0.8 16$\times$ LWD objective (N16XLWD-PF, Thorlabs). We first determined the size and properties of the field of view with a 100~\textmu m grid (R1L3S3P, Thorlabs), imaged using a Fluorescein in water film through a standard \#1.5 ($\approx170\text{ \textmu m}$ thick) coverslip, see Fig.~\ref{fig5}A. The field of view was $d\approx1.3\text{ mm}$ along the diagonal, $A\approx 1\text{ mm}^2$ in area and the field curvature below the thickness of a thin Fluorescein film $\lesssim 10\text{ \textmu m}$. This is consistent with our earlier Zemax simulations. When measuring the magnification $M$ in \textmu m/px across the field of view, we observed small deviations of $\Delta M \approx 0.1\text{ \textmu m/px}$ in the center when compared to the edges, while the overall range of magnifications across the field of view was tight, see Fig.~\ref{fig5}B. The average magnification is $M=2.77\pm0.04\text{ \textmu m/px}$, which suggests a deviation from a perfect f-Theta system of $\Delta M/M = 0.1/2.8 \approx 4\%$. Next, we imaged a uniform bath of Fluorescein, see Fig.~\ref{fig5}C. This is a combined measure of the quality of excitation and the efficiency of the collection optics across the field of view. Within the central $700\text{ \textmu m} \times 700\text{ \textmu m}$ region, the signal deviated from uniformity within $\approx 10\%-15\%$ ($\pm 1 \text{ standard deviation}$) suggesting a relatively flat field, see Fig.~\ref{fig5}D, E. Following these measurements, we imaged a bead sample of 0.2\microns diameter in 1\% Agarose (Dragon Green beads; Bangs Laboratories) to measure axial and radial PSFs. The sample is shown in Fig.~\ref{fig5}F. Averaging across the $N=38$ beads in this volume, we measured a radially symmetric full-width-at-half-maximum of $\delta r\approx760\pm30\text{ nm}$, see Fig.~\ref{fig5}G,H, and axially $\delta z \approx 5.4\pm0.9\text{ \textmu m}$, see Fig.~\ref{fig5}I. The theoretical resolution limits\cite{Tsai2002} for our system, underfilled to $\text{NA}=0.7$ at $\lambda=920\text{ nm}$ and water immersion ($n=1.33$) were radially FWHM of $\delta r=0.6\,\lambda/\text{NA}=780\text{ nm}$ and axially $\delta z = 2\,\lambda n/\text{NA}^2=5.0\text{ \textmu m}$. This is consistent with our earlier simulations in Zemax (cf. Fig.~\ref{fig2}), and suggests that our microscope is operating very close to the diffraction limit, and its design specifications.
+%
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{fig5.jpg}
+    \caption{{\bf System capabilities} \textbf{A)} Measurement of the local magnification with a 100\microns calibration target in a thin Fluorescein film below a coverslip. Shown in green is a $700\times700\text{ \textmu m}^2$ square as reference. \textbf{B)} Histogram of the magnifications in A, measured across all squares. \textbf{C)} Two-photon intensity measurements from a uniform bath of Fluorescein. Shown are pixel values (maximum is 32768). \textbf{D)} Horizontal and vertical profiles through the data in C. The green box is indicated by the shaded green area. Range is $\pm 1 \text{ standard deviation}$. \textbf{E)} Histogram of the intensities from within the green box in C. \textbf{F)} Volumetric measurement of a 0.2 \textmu m bead sample in 1\% Agarose. \textbf{G)} Average of N=38 beads. \textbf{H)} Horizontal and vertical profiles through data in G and a Gaussian fit reveal a radial resolution of $760\pm30\text{ nm}$. \textbf{I)} Estimate of the axial resolution shows $5.4\pm0.9\text{ \textmu m}$.}
+    \label{fig5}
+\end{figure}
+%
+%
+\subsection*{Imaging performance}
+
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig6.jpg}
+    \caption{{\bf Example imaging data from simple samples.} \textbf{A)} Autofluorescence of a part of a dandilion flower (Taraxacum officinale) \textit{in vivo}. Notice the pollen grains embedded in the plant material. Optical sectioning allows to focus below the plant surface to the grains. \textbf{B)} Zoom and volumetric image of  a small region (white box) of the sample in A. Optical sectioning shows the surface of the plant and the slice where the pollen grains come into focus. Notice the complex 3D structure of the pollen grains, and their embedding below a layer of red-fluorescent plant material. \textbf{C)} Histological sample showing a stain for glial fibrillary acidic protein in rat astrocytes. \textbf{D)} Image of a cotton napkin (Kimwipe) with depth coded as color. Zooming into a small region (white box) shows how strands of cotton are woven together, and how the pattern changes with depth. Notice how image quality deteriorates in this strongly scattering sample.}
+    \label{fig6}
+\end{figure}
+
+Confident that the system operates as intended, we next imaged a number of representative samples that are easily available in any teaching lab, namely plant material, a histological and a strongly scattering sample, see Fig.~\ref{fig6}. The first samples was a Dandilion flower (Taraxacum officinale) \cite{Rupprecht2018}. Autofluorescence in plant material is a good test to separate compounds fluorescing in the red and green channels respectively, while also exhibiting complex three-dimensional structure \cite{Cheung2010, Nguyen2001}. Fig.~\ref{fig6}A shows a slice through part of the flower, that reveals red-fluorescent structural plant material, together with green-fluorescent Dandilion pollen grains. The complex 3-D structure is readily apparent if one zooms into a small region (white box), and records a stack, see Fig.~\ref{fig6}B. The pollen grains are hidden under a layer of red-fluorescent plant material as well, which we can easily resolve. Pollen grains are a great sample in a teaching lab, as they are easy to obtain, easy to prepare, and complex when imaged with a two-photon microscope\cite{Rupprecht2018}. The next sample is a mounted primary rat cell culture\cite{Schottdorf2018}, stained for GFAP (Rabbit-Anti-GFAP, ab33922) in the green channel (Donkey-Anti-Rabbit Alexa Fluor 488, ab150061), see Fig.~\ref{fig6}C. This demonstrates the complex structure of glial fibrillary acidic protein in astrocytes. Finally, we imaged a piece of a cellulose napkin (Kimwipe, Fisher Scientific), see Fig.~\ref{fig6}D. This is an example of a strongly scattering sample with complex 3D fibrous structure. To demonstrate this structure, we acquired a volume and color-coded depth. Individual slices at different depths reveal uncorrelated fiber structures. In contrast to our earlier experiments in a less scattering sample (cf. Fig.~\ref{fig5}), the image quality here deteriorates with depth.\newline
+Next, we imaged neural activity \textit{in vivo} in both larval zebrafish (Danio rerio) and adult \textit{Drosophila melanogaster}. 
+%
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{fig7.jpg}
+    \caption{{\bf Example Calcium imaging in transgenic Zebrafish (Danio rerio).} \textbf{A)} 3D rendering of a 300~\textmu m deep volumetric image of a 5 day old Zebrafish larva with Fiji\cite{Schindelin2019}. \textbf{B)} Dorsal slice through the same animal and two zoom views down to cellular scale. \textbf{C)} Color-coded $\approx10\text{ min}$ of time-averaged volumetric imaging data of three 20~\textmu m-spaced planes using the piezoelectric collar attached to the objective. The layers are colored in red/green/blue. No motion correction was applied. Notice the blurry averages, caused by motion of the fish. \textbf{D)} Running Suite2p on the data in C produces numerous regions of interest (ROIs) with complex Calcium dynamics. Left: Suite2p applies motion correction, resulting in a much crisper average picture. Right: Time series of a few ROIs over 10 min.}
+    \label{fig7}
+\end{figure}
+%
+%
+For zebrafish imaging, we used the HuC:H2B-GCaMP6f line of transgenic Zebrafish \cite{Cong2017}. Neurons in this organism expresses the fluorescent protein GCaMP6f in their nuclei whose green fluorescence strongly depends on the cellular concentration of Calcium ions. We imaged a 5-day old larva in 2\% low melting point Agarose in E3 medium, see Fig.~\ref{fig7}. We first performed a volumetric scan of the organism, Fig.~\ref{fig7}A shows a rendering in Fiji \cite{Schindelin2019}, and then focused on a plane with a large number of visible neurons, Fig.~\ref{fig7}B. In a small region, we used our piezoelectric collar to collect volumetric data from three planes, see Fig.~\ref{fig7}C. We processed these data with Suite2p \cite{Pachitariu2016}, which identified many neurons with complex calcium transients, Fig.~\ref{fig7}D.\newline
+To image in the adult fruit fly, we head-fixed the fly in a custom 3D-printed mount \cite{Pacheco2021} (Fig.~\ref{fig8}A). We then perform a dissection which removes the cuticle from the back of the head of the fly, providing optical access to the brain. We imaged 6-day-old transgenic adult flies which express GCaMP6s and myr-tdTomato pan-neuronally, labeling all neurons cytoplasmically. We volumetrically imaged a volume approximately 300 x 350 x 50 ~\textmu m in scale, spanning a fraction of the central brain of the fly (Fig.~\ref{fig8}B). We then motion-corrected and segmented the GCaMP6s volume into regions of interest (ROIs) with spatial clustering algorithms \cite{Pacheco2021}, revealing diverse spontaneous calcium activity (Fig.~\ref{fig8}C). 
+%
+%
+\begin{figure}[t]
+\begin{center}
+    \includegraphics[width=\textwidth]{fig8.jpg}
+\end{center}
+    \caption{{\bf Example calcium imaging in adult \textit{Drosophila melanogaster}.} \textbf{A)} Imaging from the brain of a head-fixed adult fly \cite{Pacheco2021}. A dissection is performed to remove the cuticle from the back of the fly's head and provide optical access to the brain, and the imaged brain volume is outlined. The transgenic flies express pan-neuronal GCaMP6s and myr-tdTomato, driven by the nsyb promoter. \textbf{B)} Average projections over ten 5~\textmu m-spaced planes of both imaging channels, acquired at a temporal resolution of 1 volume/s. XY boundaries of exemplar ROIs are indicated. \textbf{C)} The channels are motion corrected and spatially clustered ROIs are extracted. Examples of spontaneous calcium activity extracted from ROIs in the brain volume.}
+    \label{fig8}
+\end{figure}
+
+\subsection*{Teaching}
+Twinkle was assembled, disassembled, and reassembled three times by different groups of researchers and students. In the following paragraphs, we summarize our experiences, and produce two examples for what we consider useful learning experiences for two-photon microscopy.\newline
+To organize our workshop, we freed around 2 weeks in the summer. On the first day, we provided an introductory lecture going through the principles of two-photon microscopy (cf. Fig.~\ref{fig1}A), safety, and the plan ahead. Next, we completely stripped the optical table and returned Twinkle's components back into their containers. Then reassembly began, first setting up and aligning laser and beam-splitting hardware, then the Pockels cell, the shutter, telescope, and associated beam blocks (cf. Fig.~\ref{fig1}B). This was done over the course of days 1-3 during which students became familiar working with safety goggles, and aligning lasers using a power meter and cards. In particular, the alignment of the Pockels cell requires care, as its orientation has to be carefully set to produce the largest dynamic range of transmitted laser power depending on the control voltage (see teaching examples below). Following the conditioning of the beam, we then proceeded to assemble the mechanics of the microscope head (cf. Fig.~\ref{fig1}C). Reassembling the box housing the scanning mirrors, the lens groups from individual elements, and the collection optics was done from days 3-6 (cf. Fig.~\ref{fig2}, \ref{fig3}, \ref{fig4}) After this was done, we assessed the performance of the instrument and fine tuned it on days 7-8 (cf. Fig.~\ref{fig5}). When properly aligned, we shielded the optical path with sheet metal and Thorlabs tubing, and imaged various samples on day 9 (cf. Figs.~\ref{fig6}, \ref{fig7}, \ref{fig8}). On the last day, day 10, we addressed questions that came up during the course of the workshop.\newline
+To exemplify a simple teaching example, see Fig.~\ref{fig9}. Fig.~\ref{fig9}A shows light transmission through the Pockels cell for two different orientations (red and blue) to teach the working principles of the Pockels effect. The optimal angle is shown by the blue dots. A fit to the expected transmitted power curve, 
+\begin{eqnarray}
+    P(V) = P_0 \sin\left(2\pi\frac{V}{V_0} + \phi \right)^2
+\end{eqnarray}
+is shown as thin purple line. Deriving this from geometric principles, and aligning the Pockels cell on the table for greatest dynamic range is a relatively straightforward. The students perform these measurement by scanning through voltage settings on the Pockels driver, while monitoring light intensity. This explains to them the particular orientation of the crystal relative to the laser.\newline
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{fig9.jpg}
+    \caption{{\bf Examples for teaching principles of two-photon microscopy.} \textbf{A)} Transmitted laser power as function of the control voltage applied to the Pockels crystal for two different crystal orientations. The red orientation is far from the optimum and produces a small dynamic range for intensity control. The blue orientation is close to the optimal. The thin purple line is a best fit (see text). \textbf{B)} Fluorescence in Fluorescein as a function of applied dispersion compensation. A fit allows to estimate the pulse width. Note also the symmetric shoulders not captured by the fit, suggesting a non-Gaussian pulse shape.}
+    \label{fig9}
+\end{figure}
+%
+If students are interested in dispersion of the laser pulse and its correction, a more challenging experiment and analysis are shown in Fig.~\ref{fig9}B. Here, students used the fluorescence at fixed laser power for different values of dispersion compensation to infer the laser pulse width. This is possible because the efficiency of two-photon fluorescence depends inversely on the pulse duration \cite{Denk1990}. The laser's built-in dispersion compensation can give the short-wavelength components a head start such that after delays in the optical path, blue and red components can arrive at the sample at the same time. One can write down the expected fluorescence $I$ as function of this group delay dispersion $\varphi$ applied to a $\varphi_0$-dispersed Gaussian pulse of FWHM width $\Delta\tau$ as
+\begin{eqnarray}
+    I(\varphi) =I_0 \left(1+\alpha\frac{(\varphi+\varphi_0)^2}{\Delta\tau^4}\right)^{-1/2}.
+\end{eqnarray}
+Here, $\alpha=16\log(2)^2$. This equation can be derived by expressing the Gaussian pulse shape in the Fourier domain, applying a phase-shift along the laser path to quadratic order in the frequency \cite{Young2015}, and computing the result in the time domain. Deriving this expression is a fun at-home exercise. The fit suggests that the various  optical components introduced a dispersion of $\varphi_0\approx20200\pm170\text{ fs}^2$. When removed with the built-in dispersion compensation of the laser, our system operates with a FWHM pulse of $\Delta\tau \approx 150\pm20\text{ fs}$, which is close to, but significantly longer than the $\approx110\text{ fs}$ pulses produced by the laser itself (measured with an autocorrelator). This suggests detectable non-linear dispersion that we cannot compensate with our optics. Note that analyses like these, relating laser physics and fluorescence, are close to the research frontier\cite{Saidi2023}.
+
+\section*{Discussion}
+
+In this article, we have covered the design, building and alignment of a two-photon microscope. We then assessed its performance, and demonstrated several possible use cases, from plant physiology over material science to neuroscience. In the following lines, we will expand on issues raised in passing earlier, and conclude with a note about our instrument in the growing space of open source scientific instrumentation.
+
+\subsection*{Improvements to the microscope}
+
+(1) We used silver mirrors to direct the beam. These reflect around 98\% of incoming light. Dielectric mirrors perform significantly better, typically exceeding 99.5\% reflectivity. With around 8 to 10 mirrors in the beam, this can boost overall transmission by 10\%-20\%, but comes at slightly higher cost and can introduce complex dispersion \cite{Rupprecht2019}. In our experiments, we have not encountered power limitations: For the data presented here, we used only $\approx 15\text{ mW}$ under the objective while at maximum transmission the system allows for up to $\approx 260\text{ mW}$ to leave the objective. For simplicity, and similar to other designs \cite{Sofroniew2016}, we therefore used exclusively silver mirrors. However, for stimulation or ablation experiments, considerations might be different. \newline
+(2) In our design, a piezoelectric collar is attached to the objective. Physically moving the objective along the optical axis allows to image several planes. The time required by the piezoelectric collar to stabilize is on the scale of 10 ms. Imaging faster processes requires a different approach, e.g. with an electrically tunable lens (ETL). These lenses have a variable focal length, usually from around 10 cm to infinity, that can be set with a control voltage within $<1\text{ ms}$. A convenient spot for an ETL might be right before the scan assembly, while care should be taken to not focus the beam on the scanning mirrors to avoid damage.\newline
+(3) Estimating the pulse duration suggests non-linear dispersion that we cannot correct. This is highly dependent on the laser. For readers interested in this aspect of microscope design, we refer to \cite{Saidi2023, Bueno2019}. If available, other light sources might be worth exploring.\newline
+(4) We made the design choice to place the resonant and slow scanning mirrors close together in space while the plane equidistant between the rotational axis of both scan mirrors is conjugate to the back aperture of the objective. This is a compromise that is used by others as well (e.g. Thorlabs' Cerna or earlier designs \cite{Rosenegger2014, Tan1999, Nguyen2001}). Other microscope designs add a pair of lenses between the slow and resonant scanning mirrors to position them in conjugated planes. Our design choice significantly simplifies the design and reduces the amount of glass between laser and sample to reduce dispersion. It does, however, introduce a Barrel distortion that becomes visible at low magnifications.\newline
+(5) The fixed $2\times$ beam expander can be replaced with variable/zoom beam expander that allows a user to dial in a particular beam magnification to tweak the point spread function for a particular application\cite{Smith2019}. We have used this in some of our earlier designs, e.g. \cite{Song2017}. While a high numerical aperture is beneficial for high axial resolution and improved separation of somatic and neuropil signals \cite{Kerr2008, Gobel2007}, the large angles at which excitation light is brought into the brain results in longer paths for the light to take. This can lead to more scattering. For experiments aiming to image deep in the brain, a lower NA can be beneficial \cite{Tung2004}. Similarly, the presence of axial brain motion of several \textmu m in awake and behaving animals can introduce movement artifacts at high numerical apertures \cite{Dombeck2007}. That said, even when underfilled by the excitation beam, a large NA of the objective is beneficial to collect as much fluorescent light as possible.\newline
+(6) It can be advantageous to combine the two-photon system with wide-field imaging. To this end, the two inch mirror above the collection optics can be replaced with a 800 or 900 nm short-pass filter followed by a tube lens and a camera. This would allow infrared imaging around 700 nm through the collection optics, as it is transparent above 665 nm. While this is relatively straightforward to do \cite{Rosenegger2014}, widefield epipfluorescence is harder to realize.\newline
+(7) The collection optics are designed to have an average optical density $>4$ in the range between 400 nm and 460 nm. This is advantageous for use in virtual reality systems, because light leaving a projector can be filtered to this range before projected on a dome surrounding the objective and animal. We have successfully used budget friendly colored glass filters in front of the projector (Schott BG25 or Schott BG5), and long-pass colored glass (Schott RG780) to block projector light from entering the excitation path \cite{Dombeck2007}. Combined with a light shield around the objective, such a projection system will only minimally interfere with imaging (e.g. \cite{Nieh2021}). This is a useful range for visual experiments in mice, but if other model organisms are desired, the optical filters need to be adjusted accordingly.\newline
+(8) Relatedly, the collection optics described here, built from lenses with two inch diameter, can accept fluorescent light leaving the objective back aperture in the range of $\pm 8\text{ deg}$. If one intends to image at larger angles, larger lenses in the collection optics can be beneficial \cite{Tsai2015} and some of our microscopes use a collection design with three inch diameter optics \cite{Song2017, Nieh2021}. In our experience, it is difficult to push this further, because large angles reduce the effectiveness of the dichroic mirrors and band-pass filters.\newline
+(9) Parts of our microscope can be replaced with commercial products. For example, we have used commercial telecentric scan lenses in the past \cite{Song2017, Rich2024}. These come at higher cost and introduce higher dispersion, but exhibit very low field curvature. While low field curvature is not always considered the highest priority in neuroscience applications, this can be a useful substitution.\newline
+(10) Regarding the mechanical design, we decided to not mount the microscope on an xy translation stage. This means that the sample has to be moved laterally relative to the microscope. We did, however, include a z-adjustment through a piezoelectric collar for the objective. This significantly simplifies measurements of point spread functions, and allows rapid volumetric imaging which we consider worth the extra cost. Our laboratory had great success with this design, and we have developed stages for mounting animals that incorporate drives for xy motion. Mounting the microscope itself on an xyz controller that can carry its weight, and precisely aligning the optical path to be parallel to x, y and z displacement is possible but will incur extra cost.\newline
+(11) To aid mechanical stability, the aluminium plate forming the base of the head of the microscope could be replaced with a steel plate, or a thicker piece of aluminium, that is less prone to vibrations when bumped into. This would also be important if one wanted to extend the microscope head to provide even more space around the objective.
+
+\subsection*{Teaching advanced methods in neuroscience}
+In addition to training researchers on how to set up a two-photon microscope, we aimed to provide examples of imaging data that are not neuroscience related, and do not require the handling of animals or living neurons (cf. Fig.~\ref{fig5}, \ref{fig6}, \ref{fig9}). Other samples are possible as well (such as cheese \cite{Nguyen2001}). Working with such samples can make experiments in a teaching lab easier as such spaces are not always designated animal work areas. If students can work with animals, the instrument is ideally suited for various neuroscience experiments. For example, the Calcium imaging demonstrated in Figs.~\ref{fig7}, \ref{fig8} could be combined with pharmacology to demonstrate changes of neural activity patterns. Or students can learn in a controlled environment how to get optical access to the nervous system and hone in their surgery skills to produce good quality optical windows\cite{Holtmaat2009, Grienberger2022}.
+Our microscope was set up in a teaching lab space at the Princeton Neuroscience Institute. Over the course of three years, it was disassembled and re-assembled by various generations of students and postdocs. We found that assembling and aligning the microscope, as described, takes around 10 work-days. These two weeks seem to be a good compromise between depth, and researcher commitment. Various additional content across difficulty levels can be added depending on student interest and abilities (cf. Fig.~\ref{fig9}). For example, and only mentioned in passing before, the history and current applications of the two-photon effect and its use in microscopy is a fascinating subject to explore, e.g. \cite{Sheppard2020, Yao2023}.\newline 
+Students might also become interested in further optimizing the optical design, or wonder why many lenses are used in lens groups. Questions like these can sometimes be linked to prior student knowledge. For example, for students interested in astronomy, the tube lens can be thought of as an eye piece with a long focal length and eye relief \cite{Smith2007}. In our system, the tube lens projects the image formed by the scan lens to an exit pupil, the back aperture of the objective. The objective then focuses the collimated beams onto the sample. In astronomy, the eye piece forms collimated beams of the image formed by the objective lens. The beams converge at some distance (the ``eye relief'') to enter the pupil of the eye of a human observer. The lens in the human eye then focuses the collimated beams onto the retina. Pl\"ossl designs in astronomy are known to perform particularly well for long eye relief \cite{Smith2007, Nagler1983}, and are a common design in two-photon microscopes as well (e.g. \cite{Rupprecht2024}). Our design is close to this, but flipped one of the two lenses to a Petzval configuration. In our hands, this configuration performed better \cite{Hong2022, Bumstead2018, Mayrhofer2015}.\newline
+For students interested in photography, the scan lens can be thought of as a 100 mm f/2 camera lens. Camera lenses face similar challenges as our scan lens. They have to focus distant objects, at different angles, into the same flat photographic emulsion, while faithfully depicting true angular distances with minimal aberrations. Think for example about stars on the sky, whose light arrives as beams at different angles at the camera lens. Addressing this problem lead to lens designs that were very similar to our scan lens. One important design, sometimes referred to as a Gauss doublet objective \cite{Kidger2001}, features two symmetrically configured doublets providing much of the optical power, while additional lenses control aberrations. For example, the Zeiss Planar lens from 1897 features 6 elements in 4 groups with a symmetric pair of doublets in a design very similar to our scan lens assembly \cite{Rudolf1897}. To help students and researchers explore these sometime challenging subjects theoretically, we provide all Zemax files for the microscope optics. More advanced optimization in Zemax requires the use of their programming API. For example, the simulated point spread functions and their analysis in Fig.~\ref{fig2} were computed in Matlab, using the Zemax API. The code is provided in our repository. This allows for fast optimization of system parameters by effectively scanning through lens spacing, lens types, and the like. This can allow researchers and students to explore the limits and possible future improvements of the system. Experimental modifications of the system are simpler in the format of a workshop. For example, students can swap or rotate lenses and observe the effects. The scan lens assembly is particularly sensitive to this, because the incoming laser beam is concentrated into a small region that gets scanned across the surface of the lens. Small surface imperfections will introduce optical difference across spot positions, and significantly affect field flatness, cf. Fig.~\ref{fig5}C,D,E.\newline
+Finally, it can be a useful learning experience to re-use parts from other microscopes, such as xy scanners from a confocal microscope\cite{Nikolenko2013}, and to mix and match parts to learn what works and what does not. It is an important learning experience to understand failure modes. For example, assembling the lens groups can lead to dust when tightening the retaining rings through the anodized aluminium threads. Or the rectangular ``TV screen'' field of view (visible in the figures at zoom level 1 above) is caused by a round, and not elliptical mirror above the scan engine. This mirror clips the beam along one axis. (This is corrected in the CAD files.) When analyzing data, we suggest to use simple programs. Our Image analyses here were done in Fiji \cite{Schindelin2019} combined with simple python and matlab scripts. In our experience, students learn very effectively through hands-on open-ended pedagogy and pursuing their own interests \cite{Zajdel2016}.\newline
+
+\subsection*{Open scientific instrumentation}
+In this article, we described the instrument's mode of operation, and provide an overview of the design. For the complete and illustrated built instructions, please see the git repository and attached build instructions. To aid discoverability, we have generated an Open Know How Manifest (OKH-manifest), located in the hardware folder of the git repository at \url{https://github.com/BrainCOGS/Microscope}.\newline
+The growing space of open-source instrumentation can improve science in several ways: (1) enabling faster innovation through lower costs and enabling work in low-resource settings. (2) facilitating review and inspection by avoiding black-box designs and (3) providing a benchmark for innovation towards next-generation technology. We hope that our instrument, combined with earlier designs \cite{Rosenegger2014, Mayrhofer2015, Tan1999}, and recent developments like the head mounted microscope \cite{Zong2022} or the Janelia Research Campus microscope \cite{Janelia2024}, can serve as benchmarks for future instruments. Relatedly, we have contributed to other projects that follow this philosophy in microscopy \cite{Scott2018}, but also designing an open source ventilator during the COVID-19 pandemic \cite{LaChance2022,POVMC2022}, and a \textmu-contact printing device \cite{Samhaber2016}. Making these devices fully open has informed the narrative in this article, the design and organization of the published files, and also the choice of a open access journal. Finally, the open approach can make two-photon microscopy more accessible to researchers, thereby greatly expanding the ability to train students in approaching such technology and producing new inventions. In our ventilator work, this has led to one of the first deep-RL controlled devices that performed superior to classical control schemes \cite{Suo2021}. Future will tell how the community will make best use of Twinkle. The world is moving towards more open technology \cite{Schottdorf2024}, in particular in the microscopy community \cite{Hohlbein2022}. We hope that our microscope and its future iterations can play a part in this movement.
+
+\subsection*{Disclaimer}
+The aim of our work is to allow anyone to build a high-performance and cost-effective two-photon microscope. However, the information here cannot be exhaustive. We recommend anyone embarking on this journey to engage with the community, to carefully think about effective solutions to their use-case and specific experiment at hand, and to adjust to the ever changing landscape of available technology. When adapting the optical path to their needs, we suggest to start at our lens combinations, and then optimize (at the very least) the lens spacings in Zemax. Technology develops rapidly, and much of the specific components mentioned here will be outdated in a few years. We believe that science progresses best if researchers understand their instrumentation, and leverage the current cutting edge of what is possible to further their science.\newline
+This work is free: you can redistribute it and/or modify it under the terms of the Creative Commons Attribution 4.0 International license, version 4 of the License, or (at your option) any later version (CC-BY-4.0). This work is distributed in the hope that it will be useful, but without any warranty, to the extent permitted by law; without even the implied warranty of merchantability or fitness for a particular purpose. A copy of the License is provided in our repository.  For more details, see \url{http://www.gnu.org/licenses/}.
+
+\section*{Supporting information}
+
+\paragraph*{S1 Appendix:}
+\label{S1_Appendix}
+A document with detailed build instructions and pictures of the microscope.
+
+\paragraph*{\bf Online Repository:} 
+\label{repository}
+All CAD and optics design files, bill-of-materials, and other useful information: \url{https://github.com/BrainCOGS/Microscope}.
+
+\section*{Acknowledgments}
+MS and MD are supported by NIH grant U19NS132720. MS is also supported by a C.V. Starr fellowship and a Burroughs Wellcome Fund's Career Award at the Scientific Interface. AL was supported by the NSF through the Center for the Physics of Biological Function (PHY-1734030). We thank Beatrice Hadiwidjaja for transgenic Zebrafish husbandry, and Drs. Lindsay Collins and Anthony Ambrosini for hospitality and accommodating our tinkering in the teaching lab of the Princeton Neuroscience Institute. We thank Kai Br\"oking for helpful comments.
+
+\section*{Author Contributions}
+%  Follow the "CRediT Taxonomy" - plos standard. 
+\begin{itemize}
+    \item \textbf{Conceptualization}: Stephan Y. Thiberge.
+    \item \textbf{Data curation}: Manuel Schottdorf, Mika Diamanti, Albert Lin, Stephan Y. Thiberge.
+    \item \textbf{Formal analysis}: Manuel Schottdorf, E. Mika Diamanti, Albert Lin.
+    \item \textbf{Funding acquisition}: Stephan Y. Thiberge.
+    \item \textbf{Investigation}: Manuel Schottdorf, P. Dylan Rich, E. Mika Diamanti, Albert Lin, Sina Tafazoli, Edward Nieh.
+    \item \textbf{Methodology}: Manuel Schottdorf, P. Dylan Rich, E. Mika Diamanti, Albert Lin, Sina Tafazoli, Edward H. Nieh, Stephan Y. Thiberge. 
+    \item \textbf{Project administration}: Manuel Schottdorf, Stephan Y. Thiberge.
+    \item \textbf{Resources}: Manuel Schottdorf, Stephan Y. Thiberge.
+    \item \textbf{Software}: Manuel Schottdorf, E. Mika Diamanti, Albert Lin.
+    \item \textbf{Supervision}: Stephan Y. Thiberge.
+    \item \textbf{Validation}: Manuel Schottdorf, P. Dylan Rich, E. Mika Diamanti.
+    \item \textbf{Visualization}: Manuel Schottdorf, E. Mika Diamanti, Albert Lin.
+    \item \textbf{Writing – original draft}: Manuel Schottdorf.
+    \item \textbf{Writing – review \& editing}: Manuel Schottdorf, P. Dylan Rich, E. Mika Diamanti, Albert Lin, Sina Tafazoli, Stephan Thiberge.
+\end{itemize}
+
+\nolinenumbers
+
+\begin{thebibliography}{10}
+
+\bibitem{Denk1990}
+Denk W, Strickler JH, Webb WW. Two-photon laser scanning fluorescence microscopy. Science. 1990 Apr 6;248(4951):73-6. doi: 10.1126/science.2321027. PMID: 2321027.
+
+\bibitem{Svoboda1997}
+Svoboda K, Denk W, Kleinfeld D, Tank DW. In vivo dendritic calcium dynamics in neocortical pyramidal neurons. Nature. 1997 Jan 9;385(6612):161-5. doi: 10.1038/385161a0. PMID: 8990119.
+
+\bibitem{So2000}
+So PT, Dong CY, Masters BR, Berland KM. Two-photon excitation fluorescence microscopy. Annu Rev Biomed Eng. 2000;2:399-429. doi: 10.1146/annurev.bioeng.2.1.399. PMID: 11701518.
+
+\bibitem{Helmchen2005}
+Helmchen F, Denk W. Deep tissue two-photon microscopy. Nat Methods. 2005 Dec;2(12):932-40. PMID: 16299478.
+
+\bibitem{Luu2024}
+Luu P, Fraser SE, Schneider F. More than double the fun with two-photon excitation microscopy. Commun Biol. 2024 Mar 26;7(1):364. doi: 10.1038/s42003-024-06057-0. PMID: 38531976; PMCID: PMC10966063.
+
+\bibitem{Grienberger2022}
+Grienberger C, Giovannucci A, Zeiger W, Portera-Cailliau C. Two-photon calcium imaging of neuronal activity. Nat Rev Methods Primers. 2022;2(1):67. doi: 10.1038/s43586-022-00147-1. Epub 2022 Sep 1. PMID: 38124998; PMCID: PMC10732251.
+
+\bibitem{Baden2016}
+Baden T, Berens P, Franke K, Román Rosón M, Bethge M, Euler T. The functional diversity of retinal ganglion cells in the mouse. Nature. 2016 Jan 21;529(7586):345-50. doi: 10.1038/nature16468. Epub 2016 Jan 6. PMID: 26735013; PMCID: PMC4724341.
+
+\bibitem{Harvey2012}
+Harvey CD, Coen P, Tank DW. Choice-specific sequences in parietal cortex during a virtual-navigation decision task. Nature. 2012 Mar 14;484(7392):62-8. doi: 10.1038/nature10918. PMID: 22419153; PMCID: PMC3321074.
+
+\bibitem{Nieh2021}
+Nieh EH, Schottdorf M, Freeman NW, Low RJ, Lewallen S, Koay SA, Pinto L, Gauthier JL, Brody CD, Tank DW. Geometry of abstract learned knowledge in the hippocampus. Nature. 2021 Jul;595(7865):80-84. doi: 10.1038/s41586-021-03652-7. Epub 2021 Jun 16. PMID: 34135512; PMCID: PMC9549979.
+
+\bibitem{Engelhard2019}
+Engelhard B, Finkelstein J, Cox J, Fleming W, Jang HJ, Ornelas S, Koay SA, Thiberge SY, Daw ND, Tank DW, Witten IB. Specialized coding of sensory, motor and cognitive variables in VTA dopamine neurons. Nature. 2019 Jun;570(7762):509-513. doi: 10.1038/s41586-019-1261-9. Epub 2019 May 29. PMID: 31142844; PMCID: PMC7147811.
+
+\bibitem{Yu2018}
+Gu Y, Lewallen S, Kinkhabwala AA, Domnisoru C, Yoon K, Gauthier JL, Fiete IR, Tank DW. A Map-like Micro-Organization of Grid Cells in the Medial Entorhinal Cortex. Cell. 2018 Oct 18;175(3):736-750.e30. doi: 10.1016/j.cell.2018.08.066. Epub 2018 Sep 27. PMID: 30270041; PMCID: PMC6591153.
+
+\bibitem{Trautmann2021}
+Trautmann EM, O'Shea DJ, Sun X, Marshel JH, Crow A, Hsueh B, Vesuna S, Cofer L, Bohner G, Allen W, Kauvar I, Quirin S, MacDougall M, Chen Y, Whitmire MP, Ramakrishnan C, Sahani M, Seidemann E, Ryu SI, Deisseroth K, Shenoy KV. Dendritic calcium signals in rhesus macaque motor cortex drive an optical brain-computer interface. Nat Commun. 2021 Jun 17;12(1):3689. doi: 10.1038/s41467-021-23884-5. PMID: 34140486; PMCID: PMC8211867.
+
+\bibitem{Ebina2018}
+Ebina T, Masamizu Y, Tanaka YR, Watakabe A, Hirakawa R, Hirayama Y, Hira R, Terada SI, Koketsu D, Hikosaka K, Mizukami H, Nambu A, Sasaki E, Yamamori T, Matsuzaki M. Two-photon imaging of neuronal activity in motor cortex of marmosets during upper-limb movement tasks. Nat Commun. 2018 May 14;9(1):1879. doi: 10.1038/s41467-018-04286-6. PMID: 29760466; PMCID: PMC5951821.
+
+\bibitem{Sharma2016}
+Sharma R, Williams DR, Palczewska G, Palczewski K, Hunter JJ. Two-Photon Autofluorescence Imaging Reveals Cellular Structures Throughout the Retina of the Living Primate Eye. Invest Ophthalmol Vis Sci. 2016 Feb;57(2):632-46. doi: 10.1167/iovs.15-17961. PMID: 26903224; PMCID: PMC4771181.
+
+\bibitem{Schottdorf2021}
+Schottdorf M, Lee BB. A quantitative description of macaque ganglion cell responses to natural scenes: the interplay of time and space. J Physiol. 2021 Jun;599(12):3169-3193. doi: 10.1113/JP281200. Epub 2021 Jun 1. PMID: 33913164; PMCID: PMC8998785.
+
+\bibitem{Renninger2013}
+Renninger SL, Orger MB. Two-photon imaging of neural population activity in zebrafish. Methods. 2013 Aug 15;62(3):255-67. doi: 10.1016/j.ymeth.2013.05.016. Epub 2013 May 31. PMID: 23727462.
+
+\bibitem{Seelig2010}
+Seelig JD, Chiappe ME, Lott GK, Dutta A, Osborne JE, Reiser MB, Jayaraman V. Two-photon calcium imaging from head-fixed Drosophila during optomotor walking behavior. Nat Methods. 2010 Jul;7(7):535-40. doi: 10.1038/nmeth.1468. Epub 2010 Jun 6. Erratum in: Nat Methods. 2011 Feb;8(2):184. PMID: 20526346; PMCID: PMC2945246.
+
+\bibitem{Lin2022}
+Lin A, Witvliet D, Hernandez-Nunez L, Linderman SW, Samuel ADT, Venkatachalam V. Imaging whole-brain activity to understand behavior. Nat Rev Phys. 2022 May;4(5):292-305. doi: 10.1038/s42254-022-00430-w. Epub 2022 Mar 8. PMID: 37409001; PMCID: PMC10320740.
+
+\bibitem{Baker2022}
+Baker CA, McKellar C, Pang R, Nern A, Dorkenwald S, Pacheco DA, Eckstein N, Funke J, Dickson BJ, Murthy M. Neural network organization for courtship-song feature detection in Drosophila. Curr Biol. 2022 Aug 8;32(15):3317-3333.e7. doi: 10.1016/j.cub.2022.06.019. Epub 2022 Jul 5. PMID: 35793679; PMCID: PMC9378594.
+
+\bibitem{Roemschied2023}
+Roemschied FA, Pacheco DA, Aragon MJ, Ireland EC, Li X, Thieringer K, Pang R, Murthy M. Flexible circuit mechanisms for context-dependent song sequencing. Nature. 2023 Oct;622(7984):794-801. doi: 10.1038/s41586-023-06632-1. Epub 2023 Oct 11. PMID: 37821705; PMCID: PMC10600009.
+
+\bibitem{Deutsch2020}
+Deutsch D, Pacheco D, Encarnacion-Rivera L, Pereira T, Fathy R, Clemens J, Girardin C, Calhoun A, Ireland E, Burke A, Dorkenwald S, McKellar C, Macrina T, Lu R, Lee K, Kemnitz N, Ih D, Castro M, Halageri A, Jordan C, Silversmith W, Wu J, Seung HS, Murthy M. The neural basis for a persistent internal state in Drosophila females. Elife. 2020 Nov 23;9:e59502. doi: 10.7554/eLife.59502. PMID: 33225998; PMCID: PMC7787663.
+
+\bibitem{Kim2017}
+Kim SS, Rouault H, Druckmann S, Jayaraman V. Ring attractor dynamics in the Drosophila central brain. Science. 2017 May 26;356(6340):849-853. doi: 10.1126/science.aal4835. Epub 2017 May 4. PMID: 28473639.
+
+\bibitem{Pacheco2021}
+Pacheco DA, Thiberge SY, Pnevmatikakis E, Murthy M. Auditory activity is diverse and widespread throughout the central brain of Drosophila. Nat Neurosci. 2021 Jan;24(1):93-104. doi: 10.1038/s41593-020-00743-y. Epub 2020 Nov 23. PMID: 33230320; PMCID: PMC7783861.
+
+\bibitem{Brezovec2024}
+Bella E. Brezovec, Andrew B. Berger, Yukun A. Hao, Feng Chen, Shaul Druckmann, Thomas R. Clandinin, Mapping the neural dynamics of locomotion across the Drosophila brain, Current Biology, Volume 34, Issue 4, 2024,
+Pages 710-726.e4, ISSN 0960-9822, https://doi.org/10.1016/j.cub.2023.12.063.
+
+\bibitem{Randi2023}
+Randi F, Sharma AK, Dvali S, Leifer AM. Neural signal propagation atlas of Caenorhabditis elegans. Nature. 2023 Nov;623(7986):406-414. doi: 10.1038/s41586-023-06683-4. Epub 2023 Nov 1. PMID: 37914938; PMCID: PMC10632145.
+
+\bibitem{Diamanti2021}
+Diamanti EM, Reddy CB, Schröder S, Muzzu T, Harris KD, Saleem AB, Carandini M. Spatial modulation of visual responses arises in cortex with active navigation. Elife. 2021 Feb 4;10:e63705. doi: 10.7554/eLife.63705. PMID: 33538692; PMCID: PMC7861612.
+
+\bibitem{Yao2023}
+Yao P, Liu R, Broggini T, Thunemann M, Kleinfeld D. Construction and use of an adaptive optics two-photon microscope with direct wavefront sensing. Nat Protoc. 2023 Dec;18(12):3732-3766. doi: 10.1038/s41596-023-00893-w. Epub 2023 Nov 1. PMID: 37914781; PMCID: PMC11033548.
+
+\bibitem{Song2017}
+Song A, Charles AS, Koay SA, Gauthier JL, Thiberge SY, Pillow JW, Tank DW. Volumetric two-photon imaging of neurons using stereoscopy (vTwINS). Nat Methods. 2017 Apr;14(4):420-426. doi: 10.1038/nmeth.4226. Epub 2017 Mar 20. PMID: 28319111; PMCID: PMC5551981.
+
+\bibitem{Rickgauer2014}
+Rickgauer JP, Deisseroth K, Tank DW. Simultaneous cellular-resolution optical perturbation and imaging of place cell firing fields. Nat Neurosci. 2014 Dec;17(12):1816-24. doi: 10.1038/nn.3866. Epub 2014 Nov 17. PMID: 25402854; PMCID: PMC4459599.
+
+\bibitem{Sofroniew2016}
+Sofroniew NJ, Flickinger D, King J, Svoboda K. A large field of view two-photon mesoscope with subcellular resolution for in vivo imaging. Elife. 2016 Jun 14;5:e14472. doi: 10.7554/eLife.14472. PMID: 27300105; PMCID: PMC4951199.
+
+\bibitem{Demas2021}
+Demas J, Manley J, Tejera F, Barber K, Kim H, Traub FM, Chen B, Vaziri A. High-speed, cortex-wide volumetric recording of neuroactivity at cellular resolution using light beads microscopy. Nat Methods. 2021 Sep;18(9):1103-1111. doi: 10.1038/s41592-021-01239-8. Epub 2021 Aug 30. Erratum in: Nat Methods. 2021 Dec;18(12):1552. doi: 10.1038/s41592-021-01337-7. PMID: 34462592; PMCID: PMC8958902.
+
+\bibitem{Bueno2019}
+Bueno JM, Ávila FJ, Artal P. Comparing the performance of a femto fiber-based laser and a Ti:sapphire used for multiphoton microscopy applications. Appl Opt. 2019 May 10;58(14):3830-3835. doi: 10.1364/AO.58.003830. PMID: 31158196.
+
+\bibitem{Rosenegger2014}
+Rosenegger DG, Tran CHT, LeDue J, Zhou N, Gordon GR (2014) A High Performance, Cost-Effective, Open-Source Microscope for Scanning Two-Photon Microscopy that Is Modular and Readily Adaptable. PLoS ONE 9(10): e110475. https://doi.org/10.1371/journal.pone.0110475
+
+\bibitem{Mayrhofer2015}
+Mayrhofer JM, Haiss F, Haenni D, Weber S, Zuend M, Barrett MJ, Ferrari KD, Maechler P, Saab AS, Stobart JL, Wyss MT, Johannssen H, Osswald H, Palmer LM, Revol V, Schuh CD, Urban C, Hall A, Larkum ME, Rutz-Innerhofer E, Zeilhofer HU, Ziegler U, Weber B. Design and performance of an ultra-flexible two-photon microscope for in vivo research. Biomed Opt Express. 2015 Oct 2;6(11):4228-37. doi: 10.1364/BOE.6.004228. PMID: 26600989; PMCID: PMC4646533.
+
+\bibitem{Kidger2001}
+M. J. Kidger, Fundamental Optical Design (SPIE, 2001).
+
+\bibitem{Negrean2014}
+Negrean A, Mansvelder HD. Optimal lens design and use in laser-scanning microscopy. Biomed Opt Express. 2014 Apr 18;5(5):1588-609. doi: 10.1364/BOE.5.001588. PMID: 24877017; PMCID: PMC4026907.
+
+\bibitem{Smith2007}
+W. J. Smith, Modern Optical Engineering, 4th ed. (McGraw-Hill Professional, 2007).
+
+\bibitem{Hong2022}
+Hong W, Dunsby C. Automatic tube lens design from stock optics for microscope remote-refocusing systems. Opt Express. 2022 Jan 31;30(3):4274-4287. doi: 10.1364/OE.450320. PMID: 35209667.
+
+\bibitem{Bumstead2018}
+Bumstead JR, Park JJ, Rosen IA, Kraft AW, Wright PW, Reisman MD, Côté DC, Culver JP. Designing a large field-of-view two-photon microscope using optical invariant analysis. Neurophotonics. 2018 Apr;5(2):025001. doi: 10.1117/1.NPh.5.2.025001. Epub 2018 Feb 19. PMID: 29487876; PMCID: PMC5818100.
+
+\bibitem{Tsai2015}
+Tsai PS, Mateo C, Field JJ, Schaffer CB, Anderson ME, Kleinfeld D. Ultra-large field-of-view two-photon microscopy. Opt Express. 2015 Jun 1;23(11):13833-47. doi: 10.1364/OE.23.013833. PMID: 26072755; PMCID: PMC4523368.
+
+\bibitem{Zipfel2003}
+Zipfel WR, Williams RM, Webb WW. Nonlinear magic: multiphoton microscopy in the biosciences. Nat Biotechnol. 2003 Nov;21(11):1369-77. doi: 10.1038/nbt899. PMID: 14595365.
+
+\bibitem{Taddeucci1996}
+Taddeucci A, Martelli F, Barilli M, Ferrari M, Zaccanti G. Optical properties of brain tissue. J Biomed Opt. 1996 Jan;1(1):117-23. doi: 10.1117/12.227816. PMID: 23014652.
+
+\bibitem{Young2015}
+Young MD, Field JJ, Sheetz KE, Bartels RA, Squier J. A pragmatic guide to multiphoton microscope design. Adv Opt Photonics. 2015 Jun 30;7(2):276-378. doi: 10.1364/AOP.7.000276. PMID: 27182429; PMCID: PMC4863715.
+
+\bibitem{Tsai2002}
+Tsai PS, et al. Principles, design, and construction of a two photon laser scanning microscope for in vitro and in vivo brain imaging. In: Frostig RD, editor. In Vivo Optical Imaging of Brain Function. CRC Press; Boca Raton: 2002. pp. 113–171. \url{https://neurophysics.ucsd.edu/publications/tsai_book_chapter_crc_2002.pdf}
+
+\bibitem{Pologruto2003}
+Pologruto TA, Sabatini BL, Svoboda K. ScanImage: Flexible software for operating laser scanning microscopes. BioMed Eng OnLine 2, 13 (2003). \url{https://doi.org/10.1186/1475-925X-2-13}
+
+\bibitem{Limpert2006}
+J. Limpert, F. Roser, T. Schreiber, A. Tunnermapnn, High-power ultrafast fiber laser systems. in IEEE Journal of Selected Topics in Quantum Electronics, vol. 12, no. 2, pp. 233-244, March-April 2006, doi: 10.1109/JSTQE.2006.872729.
+
+\bibitem{Wise2012}
+Wise FW. Femtosecond Fiber Lasers Based on Dissipative Processes for Nonlinear Microscopy. IEEE J Sel Top Quantum Electron. 2012;18(4):1412-1421. doi: 10.1109/JSTQE.2011.2179919. PMID: 23869163; PMCID: PMC3712536.
+
+\bibitem{Guide2011}
+National Research Council (US) Committee for the Update of the Guide for the Care and Use of Laboratory Animals. Guide for the Care and Use of Laboratory Animals. 8th ed. Washington (DC): National Academies Press (US); 2011. PMID: 21595115.
+
+\bibitem{Rupprecht2018}
+Rupprecht P. Springtime for two-photon microscopy. Blogpost April 25 2018, \url{https://gcamp6f.com/2018/04/25/springtime-for-two-photon-microscopy/}
+
+\bibitem{Nguyen2001}
+Nguyen QT, Callamaras N, Hsieh C, Parker I. Construction of a two-photon microscope for video-rate Ca(2+) imaging. Cell Calcium. 2001 Dec;30(6):383-93. doi: 10.1054/ceca.2001.0246. PMID: 11728133.
+
+\bibitem{Cheung2010}
+Cheung AY, Boavida LC, Aggarwal M, Wu HM, Feijó JA. The pollen tube journey in the pistil and imaging the in vivo process by two-photon microscopy. J Exp Bot. 2010 Apr;61(7):1907-15. doi: 10.1093/jxb/erq062. Epub 2010 Apr 2. PMID: 20363865.
+
+\bibitem{Schottdorf2018}
+Schottdorf M. The reconstitution of visual cortical feature selectivity in vitro. PhD Thesis 2018. \url{http://dx.doi.org/10.53846/goediss-6721}
+
+\bibitem{Cong2017}
+Cong L, Wang Z, Chai Y, Hang W, Shang C, Yang W, Bai L, Du J, Wang K, Wen Q. Rapid whole brain imaging of neural activity in freely behaving larval zebrafish (Danio rerio). Elife. 2017 Sep 20;6:e28158. doi: 10.7554/eLife.28158. PMID: 28930070; PMCID: PMC5644961.
+
+\bibitem{Schindelin2019}
+Schindelin J, Arganda-Carreras I, Frise E, Kaynig V, Longair M, Pietzsch T, Preibisch S, Rueden C, Saalfeld S, Schmid B, Tinevez JY, White DJ, Hartenstein V, Eliceiri K, Tomancak P, Cardona A. Fiji: an open-source platform for biological-image analysis. Nat Methods. 2012 Jun 28;9(7):676-82. doi: 10.1038/nmeth.2019. PMID: 22743772; PMCID: PMC3855844.
+
+\bibitem{Pachitariu2016}
+Pachitariu M, Stringer C, Schröder S, Dipoppa M, Rossi LF, Carandini M, Harris KD. (2016). Suite2p: beyond 10,000 neurons with standard two-photon microscopy. BioRxiv, 061507. \url{https://www.biorxiv.org/content/10.1101/061507v2}
+
+\bibitem{Saidi2023}
+Saidi S, Shtrahman M. Evaluation of compact pulsed lasers for two-photon microscopy using a simple method for measuring two-photon excitation efficiency. Neurophotonics. 2023 Oct;10(4):044303. doi: 10.1117/1.NPh.10.4.044303. Epub 2023 Nov 14. PMID: 38076726; PMCID: PMC10704185.
+
+\bibitem{Rupprecht2019}
+Peter Rupprecht. (2019). PTRRupprecht/Photon-yield-and-pulse-dispersion: Photon yield and pulse dispersion, version 1 (Version version1). Zenodo. https://doi.org/10.5281/zenodo.2592465 \url{https://ptrrupprecht.github.io/Photon-yield-and-pulse-dispersion/}
+
+\bibitem{Smith2019}
+Smith, SL (2019). Building a Two-Photon Microscope Is Easy. In: Hartveit, E. (eds) Multiphoton Microscopy. Neuromethods, vol 148. Humana, New York, NY. \url{https://doi.org/10.1007/978-1-4939-9702-2_1}
+
+\bibitem{Kerr2008}
+Kerr JN, Denk W. Imaging in vivo: watching the brain in action. Nat Rev Neurosci. 2008 Mar;9(3):195-205. doi: 10.1038/nrn2338. PMID: 18270513.
+
+\bibitem{Gobel2007}
+G\"obel W, Helmchen F. In vivo calcium imaging of neural network function. Physiology (Bethesda). 2007 Dec;22:358-65. doi: 10.1152/physiol.00032.2007. PMID: 18073408.
+
+\bibitem{Tung2004}
+Tung CK, Sun Y, Lo W, Lin SJ, Jee SH, Dong CY. Effects of objective numerical apertures on achievable imaging depths in multiphoton microscopy. Microsc Res Tech. 2004 Dec;65(6):308-14. doi: 10.1002/jemt.20116. PMID: 15662621.
+
+\bibitem{Dombeck2007}
+Dombeck DA, Khabbaz AN, Collman F, Adelman TL, Tank DW. Imaging large-scale neural activity with cellular resolution in awake, mobile mice. Neuron. 2007 Oct 4;56(1):43-57. doi: 10.1016/j.neuron.2007.08.003. PMID: 17920014; PMCID: PMC2268027.
+
+\bibitem{Rich2024}
+Rich PD, Thiberge SY, Scott BB, Guo C, Tervo DGR, Brody CD, Karpova AY, Daw ND, Tank DW. Magnetic voluntary head-fixation in transgenic rats enables lifespan imaging of hippocampal neurons. Nat Commun. 2024 May 16;15(1):4154. doi: 10.1038/s41467-024-48505-9. PMID: 38755205; PMCID: PMC11099169.
+
+\bibitem{Holtmaat2009}
+Holtmaat A, Bonhoeffer T, Chow DK, Chuckowree J, De Paola V, Hofer SB, Hübener M, Keck T, Knott G, Lee WC, Mostany R, Mrsic-Flogel TD, Nedivi E, Portera-Cailliau C, Svoboda K, Trachtenberg JT, Wilbrecht L. Long-term, high-resolution imaging in the mouse neocortex through a chronic cranial window. Nat Protoc. 2009;4(8):1128-44. doi: 10.1038/nprot.2009.89. Epub 2009 Jul 16. PMID: 19617885; PMCID: PMC3072839.
+
+\bibitem{Sheppard2020}
+Sheppard CJR. Multiphoton microscopy: a personal historical review, with some future predictions. J Biomed Opt. 2020 Jan;25(1):1-11. doi: 10.1117/1.JBO.25.1.014511. PMID: 31970944; PMCID: PMC6974959.
+
+\bibitem{Nagler1983}
+Nagler A. Plossl type eyepiece for use in astronomical instruments. US-Patent US4482217A 1983
+\url{https://patents.google.com/patent/US4482217A/en}
+
+\bibitem{Rupprecht2024}
+Rupprecht P, Duss SN, Becker D, Lewis CM, Bohacek J, Helmchen F. Centripetal integration of past events in hippocampal astrocytes regulated by locus coeruleus. Nat Neurosci. 2024 May;27(5):927-939. doi: 10.1038/s41593-024-01612-8. Epub 2024 Apr 3. PMID: 38570661; PMCID: PMC11089000.
+
+\bibitem{Rudolf1897}
+Rudolf P. Objekt-Glass. US-Patent US583336A 1897 \url{https://patents.google.com/patent/US583336A/en}.
+
+\bibitem{Nikolenko2013}
+Nikolenko V, Yuste R. How to build a two-photon microscope with a confocal scan head. Cold Spring Harb Protoc. 2013 Jun 1;2013(6):588-92. doi: 10.1101/pdb.ip075135. PMID: 23734024.
+
+\bibitem{Zajdel2016}
+Zajdel TJ, Maharbiz MM (2016) Teaching design with a tinkering-driven robot hack. Proceedings of 2016 IEEE Frontiers in Education Conference (FIE) \url{https://ieeexplore.ieee.org/document/7757484}
+
+\bibitem{Tan1999}
+Tan YP, Llano I, Hopt A, Würriehausen F, Neher E. Fast scanning and efficient photodetection in a simple two-photon microscope. J Neurosci Methods. 1999 Oct 15;92(1-2):123-35. doi: 10.1016/s0165-0270(99)00103-x. PMID: 10595710.
+
+\bibitem{Zong2022}
+Zong W, Obenhaus HA, Skytøen ER, Eneqvist H, de Jong NL, Vale R, Jorge MR, Moser MB, Moser EI. Large-scale two-photon calcium imaging in freely moving mice. Cell. 2022 Mar 31;185(7):1240-1256.e30. doi: 10.1016/j.cell.2022.02.017. Epub 2022 Mar 18. PMID: 35305313; PMCID: PMC8970296.
+
+\bibitem{Janelia2024}
+Modular In Vivo Multi-photon Microscope 2.2 \url{https://www.janelia.org/open-science/mimms-22-2024}
+
+\bibitem{Scott2018}
+Scott BB, Thiberge SY, Guo C, Tervo DGR, Brody CD, Karpova AY, Tank DW. Imaging Cortical Dynamics in GCaMP Transgenic Rats with a Head-Mounted Widefield Macroscope. Neuron. 2018 Dec 5;100(5):1045-1058.e5. doi: 10.1016/j.neuron.2018.09.050. Epub 2018 Oct 25. PMID: 30482694; PMCID: PMC6283673.
+
+\bibitem{LaChance2022}
+LaChance J, Schottdorf M, Zajdel TJ, Saunders JL, Dvali S, Marshall C, Seirup L, Sammour I, Chatburn RL, Notterman DA, Cohen DJ. PVP1-The People's Ventilator Project: A fully open, low-cost, pressure-controlled ventilator research platform compatible with adult and pediatric uses. PLoS One. 2022 May 11;17(5):e0266810. doi: 10.1371/journal.pone.0266810. PMID: 35544461; PMCID: PMC9094548.
+
+\bibitem{POVMC2022}
+The Princeton Open Ventilation Monitor Collaboration et al. Inexpensive Multipatient Respiratory Monitoring Syshttps://www.yapsutube.com/watch?v=uYOF-YggWAgtem for Helmet Ventilation During COVID-19 Pandemic. ASME. J. Med. Devices. March 2022; 16(1): 011003. https://doi.org/10.1115/1.4053386
+
+\bibitem{Samhaber2016}
+Samhaber R, Schottdorf M, El Hady A, Bröking K, Daus A, Thielemann C, Stühmer W, Wolf F. Growing neuronal islands on multi-electrode arrays using an accurate positioning-\textmu CP device. J Neurosci Methods. 2016 Jan 15;257:194-203. doi: 10.1016/j.jneumeth.2015.09.022. Epub 2015 Oct 1. PMID: 26432934.
+
+\bibitem{Suo2021}
+D. Suo, U. Ghai, E. Minasyan, P. Gradu, X. Chen, N. Agarwal, C. Zhang, K. Singh, J. LaChance, T. Zajdel, M. Schottdorf, D. Cohen, E. Hazan. Machine Learning for Medical Ventilator Control”, Machine Learning for Health (ML4H), available on arXiv: 2102.06779 (2022)
+
+\bibitem{Schottdorf2024}
+Schottdorf M, Yu G, Walker EY. Data science and its future in large neuroscience collaborations. bioRxiv [Preprint]. 2024 Mar 25:2024.03.20.585936. doi: 10.1101/2024.03.20.585936. PMID: 38585895; PMCID: PMC10996530.
+
+\bibitem{Hohlbein2022}
+Hohlbein J, Diederich B, Marsikova B, Reynaud EG, Holden S, Jahr W, Haase R, Prakash K. Open microscopy in the life sciences: quo vadis? Nat Methods. 2022 Sep;19(9):1020-1025. doi: 10.1038/s41592-022-01602-3. PMID: 36008630.
+
+\end{thebibliography}
+
+
+\end{document}
+

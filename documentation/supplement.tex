@@ -1,0 +1,672 @@
+% Template for PLoS
+% Version 3.5 March 2018
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+\usepackage{changepage}
+\usepackage[utf8x]{inputenc}
+\usepackage{textcomp,marvosym}
+\usepackage{cite}
+\usepackage[usenames,svgnames,table]{xcolor}
+\usepackage[colorlinks = true,
+            urlcolor = RoyalBlue,
+            citecolor = Crimson,
+            backref= page]{hyperref}
+\usepackage[right]{lineno}
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+\usepackage[table]{xcolor}
+\usepackage{array}
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+\usepackage{figchild}
+\usepackage{enumerate}
+\usepackage{sidecap}
+\usepackage{wasysym}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+
+\bibliographystyle{plos2015}
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
+
+%% Include all macros below
+\newcommand{\microns}{~\textmu m~} % ALL UNITS UPRIGHT WITH SPACE
+\newcommand{\invivo}{\textit{in vivo}~}
+%% END MACROS SECTION
+
+\begin{document}
+\vspace*{0.2in}
+
+{
+\centering\Large\textbf{Supplemental Online Material} 
+}
+\newline\newline
+This supplemental material to the article ``TWINKLE: An open-source two-photon microscope for teaching and research'' describes the assembly, function and alignment of all parts of the microscope. Technical specifications are provided through the CAD files and the Zemax simulations in the online repository.
+
+\tableofcontents
+\newpage
+
+\linenumbers
+
+\section{Preface}
+
+\subsection{Safety}
+Class 4 lasers are extremely dangerous. A reflection on a surface can be enough to inflict permanent eye damage. Safety protocols must be observed. Consult with your institution's environmental health and safety officer and take proper training before performing any work with a laser system. Learn from people experienced with these devices and work carefully.\newline
+During alignment, always wear goggles (ours were ML1 by NoIR LaserShields with an optical density $>7$ in the relevant range around $920\text{ nm}$), remove jewelry and watches, and use the low laser power (“alignment mode”) whenever possible. Once the assembly progresses further, full power mode is necessary. Extra care must be taken then. Always use Laser Viewing Cards to track the laser. We use Thorlabs VRC4. Always be conscious where the beam is, and where the beam goes. The beam must be terminated in beam blockers and should be shielded whenever possible with opaque plastic or anodized aluminium tubes to increase safety.
+
+\subsection{Miscellaneous tools}
+\begin{itemize}
+    \item Use a high quality duster to remove any residue from optical surfaces. We use a Miller-Stephenson Aero-Duster Ultra MS-222L.
+    \item To glue optical filters we used an extra fast setting epoxy (Hardman Double/Bubble Epoxy). To seal small gaps, we use black silicone putty (V-tie self-setting silicone rubber).
+    \item We used either McMaster or Thorlabs screwdrivers and hex keys.
+    \item For alignment, we used laser viewing cards (VRC4, Thorlabs), cage system alignment plates (VRC4CPT, Thorlabs), and irises (SM1 Graduated Ring-Actuated Iris Diaphragm, SM1D12C, Thorlabs).
+\end{itemize}
+
+\subsection{Miscellaneous tips}
+\begin{itemize}
+    \item Shield the beam as soon as alignment of a particular section is done. This increases safety, and avoids accidentally bumping into aligned components.
+    \item \textit{Walking the beam}: Any beam can be threaded through two irises using two mirrors. The first mirror the beam meets is sometimes called the ``position'' mirror as it affects primarily the position of the beam. The second ``angle'' mirror instead primarily affects the angle. Assigning each mirror a separate function (position versus angle) and by adjusting them iteratively, is a good rule of thumb for driving the beam through the 2 irises and eventually hitting a specific point at the desired angle \cite{Thorlabs}. 
+    \item Be mindful of reflections from all surfaces. Put back-reflecting component at a slight angle to the beam (e.g. the half wave plate) to avoid back-reflections directly into the laser. The back-reflection can then be caught with an iris placed in front of the laser.
+    \item Make sure the beam is at the same height across the table. This can be done with an iris and an IR card. 
+    \item Take extra care for directing the beam through the center of all lenses and active optical components.
+\end{itemize}
+
+\subsection{Parts and bill-of-materials}
+All custom metal pieces are parts of the CAD assembly of the microscope. Ours were manufactured from Aluminium stock in the university machine shop, but other materials are possible. Aluminium has the added benefit of anodization, which can help control stray light. For example, if the microscope was used in a Virtual Reality system, we would anodize the collection optics to reduce scattering from the projector's light.\newline
+An overview of the microscope's cost is shown in Tab.~\ref{tab_costs}. Keep in mind that these prices can significantly change over time, while some products can become unobtainable and need to be replaced with a different or newer model.
+%
+\begin{table}
+\begin{center}
+  \begin{tabular}{ l c r } \hline
+   \textbf{Item} & \textbf{Info} & \textbf{Cost} \\ \hline
+\rowcolor{gray!20} 920 nm fs-pulsed Laser  & Spark Alcor 920 + Warranty & 90 k \\
+                   ScanImage DAQ-System \& optimized PC & Vidrio & 20 k \\
+\rowcolor{gray!20} Piezo collar & Physik Instrumente & 16 k	\\
+            $2\times$ PMTs + preamplifiers  & Hamamatsu \& Thorlabs & 12 k \\
+\rowcolor{gray!20} Pockels cell             & Conoptics &	11 k \\
+                   Objective                & Nikon &  8 k \\
+\rowcolor{gray!20} Machining custom parts   & Machine Shop; as per CAD files &  7 k \\
+                   Optical filters          & AVR optics \& Semrock &  7 k \\
+\rowcolor{gray!20} Lenses + optomechanics   & Thorlabs \& Newport &  7 k \\
+                   Galvo-Resonant Scanner set & Novanta &  6 k \\
+\rowcolor{gray!20} Electronics/cables/tools & Newark \& McMaster &  5 k \\
+                   Mounting rack            & Emcor Enclosures &  3 k \\
+\rowcolor{gray!20} Laser shutter            & Uniblitz/Vincent &  2 k \\
+                   Laser safety goggles     & Edmund Optics &  1 k \\
+\rowcolor{gray!20} Laser power meter        & Coherent &  1 k \\
+                   Agarose \& fluorescent beads     & Thermofisher &  1 k \\
+  \hline
+ \textbf{Total}                    & & \textbf{197 k} \\
+  \hline
+  \end{tabular}
+\end{center}
+\caption{\textbf{Overview of the approximate cost in 2024-US\$} Note that this list excludes the optical table, and any other infrastructure costs such as compressors for air, and associated power supplies. This is just a summary. The detailed bill-of-materials is provided in the git repository.}\label{tab_costs}
+\end{table}
+
+\subsection{Structure and use of this document}
+In the following sections, we will cover the setup and alignment of the microscope. This is split into three parts. The first part covers all components on the optical table that serve to condition the beam. The second part focuses on the  95 mm vertical post that holds the scanning mirror and scan lens assemblies. The third part is the microscope head with the attached collection optics. We will begin with the assembly on the optical table.\newline
+
+Before building your own microscope, read these instructions fully. Check the CAD files, and make sure that the instructions make sense. This document follows closely our own alignment procedure, and we have done our best to be accurate. However, use common sense and do not follow these instructions blindly. Like all open instrumentation (under CC-BY-4.0), this work is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY, to the extent permitted by law; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+\section{Assembly on the optical table}
+%
+\subsection{Beam conditioning}
+An overview of the system for beam conditioning is shown in Fig.~\ref{sfig1} with key items labelled by capital letters. The following lines will cover the items, and their alignment.
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{sfig1.jpg}
+    \caption{{\bf Overall view of the beam conditioning path on the optical table.} Shown is a photograph of the components used to condition the beam for our microscope. Key components of the system are labelled with capital letters. The laser is shown as a red transparent line with intensity color coded. The beamsplitter cube (component D) splits the beam into two, halving its power. The Pockels cell (component G) reduces the power further. The reflections out of the Pockels cell and from the shutter (item J) are shown in yellow. The telescope (item K) magnifies the beam $\times 2$. All parts are explained in the text together with a note on their alignment.}
+    \label{sfig1}
+\end{figure}
+%
+\begin{enumerate}[]
+    \item \textbf{A)} Laser beam coming out of the laser.
+    
+    \item \textbf{B)} Iris (SM1 Graduated Ring-Actuated Iris Diaphragm, SM1D12C, Thorlabs) inside a SM1-Threaded 30 mm cage plate (CP33, Thorlabs).
+    
+    \item \textbf{C)} $\diameter1\text{ in}$ mounted achromatic half-wave plate with SM1-threaded mount (AHWP10M-980, Thorlabs) inside a high-precision rotation mount (PRM1, Thorlabs). First, to check that the beam travels centrally through the half-wave plate, use an iris. Then place the half-wave plate at a slight angle to make sure that the beam reflected of the surface of the half-wave plate does not travel back into the laser. Confirm by using a detector card to find the (weak) back reflection. While doing this, terminate the beam traveling through the half-wave plate with a beam block.
+    
+    \item \textbf{D)} 10 mm polarizing beamsplitter cube (PBS103, Thorlabs) on a kinematic platform mount (KM100B, Thorlabs) held in place with a large adjustable clamping arm (PM4, Thorlabs). Arrows on the cube indicate which way the beam should go in and where the split beams travel. Similar to the half-wave plate, confirm that the reflection does not travel back to the laser using a detector card. Then adjust the kinematic mount to make sure that the transmitted and split beams travel parallel to the optical table. This is best checked with an iris far after the cube, and a detector card. Finally, adjust the angle on the half-wave plate such that transmitted and split beams have equal power. This has to be done at full-power mode of the laser. We used a Coherent FieldMaxII with a PM10 Thermopile power sensor.
+    
+    \item \textbf{E)} Beam block (hidden under the aluminium shield). This blocks the second beam which is not in use in our system (LB1, Thorlabs).
+    
+    \item \textbf{F)} $\diameter1\text{ inch}$ protected silver mirror (PF10-03-P01, Thorlabs) inside a kinematic mirror mount (KM100, Thorlabs): Reflects the beam.
+    
+    \item \textbf{G)} Pockels cell (350-80-LA-02 with 302RM driver, Conoptics) sitting on a holder (M102A, Conoptics). Properties of light travelling through this device are controlled electrically through the two connected wires. The alignment of the Pockels cell requires two steps: The Pockels cell has to be aligned with the optical axis of the laser, and be rotated relative to the laser's polarization such that the dynamic range is maximized \cite{Conoptics2018, Scientifica2024}. The first step can be done with an alignment tool of identical geometry to the Pockels cell (Conoptics modulator alignment tool 103). The second step requires the Pockels cell to be connected, and a power measurement performed. Importantly, these steps have to be done under full power because the beam profile in alignment mode might be slightly different from the full beam.
+    \begin{itemize}
+        \item First, install the holder on the table, and position on it the Conoptics Pockels cell alignment tool (Conoptics modulator alignment tool 103).
+        \item Use a power meter on the output side, maximize power going through the central bore by manipulating the 4 bottom screws on the holder.
+        \item Then switch the laser to full power and optimize the position of the screws for maximum transmission.
+        \item Tighten the screws around the alignment tool, and mark on the screws the optical position. This will be important later to reproduce the exact same position of the alignment tool with the Pockels cell.
+        \item Connect the Pockels cell (M350-80LA, Conoptics) to the driver as per the Conoptics instructions (p1m and p2m go to J1m and J2m, p1 and p2 go to the controller). The controller settings are shown in Fig.~\ref{sfig2}.
+        %
+        \begin{SCfigure}
+            \includegraphics[width=.75\textwidth]{sfig2.jpg}
+          \caption{{\bf Settings on the Pockels Cell controller.} Shown are the controls of the Pockels Cell driver as set in our system. For reference, see \cite{Conoptics2018}. We recommend for people building a microscope to take many such pictures of all settings and elements.}
+          \label{sfig2}
+        \end{SCfigure}
+        %
+        \item Next, determine the best orientation of the Pockels cell, by measuring the controller's voltage for different Pockels cell rotations. For each rotation of the Pockels cell, measure its transmission while turning the dial on the Conoptics controller from one end to the other. Iterate this for different orientations of the Pockels cell until an optimum is found. An example of different transmission curves is shown in the main manuscript, Fig. 9A. The optimal orientation allows to adjust the laser power in the widest range.
+        \item The Pockels Cell splits the input beam into a transmitted and a rejected beam. The transmitted beam is used, while the energy of the rejected beam is dissipated in a beam block. By changing the control voltage of the Pockels Cell, the power ratio between the transmitted and rejected beam can be adjusted. The rejected beam leaves the Pockels cell through a bore at its side. During alignment, make sure that the rejected beam is properly terminated with a beam block.
+        \item To validate the alignment, compute the extinction ratio of the Pockels cell, i.e. the ratio of maximal and minimal light transmission, and compare that number with the data sheet provided by Conoptics. Ours operate in a regime of $\approx 450$.
+        \item Next, set the Pockels cell controller to the control voltage corresponding to minimum light transmission.
+        \item Tighten the holder, and confirm that the Pockels cell is still well-aligned.
+    \end{itemize}
+    
+    \item \textbf{H)} Two beam blocks (LB1, Thorlabs). Confirm that the right beam block terminates the waste beam leaving the Pockels cell. The left beam is used for calibrating the Pockels cell in ScanImage (the control software used by our microscope \cite{Vidrio2022, Pologruto2003}), together with a light sensor (I).
+
+    \item \textbf{I)} Si Switchable Gain Detector, 350 - 1100 nm (PDA36A2, Thorlabs). This is used to measure the light transmission through the Pockels cell, by monitoring scattered light from the beam block (H), that comes from the shutter back reflection. Make sure that the gain on the detector is chosen reasonably for laser power and ambient light level. In our system, a gain of 50 dB works well. If the ambient room light is too bright, a SM1-mounted infrared long-pass filter in front of the photodiode can help (e.g. FELH0850, Thorlabs). The goal of setting the gain is well-defined sigmoidal control curve in ScanImage: Light transmission through the Pockels cell starts at a minimum, and increases as the Pockels control voltage increases.
+        
+    \item \textbf{J)} 6 mm Shutter (LS6S2ZM1, Vincent Associates) connected to driver (VCM-D1, Vincent Associates) for control of the shutter during imaging. To check that the shutter is properly aligned leave it open and make sure that the beam is not clipped. When closed, the back-reflection has to be terminated in a beam block. This back-reflection combined with a physically close detector (Items H and I above) is used to calibrate the Pockels cell in ScanImage (see below).
+
+    \item \textbf{K)} $2\times$ Beam Expander ($2\times$ Achromatic Galilean Beam Expander, GBE02-B, Thorlabs, inside SM1RC, Thorlabs). This expands the beam sufficiently to fill the apertures of the subsequent optics. Aligning the beam expander requires two steps. First, it has to be aligned to the optical axis. Second, it is critical that the beam stays collimated after the beam expander. For the first alignment, we use two irises, one screwed in the front, and one (on a reasonably long SM1 extension tube) behind the expander. The beam expander has to be positioned such that the irises cut into the beam symmetrically. Then, the expander is on-axis. Next, we need to adjust the collimation of the beam so that the beam is the same size at the exit and after a long distance using several mirrors, see Fig.~\ref{sfig3}. For optimal alignment, adjust the dial on the beam expander until it no convergence or divergence is visible.
+    %
+    \begin{SCfigure}
+        \includegraphics[width=.5\textwidth]{sfig3.jpg}
+      \caption{{\bf Method for making sure the beam is collimated.} Using a set of mirrors, the beam (yellow line) can be reflected back and fourth to increase the distance travelled. Along this path (in this example of $\approx 2.5\text{ m}$), the beam must not change size ($<1\text{ mm}$). This is validated with an IR detection card and switching between the forward and return path of the beam. This method allows to control beam divergence after the $2\times$ telescope to below 1 mrad.}
+      \label{sfig3}
+    \end{SCfigure}
+    %
+\item \textbf{L)} Iris (SM1D12C inside CP08, both Thorlabs) Used to check alignment.
+
+\item \textbf{M)} Mirror (PF10-03-P0, Thorlabs, inside KCB1) to reflect the beam up at a right angle. For the next steps (in particular finding the optimal scanning mirror position), it is important that the beam travels up perpendicular to the optical table, and parallel to the 95 mm optical rail column that holds the scanning mirrors (next section).
+
+\end{enumerate} 
+%
+When finished aligning the beam through all the optical components listed above, clamp them down on the table securely. Then shield the beam path with additional SM1 and SM2 tubing to increase safety and to protect the aligned optical components.
+%
+\subsection{Assembly of the scanning post}
+
+\subsubsection{Components}
+
+Following beam conditioning on the optical table, the beam is reflected up from the optical table towards the ceiling into a box housing the scanning mirrors. This is shown in Fig.~\ref{sfig4}. Following the scanning mirrors, the beam travels up through the scan lens, and directed to the microscope head with another mirror.
+%
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{sfig4.jpg}
+    \caption{{\bf Overall view of the scanning post.} \textbf{A)} Side few. Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components. Importantly, the machined block (C) houses the scanning mirrors, and the scan lens assembly is placed in the SM2 house labelled (E). \textbf{B)} Frontal view. The PMT preamplifiers (component G) and the scanning mirror power supply (component H) are visible.}
+    \label{sfig4}
+\end{figure}
+%
+%
+\begin{enumerate}[]
+    \item \textbf{A)} Mirror (BPF10-03-P0, inside KCB1, with CP12 attached) - turn the beam at a right angle.
+    \item \textbf{B)} Broadband filter (WG11010-B, Thorlabs, inside SM1L20 and SM1S20) - filter to keep dust out of the box housing the scanning mirrors.
+    \item \textbf{C)} An aluminium box containing the resonant and slow galvanometer set (CRS8K/6215H Galvo Set, Novanta), mounted to 95 mm rail (XT95RC4, Thorlabs). A detailed description is provided below.
+    \item \textbf{D)} Empty tubing.
+    \item \textbf{E)} Scan lens - See detailed description below.
+    \item \textbf{F)} Mirror in its housing (PF20-03-P01 and KCB2, both Thorlabs). While we used a round 2 inch mirror, this should be replaced with an elliptical mirror and housing (PFE20-P01 and KCB2EC, both Thorlabs). This increases the field-of-view because the cross-section of an ellipse at 45 degrees is a circle. At low magnification, a round mirror will lead to vignetting.
+    \item \textbf{G)} PMT preamplifier (TIA60, Thorlabs) attached to a 95 mm rail.
+    \item \textbf{H)} Power supply for the scanning mirrors (part of the Novanta scanning mirror set) housed in an electronics prototype box.
+\end{enumerate}
+
+\subsubsection{Alignment}
+
+\begin{itemize}
+    \item First, mount the 95 mm rail to the table. Then attach a bracket to the side to hold the scan lens (component D in Fig.~\ref{sfig3}), and one on top with a cage system to hold a mirror (component F in Fig.~\ref{sfig3}). For alignment with cage systems, we use a cage system alignment plate (VRC4CPT, Thorlabs). The rest of the assembly here will be done without any lenses. The goal is a well-aligned beam that travels through the middle of all parts, and parallel to the optomechanical surfaces.
+    \item The box housing the scanning mirrors is connected, trough SM1 tubing, to a mirror (component A in Fig.~\ref{sfig3}). To align this upper periscope mirror with the lower periscope mirror, mounted on the table, connect a piece of SM1 tubing to the upper mirror facing down, and  a second piece of SM1 tubing to the table mirror facing up (component M in Fig.~\ref{sfig1}) facing up. These two pieces meet in the air. Sliding a finger across the small gap between the two pieces makes misalignment easy to notice haptically. Mount the box housing the scanning mirrors such that you can not feel the transition from the lower SM1 tubing to the upper SM1 tubing.
+    \item Next, we adjust the mirror (component A in Fig.~\ref{sfig4}) so that light travels through the center of the scanning mirrors and up the 95 mm rail. This is done with irises. One is attached at the entry port of the scanning mirror box, e.g. in the SM1 tube (component B in Fig.~\ref{sfig4}). Another two irises are attached, as far away as possible, to a 95 mm rail bracket. It is convenient to use the future holder of the scan lens (component D/E in Fig.~\ref{sfig4}). This ensures that the beam will pass through the center of the scan lens. As the mirror (component F in Fig.~\ref{sfig4}) is not installed yet, an IR detection card can conveniently be taped to the ceiling to make sure that the beam is on-axis. Of note, the resonant scanner is at its origin point when no power is being provided, but the slow galvanometer needs to be provided 0 Volt to position the mirror at its origin point. This can be done through the voltage supply, or to a good approximation through ScanImage by setting the scan mode to the highest possible zoom level. In our microscope design, it can be helpful to wiggle the lid to which the scanning mirrors are mounted (item C in Fig.~\ref{sfig4}). This step is tricky and can require some patience. 
+    \item When confirmed that the light travels parallel to the 95 mm rail, we attach the mirror (component F in Fig.~\ref{sfig4}), and slide it along the cage rods to a position where the beam is reflected centrally through the caging system and the mount positioned on top of the 95 mm rail. This is done using the same set of two SM2-mounted irises that we used to make sure that light leaves the scanning mirror box without x or y displacement. The beam is now ready to travel through the microscope head.
+\end{itemize}
+
+\subsection{Assembly of the microscope head}
+%
+A picture is shown in Fig.~\ref{sfig5}.
+\subsubsection{Components}
+%
+\begin{figure}[t!]
+    \includegraphics[width=\textwidth]{sfig5.jpg}
+    \caption{{\bf Overall view of the microscope head.} Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components.}
+    \label{sfig5}
+\end{figure}
+%
+\begin{enumerate}[]
+    \item \textbf{A)} Empty tube, shielding the bream aligned in the previous section.
+    \item \textbf{B)} Protected silver Mirror (PF30-03-P01, Thorlabs) inside KS3 and clamped down with XE25CL2 and another clamp. This mirror directs the beam through the tube lens. We will refer to this part as ``big mirror''. This is the first mirror that we will have to align.
+    \item \textbf{C)} Tube lens - See detailed description below.
+    \item \textbf{D)} Empty, just a tube used for spacing because the distance between the scan lens, tube lens, and objective is important.
+    \item \textbf{E)} Tube holder (LCP01, Thorlabs) - just there to hold the lens straight, use with ER series 6 mm rods (ER6-P4, Thorlabs).
+    \item \textbf{F)} Elliptical mirror (PFE20-P01 inside KCB2EC, both Thorlabs). We will refer to this part as ``collection mirror''. This is the second mirror that we will align.
+\end{enumerate}
+%
+%
+\subsubsection{Setup and alignment}
+
+\begin{itemize}
+    \item Mount the two 95 mm posts to the table.
+    \item Mount the collection optics box to the Aluminium stage, and then mount the stage to the 95 mm rail. Do not install the photomultiplier tubes yet. These devices are light sensitive, and more alignment needs to be done before we are ready to install them.
+    \item Equip the Aluminium stage with brackets and cage mounts to hold SM2 tubing (A, D and E in Fig.~\ref{sfig5}).
+    \item First, we position the big mirror at a $45^\circ$ angle (component B in Fig.~\ref{sfig5}). Place two irises after the big mirror, one at the future position of the tube lens (component C in Fig.~\ref{sfig5}) and one far away beyond the future position of the collection mirror (component F in Fig.~\ref{sfig5}). Aligning the big mirror is fiddly, but can be achieved with small adjustments of its position in x and y, and the tilt of its housing. We found it helpful to use a 45 degree angled rod to guide the mirror in the direction parallel to its surface. Whichever method is used, this step can take some time. Importantly, do not adjust the set screws of the mirror on the scanning post (component F in Fig.~\ref{sfig4}) because that is already aligned.
+    \item Install the collection mirror (component F in Fig.~\ref{sfig5}). Then position an iris in place of the future objective, and one as far away as possible just above the optical table. Shift the mirror along the rail and adjust its tilt via the set screws so that the beam is aligned with the two irises.
+\end{itemize}
+
+\subsubsection{Scan and tube lens alignment}
+
+After the beam's alignment is confirmed by traveling through the two irises, it is time to install, and align scan and tube lens. Remember that (1) the distance between the tube lens (component C in Fig.~\ref{sfig5}) and scan lens (component G in Fig.~\ref{sfig5}) has to be 100 mm + 375 mm = 475 mm while (2) the scanning mirror set (component H in Fig.~\ref{sfig5}) has to be positioned in the focal plane of the scan lens, while (3) the objective back aperture is positioned in the focal plane of the tube lens (see Fig. 1 in the main manuscript). In our design, the objective is fixed. Therefore we have to perform the lens alignment in several steps, conceptually beginning at the back-aperture of the objective. 
+
+\begin{itemize}
+    \item Before starting, make sure the lens groups in the tube and scan lens assembly are mounted correctly. Specifically, when inserted into one of our previously aligned SM2 mounting rings, they should focus the beam, but must not incur a lateral or angular displacement. To test this, one can screw them into component E in Fig.~\ref{sfig4}, and observe the beam far away on a wall. The lens groups must not change the position of this spot, only its size. Only proceed if the lens groups were assembled and mounted correctly.
+    \item The first lens group to be installed is the tube lens assembly. Position the tube lens such that the beam, at maximum zoom level, is focused at the back-aperture plane of the objective. As the objective is not installed yet, an IR detection card can be placed at its future location. We designed the microscope such that the tube lens assembly is to be mounted on a 1 inch long SM2 extension to the cage plates (Component D in Fig.~\ref{sfig5}. See also the diagram in the section on ``Tube lens Assembly'' below). Observe how the focal plane changes when moving the tube lens along the optical rails (component E in Fig.~\ref{sfig4}). When its correct position is confirmed, tighten the set screws on the optical cage.
+    \item Next, install the scan lens above the scanning mirror box. The spacing between tube lens and scan lens is critical because the beam leaving the tube lens has to be collimated. To test this, remove the elliptical mirror (component F in Fig.~\ref{sfig4}) from its housing, and observe the spot on a wall far away, while moving the scan lens up and down on the 95 mm optical rail. Find a position at which the beam neither converges, nor diverges after the tube lens, and the spot on the wall has the same size as the beam right after the tube lens. Only then is the beam well collimated. Clamp down the scan lens on its rail.
+    \item Next, reinstall the elliptical mirror (component F in Fig.~\ref{sfig4}), and observe the back-aperture of the objective, while moving the scanning mirror box up and down. The scan mirrors have to be positioned in so that they are conjugated to the back aperture of the objective. It is positioned correctly when the well-collimated light converges on the back aperture of the objective across scan angles. Make sure that (1) no beam clipping is visible on high zoom along the optical path. (2) In the conjugated plane of the scan lens, a nice and crisp plane should be visible on an IR card, produced by the scanning beams focused down to a point. (3) The fast resonant scan combined with the slow scan gives the beam a visible dynamic, a ``wobble''. If the scanning mirror box is positioned correctly, then, the beam at the objective back aperture will not translate while scanning because all deflection angles converge on the back aperture (cf. Fig. 1 in the main manuscript). In other words, the ``wobble'' becomes minimal at the plane conjugated to the scan mirrors. Notice how adjustment of the scan mirrors relative to the scan lens can bring this conjugate plane to any point below the collection optics. Now, adjust the height of the scanning mirror box to a point so that the minimal-wobble plane is located at the back aperture of the objective and clamp down the scanning mirror box. For a useful illustration of this method, see also \cite{Yao2023}. Of note, this step of fine-tuning the position of the scan box up and down along the 95 mm optical rail is the reason why we stressed the importance of the alignment of the scanning post, the components A in Fig.~\ref{sfig3} and M in Fig.~\ref{sfig1} earlier. It was critical that across the various heights used here, the scanning mirror box was precisely aligned with the beam.
+    \item Shield the beam with more SM1 and SM2 tubing to protect the beam from misalignment, the optics from dust, and the user from accidentally exposing themselves to the beam.
+\end{itemize}
+%
+\subsection{Installing objective and photomultiplier tubes}
+%
+\subsubsection{Components}
+%
+\begin{SCfigure}
+    \includegraphics[width=.5\textwidth]{sfig6.jpg}
+  \caption{{\bf Side view of the microscope head.} Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components.\newline
+  Set up like this, we were measuring the amount of light traveling through the system. Note the detector taped to the objective with green tape.\newline
+  Also note that the photomultiplier tubes (component C) are light sensitive and need to be installed in the dark. We recommend to switch off the room lights when handling them, and allowing your eyes to adapt to the dark over several minutes. After installation into the collection optics, the lights can safely be used. The objective is easy to install, and just screwed into the piezoelectric collar, component F.}
+  \label{sfig6}
+\end{SCfigure}
+%
+The optics and optomechanics are now essentially in working order. The last missing steps towards a working microscope are the installation of the objective, and the photomultiplier tubes. These elements are visible in a side view of the microscope head, see Fig.~\ref{sfig6}.
+%
+\begin{enumerate}[]
+    \item \textbf{A)} Adjustable lens tube (SM2V05, Thorlabs), made flush with the collection box to stop room light entering the optics. Otherwise this will increase the background signal during use of the microscope. 
+    \item \textbf{B)} Aluminium box housing the collection optics - See detailed description below.
+    \item \textbf{C)} Two photomultiplier tubes (``PMTs'', Hamamatsu H16201-40). Their shielded output cable (black) and the control and power supply cables (color-coded wire) are also visible.
+    \item \textbf{D)} PMT Transimpedance Amplifier (Thorlabs TIA60) - amplifier for the PMTs. Set the output offset on the PMT amplifier such that no signal equals 0 V. The amplifiers are directly connected to the PMT output on the input and ScanImage on the output.
+    \item \textbf{E)} Control signals and power supply for the PMTs going to the custom PMT control box.
+    \item \textbf{F)} Piezoelectric objective collar (P-725K085: PIFOC(R) 400 \textmu m travel, Physik Instrumente).
+    \item \textbf{G)} The microscope's objective (Nikon N16XLWD-PF, Thorlabs).
+\end{enumerate}
+%
+\subsubsection{Objective installation}
+Before installing the objective, double check that the beam is collimated below the piezoelectric collar, and on-axis. To do so set the ScanImage zoom level to high and with the use of two irises confirm that the beam is not clipped. Then screw the objective into the collar.
+ 
+\subsubsection{PMT installation}
+PMTs are light sensitive. Always store them with their aperture covered with black tape when not in use. When removing the tape for installation, this installation into the collection box must be done in darkness and as quickly as possible. We recommend to use black silicone putty (V-tie self setting silicone rubber), and have it ready for use to seal the gap between the PMTs and the aluminium box. Switch the room lights off, wait a few minutes to adapt to the darkness then mount the PMTs on their respective ports.
+
+\subsection{Shield the light path}
+Now that your microscope is ready, finish shielding the light path with SM1 and SM2 tubing, and cover the optical table with sheet metal. We use bent Aluminium sheet, placed on small columns made from T-slotted rail.
+
+\section{Last steps}
+%
+\subsection{No signal?}
+If no picture is visible, check:
+\begin{itemize}
+    \item Is a fluorescent sample under the objective? A bright simple will be useful, such as a fluorescent plastic slide (FSK5, Thorlabs). Is the sample positioned in a suitable distance from the objective? Note that the focal plane is only a few \textmu m wide. If no fluorescence is produced in this optical slice, no signal will be visible in ScanImage.
+    \item If the objective requires water immersion, has a drop of water been placed between the sample and the objective.
+    \item Are all beam blocks removed from the path? Check with IR cards along the way. Below the objective, the IR light should be focused to a tight spot.
+    \item Are the PMTs operating as intended? This can be checked with a light-source like a flashlight close to the objective. This should noticeably increase the noise in the picture.
+\end{itemize}
+%
+\subsection{Validation and tuning}
+%
+Validation and tuning is done in several steps.
+\begin{itemize}
+    \item The first sample to image should be a fluorescent plastic slide (FSK5, Thorlabs). These are bright and uniform. It can be helpful to scratch the surface of the slide to find a feature to focus on. With this sample, the group delay dispersion can be adjusted for maximum signal. It should also validate that the field-of-view is as intended, and no obstructions exist in the beam path.
+    \item Next, image a calibrated scale to validate the microscope's magnification. We used a reference slide featuring a 100 \textmu m grid (Thorlabs R1L3S3). This slide was covered with a drop of Fluorescein solution in water and a standard coverslip. Find the calibration grid, and compute the magnification in \textmu m/pixel. It should be approximately equal in x and y direction. Our microscope has sufficiently small field curvature that despite the thin film of dye, the entire grid should be visible. An example is shown in Fig.~\ref{sfig7}A.
+    \item Next, measure (at very low laser power to not saturate the PMTs) the two photon intensity from a uniform bath of Fluorescein, see Fig.~\ref{sfig7}B. This measures field flatness. Alignment problems either in the excitation or collection path will make this image less uniform. Of note, small alignment errors in particular of the scan lens can have a major effect on field flatness. If your field is not as uniform as the example shown, we recommend to check the scan lens first.
+    \item Finally, use a fluorescent bead sample to measure the microscope's point spread function (PSF), see Fig.~\ref{sfig7}C. This will reveal more subtle misalignments or aberrations in the optics. We use a mix of 5000:1 100 nm fluorescent beads (``Dragon Green'' 480/520 from Bangs Laboratories) in in 1\% Agarose. To prepare this sample, take the beads from the fridge, vortex the container, take the 10 \textmu l and 49.5 g of water. Then microwave the mix with 0.5 g of Agarose until the solution is clear. While warm, place a drop on a microscope slide, and cover with a coverslip. Bring your sample to the microscope, and record a z-stack. Use low laser power to not damage the bead, or saturate the PMTs. The example shown was recorded with 5\% laser power at 99.9 zoom for 40 z-slices with 0.5 \textmu m spacing. The PSF profile should be symmetric, and a faint, but also symmetric, Airy ring visible around the bead, around 5 \textmu m away from center of the bead (see Fig. 2D in the main manuscript).
+\end{itemize}
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{sfig7.jpg}
+    \caption{{\bf Three key validation samples.} \textbf{A)} Image of a reference slide with a 100 \textmu m grid to measure the microscope's magnification. Note how the entire grid is in focus, suggesting small field curvature. \textbf{B)} Two photon intensity from a uniform bath of Fluorescein. This shows that the microscope can effectively elicit and collect fluorescence across the field of view. \textbf{C)} A volumetric image of fluorescent beads in Agarose. This is used to compute the axial and radial width of the microscope's point spread function. Use low laser powers for these measurements to not saturate the PMTs and to produce correct results.}
+    \label{sfig7}
+\end{figure}
+%
+%
+\section{Assembly of subcomponents}
+In the remaining sections, we will cover the microscope's sub-assemblies and their construction, beginning with the lens groups.
+%
+\subsection{Tube lens assembly}
+The tube lens assembly is made of two cemented doublets $2\times$ ACT508-750-B (Thorlabs), see Fig.~\ref{sfig8}A. The letter ``B'' signifies that these lenses have an anti-reflective coating in the IR range. For assembly, the lenses are placed on a lens assembly tool, and a SM2 housing is lowered above them, for an example see Fig.~\ref{sfig8}B. This methods has to be used for the lenses to be seated correctly. The individual steps for the tube lens group are as follows:
+
+\begin{itemize}
+    \item Place the first element on top of the spanner wrench (Thorlabs SPW604) using lens paper. Check the lens thoroughly. Dust can be blown away with a duster, finger prints wiped off with Methanol and a lens cleaning tissue (cf. Fig.~\ref{sfig8}B).
+    \item Blow it with the air duster. 
+    \item Slide the SM2L10 tube over the element until it sits in the end. Sometimes it needs to be wiggled, but do not force it.
+    \item Flip the whole thing over.
+    \item Now the element is in the tube. Tighten it with a SM2 retaining ring.
+    \item Insert a second SM2 retaining ring for spacing. 
+    \item Repeat the previous steps to install the second lens above the SM2 retaining ring
+    \item Flip again, blow with air, and set the lens in place with a third SM2 retaining ring. This produces the configuration shown in Fig.~\ref{sfig8}A.
+    \item Be careful with dust and fingerprints when putting elements into the tube. Confirm that there are no fingerprints, and no dust particles trapped on or between the lenses.
+\end{itemize}
+%
+Our simulations indicate that the lens spacing between the two doublets is not critical, and the approximate clearance provided by two SM2 spacer rings is sufficient. This is shown in Fig.~\ref{sfig8}A. For more precise placement, a spacer ring like the one shown in Fig.~\ref{sfig8}B can be used. This will be important for the slightly more complex scan lens assembly described in the next section.
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{sfig8.jpg}
+    \caption{{\bf Assembly of lens groups.} \textbf{A)} Tube lens assembly with the two doublets held in place with spacer rings. \textbf{B)} Assembly method of lenses: Lenses and spacer rings are stacked on a SM2 spanner, ready for the SM2 tubing to be lowered around them. \textbf{C)} Design of the scan lens assembly. Notice the custom spacer rings in blue. The distance between the last element of the scan lens assembly and the scanning mirror box is $\approx 1.35 \text{ inches}$. \textbf{D)} The assembled scan lens group in its SM2 housing.}
+    \label{sfig8}
+\end{figure}
+%
+\subsection{Scan lens assembly}
+
+\begin{itemize}
+    \item Place the KPC070AR, a plano-concave lens, on the spanner wrench with the plane side facing out. Check the lens thoroughly for dust and finger prints.
+    \item Slide the SM2 tube over the elements until they sit at the end of the tube. Sometimes it needs to be wiggled, to make sure the lenses are seated properly.
+    \item Flip the whole thing over.
+    \item Tighten it with a SM2 retaining ring.
+    \item Next, place the LB1199-B lens on the wrench. This is a bi-convex lens for which the orientation is irrelevant. Flip over the assembly, and tighten the lens with a second SM2 retaining ring. 
+    \item For the third and fourth lens, place an ACT508-200-B lens, a spacer ring, the second ACT508-200-B lens, and two spacer rings on the wrench. Make sure you remove all dust from the various surfaces. Flip over the assembly, and tighten the lens with a third SM2 retaining ring. 
+    \item Check the assembly for trapped dust or fingerprints. This will produce a lens group like the one shown in Fig.~\ref{sfig8}D.
+\end{itemize}
+
+\subsection{Assembly of the collection optics}
+%
+The collection optics are made from several components, including optical filters, lenses, and custom metal pieces. Fig.~\ref{sfig9}A shows a cut through the CAD drawing. The function is described in the main manuscript. A pictures of the collection optics box is shown in Fig.~\ref{sfig9}B with key components labelled. Here, we will focus on the assembly and their alignment.
+%
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{sfig9.jpg}
+    \caption{{\bf Assembly of the collection optics.} \textbf{A)} The assembled collection optics with bottom cover removed, perspective from below. \textbf{B)} The collection optics during the assembly process, similar to panel A. Key components are labelled (see text).}
+    \label{sfig9}
+\end{figure}
+%
+\begin{enumerate}[]
+    \item \textbf{A)} The construction of the collection optics box starts with a side panel attached to the base with stainless steel button head hex screws, 8-32 thread size, 1/2 inch long.
+    \item \textbf{B)} Next, we attach the front panel. This is connected  with stainless steel Phillips flat head screws, 82 degree countersink angle, 4-40 Thread, 1/8 in long and undercut.
+    \item \textbf{C)} Then we install the first lens, a LA1384-A plano-convex lens (Thorlabs), see also Fig.~\ref{sfig8}A. The flat side of the lens sits against the lip inside of its Aluminium holder. The convex side points towards the PMTs. The lens is glued in place with three dots of Epoxy (because 3 points make a plane, and 4 can bend the lens). When gluing, make sure to dab the glue on and pull AWAY from the center of the mirror. That way any glue strands do not fall onto the mirror. When the glue has set, the holder is screwed into the wall. 
+    \item \textbf{D)} The next lens to be installed is a biconvex lens (LB1607-A, Thorlabs). This lens is symmetric, so can be oriented in any way. It is also epoxied on three spots and the holder screwed into the wall, see Fig.~\ref{sfig9}A.
+    \item \textbf{E)} Next, we glue the first dichroic mirror to its holder. This dichroic mirror separates IR light from fluorescence (FF665-Di02-40X55, AVR Optics). Its orientation is important. The caret points TOWARDS the metal piece. The filter is then glued in place with three dots of Epoxy, and the triangular holder screwed into the wall.
+    \item \textbf{F)} Next, we fix the condenser lenses (ACL25416U-A, Thorlabs) in their housing plates. The convex part is facing towards the inside of the box, and set with nylon set screws (Stainless Steel Nylon-Tip Set Screw, 4-40 Thread, 1/8 inch long). The holders are then fixed together with Stainless Steel Socket Head Screw, 8-32 Thread Size, 3/8 inch long.
+    \item \textbf{G)} With the condensers in place, we can install the optical band-pass filters in front of them. First the 525 nm band-pass filter (Semrock Brightline FF01-525/45-32, AVR Optics) for the green channel, which is secured with a nylon set screw (stainless steel nylon-tip set screw, 4-40 thread, 1/8in long). Orientation is important: The arrow is facing outwards, i.e. away from the inside of the box and towards the PMT along the light path.
+    \item \textbf{H)} Next we install the 600 nm band-pass filter for the red channel (Semrock Brightline FF01-600/52-32, AVR Optics). Like the 525 nm filter, it is secured with nylon set screws and the arrow points away from the inside of the box and towards the PMT.
+    \item \textbf{I)} Next, we attach the dichroic mirror that splits red and green light (Semrock Brightline FF562-Di03-40X52, AVR Optics) to its metal holder. The caret points towards the metal holder, such that the side the caret is pointing to contacts the metal when it is glued in place. When the glue has set, the mirror casing is screwed in place using stainless steel socket head screw, 4-40 Thread Size, 5/16 inches long.
+    \item \textbf{J)} The piece containing the 525 nm and 600 nm band-pass filters and the dichroic mirror is connected to the larger metal box with stainless steel socket head screw, 4-40 Thread Size, 3/4 inches long.
+    \item \textbf{K)} The bottom piece (bottom per the view of the picture in Fig.~\ref{sfig9}B) of the PMT box is attached using 4-40, undercut, 3/16 inch screws.
+    \item \textbf{L)} PMT plate. The PMT attaches to the FLAT side of the PMT plates. The other side has a shallow cut out for the screw head to sit. The plate with the PMT attached screws into the rest of the assembly using 4-40 5/16 inch, socket cap screws.
+    \item \textbf{M)} Next, we install an IR block filter (Semrock BrightLine Multiphoton Filter FF01-680/SP-50, AVR Optics). This filter is sandwiched between two rings (SM2RR).
+    \item \textbf{N)} Then we close the second panel with 8/32, 1/2 inch, socket cap screws.
+    \item \textbf{O)} The piezoelectric holder is attached to the aluminium part using the adapter that comes with it. Do not damage the Serial cable.
+    \item \textbf{P)} The lid is attached using 8/32, 3/8 inch, undercut screws. Finish off by securing the rest of the front plate screws (component B) using 4-40 thread, 1/8 inch screws. Screw in the piece holding M to the lid using 4-40, 1/2 inch, socket cap screws.
+    \item \textbf{Q)} Attach the top cover using 4-40, undercut, 3/16 inch screws.
+\end{enumerate}
+%
+\subsection{Assembly of the scanning mirror housing}
+%
+\begin{figure}[!t]
+    \includegraphics[width=\textwidth]{sfig10.jpg}
+    \caption{{\bf The scanning mirror box.} \textbf{A)} The custom aluminium box housing the pair of scanning mirrors. \textbf{B)} Close-up of the same box with key parts labelled: A: Two broadband windows (WG11010-B, Thorlabs) to keep dust out. B: Attachment of the box to the 95 mm optical rail. C: An Iris used for alignment, and D: SM1 tubing. \textbf{C)} Bottom part of the aluminium box. A: The windows, and B: screws to attach the box to the drop-on rail carriage via four 0.75 inch tall 1 inch diameter posts. \textbf{D)} The scanning mirrors are mounted to the lid using heat transfer compound. E: Anodized aluminium block holding the scanning mirrors. F: One of the scanning mirror assemblies, G: The aluminium lid and H: The scanning mirrors. \textbf{E)} Same as \textbf{D} but different angle. \textbf{F)} Same as \textbf{E} but different angle. I: Cables controlling the scanning mirrors.}
+    \label{sfig10}
+\end{figure}
+%
+The scanning mirror housing is a machined piece of aluminium holding the Novanta scanning mirror set against the 95 mm optical rail, see Fig.~\ref{sfig10}. It also shields the scanning mirrors from dust in the environment, and protects the environment from audible noise produced by the scanning mirrors. The housing is composed of a box, mounted to the 95 mm rail (Fig.~\ref{sfig10}A), and a lid to which the Novanta scanners are mounted (Fig.~\ref{sfig10}B,C). When mounting the black anodized holder, make sure to apply heat transfer compound between the holder and the lid (we use Wakefield Thermal Joint Compound Type 120-5 Silicone). While the resonant scanner does not dissipate much heat, the slow galvanometer becomes warm in normal operation, and this heat needs to be dissipated. This is particularly important when pushing to fast responses, and driving the slow galvanometer with larger currents.\newline
+After receiving the scanning mirrors, they need to be installed in the black anodized Aluminium block. Make sure to put the resonant scanner in first (the piece sitting at an angle) before the slow galvanometer (the piece sitting parallel to the mount). Both pieces should have stops that keep you from pushing them into the mount too far.\\
+The box has two windows that are SM1 threaded. Position the dust filters (WG11010-B, Thorlabs) in these bores with appropriate retaining rings. We used a SM1 to SM2 converter ring at the exit, Fig.~\ref{sfig10}B, only because we had that part available from an earlier project.
+
+\subsection{Scanning mirror power supply}
+%
+The scanning mirrors come with driver circuit boards. We place them in a prototype box, and connect the driver board's power supply and signal lines to connectors, see Fig.~\ref{sfig11}A. The power connectors accept banana plugs. The signals are connected to BNC connectors. The other key parts are as follows.
+%
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{sfig11.jpg}
+  \caption{{\bf Scanner electronics.} \textbf{A)} Overview of all scanning mirror parts. Key parts are labelled with capital letters. Optomechanics were covered in Fig.~\ref{sfig10}. All electrical drivers were placed in the yellow circuit box. \textbf{B)} Power supply and connection of the scanning mirrors with key parts labelled by capital letters. The inset shows the scanning mirror driver boards provided by Novanta and mounted in the yellow circuit box. The smaller driver circuit (blue) powers the resonant scanner. The larger circuit board (green) drives the slow galvanometer. The circuit boards are mounted to the Aluminium walls with screws and heat transfer compound.}
+  \label{sfig11}
+\end{figure}
+%
+Fig.~\ref{sfig11}A shows as the housing box (component A) and xy scanning mirror set (component B) that we discussed above. Components C are the cables connecting the scanning mirrors to their driver boards. These driver boards are housed in a yellow prototype box, and connected to accept power (component D), and signals (component F). Fig.~\ref{sfig11}B shows the power supply of the scanning mirrors. The slow galvanometer needs a $\pm 28\text{ V}$ supply. This is provided through the three black/white/red cables (-28 V, 0 V, +28 V) from the right power supply. The second power supply to the left provides 12 V for the resonant scanner. The supplies are connected to the power supply ports on the prototype box, and the signal lines are connected to the Vidrio DAQ system. Key components in the figure are labelled with capital letters. These are as follows:
+\begin{itemize}
+    \item \textbf{A)} Power supply (GPD-3303D, Gw Instek) with two channels, both set to 28 V.
+    \item \textbf{B)} Have CH 1 turned on.
+    \item \textbf{C)} Press the ``Ser/Indep'' button. This wires the two channels together to a shared references to provide the $\pm 28\text{ V}$ and the 0 V reference line.
+    \item \textbf{D)} This enables our power supply unit. Only when pressed, power is sourced to the galvanometer driver board.
+    \item \textbf{E)} CC/CV indicator light. Make sure that the device is set to CV (constant voltage).
+    \item \textbf{F)} The -28 V output line (black). This is connected to the -28 V line on the electronics box (shown below).
+    \item \textbf{G)} The reference lines, 0 V (white) connected to the 0 V line on the electronics box.
+    \item \textbf{H)} Connects the reference line to ground.
+    \item \textbf{I)} The +28 V output line (red) connected to the +28 V line on the electronics box.
+    \item \textbf{J)} Power supply (E3630A, Keysight) set to 12 V to power the resonant scanners.
+    \item \textbf{K)} Black channel is the references, and connected to black port on the controller box.
+    \item \textbf{L)} Red channel, set to +12 V, is connected to the red port on the controller box.
+    \item \textbf{M)} Coaxial connector controlling ``Zoom'' (the resonant scanners's amplitude).
+    \item \textbf{N)} Coaxial connector for ``Sync'' (the resonant galvanometer's digital synchronization signal)
+    \item \textbf{O)} Coaxial connector for controlling the slow galvanometer.
+\end{itemize}
+Make sure the power generator settings are correct before plugging in the scanning mirrors. Check this with a good multimeter and do not just trust the display. Of further note, the scanning mirror driver boards cannot be mixed and matched. Every board has a unique ID that is matched to the scanner. Double check that they are connected correctly before powering up.
+
+\subsection{Assembly of PMT control circuits}
+The last part to be assembled is the control circuitry for the photomultiplier tubes. This is shown in Fig.~\ref{sfig12}. The circuit is shown and explained in the main manuscript. Here, we will cover the assembly. In short, the circuit allows a user to set the gain of the H16201P-40 photomultiplier tube module with a potentiometer \cite{Hamamatsu2024}, while displaying the control voltage on a small digital panel meter (Murata DMS-20PC). The supply of this circuit is a well regulated +15 V supply that also powers the PMTs. The panel meter needs a +5 V supply that we obtain from the +15 V via a voltage divider. The PMT is supplied directly with the +15 V. It also sources a signal through the blue cable that is connected to ground via a voltage divider, using a potentiometer. This voltage divider produces the control voltage that is fed back to the module via the white input line, and used for display on the panel meter. Due to the simplicity of this circuit, we do not solder this on a circuit board, but rather in a prototype development box directly, see Fig.~\ref{sfig11}A,B, which is attached to the rig.
+%
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{sfig12.jpg}
+  \caption{{\bf Custom electronics.} \textbf{A)} Picture of the control box. Component A are the displays for the control voltage for red and green channels. Component B are the two potentiometers to set the two channel gains. \textbf{B)} Inside view of the potentiometer box with key components labelled (see text). \textbf{C)} Connector attached to the controller box before plugging into the PMTs. \textbf{D)} Connector from the Control box to the PMT cables. \textbf{E)} Outputs of the PMTs. Note the four color-coded American wire gauge \#28 cables, and the coaxial signal line\cite{Hamamatsu2024}.}
+  \label{sfig12}
+\end{figure}
+%
+The first components to be wired up are the Murata DMS-20PC displays. The circuit diagram is shown in the main manuscript \textcolor{red}{Fig. 4}.
+\begin{itemize}
+    \item Solder pins 7 and 8 together on each of the two displays. The displays are component \textbf{A} in Fig.~\ref{sfig12}A,B.
+    \item Solder 2.5 inch long, and 5 inch long pieces of wires to pin 12 on the top display.
+    \item Solder the other end of the 2.5 inch piece of wire and a new 1 inch piece of wire to pin 3 (+5 V return).
+    \item Solder the other end of the 1 inch piece of wire and a 1.5 inch and 3 inch pieces to display pin 6 (DP1).
+    \item Solder the other end of the 1.5 inch piece and another 1 inch piece to pin 3 (+5 V return) of the bottom display.
+    \item Solder the other end of the 1 inch piece and a new 2 inch piece to pin 6 (DP1) of the bottom display.
+    \item Solder the other end of the 2 inch piece to pin 12 (input lo) of the bottom display.
+    \item Solder the other end of the 3 inch piece from pin 6 (DP1) of the top display and a new 12 inch piece of wire to the middle pin of the left potentiometer.
+    \item Solder a 12 inch piece of wire to pin 3 (closest to the knob) on the left potentiometer (50 kOhm, 3590S-1-503L, Bourns). These are the two big blue parts, component \textbf{B}, in Fig.~\ref{sfig12}A,B.
+    \item Solder a 12 inch piece of wire and 5 inch piece of wire to pin 11 (input hi) on the top display.
+    \item Solder the other end of the 5 inch piece of wire to pin 1 (furthest from the knob) on the left potentiometer.
+    \item Solder a 5 inch piece of wire to pin 1 and pin 2 (+5 V supply) of the top display.
+    \item Solder the other end of the 5 inch piece of wire to the middle pin on the side opposite to where it says ON/ON on the switch.
+    \item Solder a 12 inch piece of wire and 5 inch piece of wire to pin 11 (input hi) on the bottom display.
+    \item Solder the other side of the 5 inch piece of wire to pin 1 (further from the knob) on the right potentiometer.
+    \item Solder a 12 inch piece of wire to pin 3 (closest to the knob) on the right potentiometer.
+    \item Solder a 12 inch piece of wire and the other end of the wire connected to pin 12 of the top display to pin 2 (middle pin) on the right potentiometer.
+    \item Solder a 6 inch piece of wire to the middle pin on the side adjacent to where it says ON/ON on the switch (component \textbf{C}).
+    \item Solder a 3 inch piece of wire to the left pin (left with the words being oriented the correct direction) on the side adjacent to where it says ON/ON on the switch.
+    \item Solder the other end of the 3 inch piece of wire and a 12 inch piece of wire to the left pin (left with words being oriented the correct direction) of the second switch on the side opposite to ON/ON words.
+    \item Solder a 12 inch piece of wire to middle pin on the second switch on the side opposite to the ON/ON words.
+    \item Solder a 6 inch piece of wire to left pin on the potentiometer used for the  +5 V supply of the display (component \textbf{D}).
+    \item Solder a 6 inch piece of wire to right pin on the same potentiometer.
+    \item Solder a 4 inch piece of wire to center pin on the same potentiometer. 
+    \item Connect the left and right pins to the banana plugs and set the potentiometer to 5V going across BEFORE connecting the middle wire to the rest of the controller circuit! 
+    \item Solder the other end of the 4 inch wire and another 4 inch piece of wire to the middle pin on the second switch on the side adjacent to the ON/ON words.
+    \item Solder the other end of the 4 inch piece of wire to the right pin (right with words being oriented in the correct direction) on the side opposite to the ON/ON words on the first switch.
+    \item Solder a 5 inch piece of wire to the right pin (right with words being oriented the correct direction) on the side adjacent to where it says ON/ON on the second switch.
+    \item Solder the other end of the wire to pin 1 and pin 2 (+5 V supply) on the bottom display.
+    \item Trim the wires from the middle pin of the gain adjusters by around 5 inches, connect those two wires, the wire furthest from the dial on the potentiometer, and two 12 inch wires by twisting together.
+    \item Solder a 3 inch wire to the white banana plug and screw it in the housing. This is component \textbf{E} in in Fig.~\ref{sfig12}B.
+    \item Solder a 3 inch wire to the red banana plug and screw it in the housing.
+    \item Connect the twisted together wires to the white banana plug.
+    \item Connect the wire closest to the dial on the potentiometer and the left pin (left with words being oriented in the correct direction) on the second switch on the side opposite to the ON/ON words to the red banana plug.
+    \item Solder one of the wires from the white banana plug to pin 2 of the top 4-pin female connector. This connection is item \textbf{F} in Fig.~\ref{sfig12}B. The 4-pin connector that will plug into this port is shown in in Fig.~\ref{sfig12}C.
+    \item Solder the wire from the pin closest to the knob on the left potentiometer to pin 3 of the top 4-pin female connector. Put a 12k Ohm resistor within the path of the wire (component \textbf{G} in white heat-shrink tubing). This limits the control voltage to approx. 0.8 V, which is safer for the PMT \cite{Hamamatsu2024}. We discuss this in the main manuscript.
+    \item Solder the wire from pin 11 on the top display to pin 1 of the top 4-pin female connector (M16 4 Pin Connector).
+    \item Solder the wire from the middle pin on side adjacent to ON/ON words on the top switch to pin 4 of the top 4-pin female connector.
+    \item Do the previous 4 steps for the other 4-pin female connector.
+\end{itemize}
+%
+This concludes the assembly of the control box. The connection of this box to the PMTs is made through a custom cable. A male connector, shown in in Fig.~\ref{sfig12}C, plugs into the control box on one end, and into a female plug soldered to the PMT module on the other. This is shown in in Fig.~\ref{sfig12}D. The PMT module has four colored control lines attached to, see in Fig.~\ref{sfig12}E, that are wired to this connector. The specific type, shown in Fig.~\ref{sfig12}D, is a Wire-Pro, Inc. (WPI) 126-195 connector.
+
+\section{Software and control}
+%
+\subsection{Laser settings}
+The laser control depends on the system used. The Alcor 920 laser is controlled through a USB interface, and software that runs on the same PC as ScanImage. The software is used to switch on the laser, switch between alignment and full-power mode, and to adjust the group delay dispersion. 
+
+\subsection{Shutter settings}
+The shutter controller has various settings that allow either manual control, or control via ScanImage. In our system, a ``Local/Remote'' toggle switch selects between those options. A second important toggle switch is ``N.O./N.C.''. In the ``N.C.'' position, the shutter will be activated open by an input pulse signal. In the ``N.O.'' position the shutter will be activated closed. If ScanImage's shutter control signal is not correctly actuating the shutter, very likely this toggle switch needs to be flipped.
+%
+\subsection{Setting up ScanImage}
+%
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{sfig13.jpg}
+  \caption{{\bf Setup Vidrio DAQ system.} \textbf{A)} Wiring of the four input channels. These are connected to the PMT preamplifiers, and for our system digitized at 14 bit resolution. \textbf{B)} Data acquisition panel connected to the microscope's various control and signal lines. Capital letters are explained in the text.}
+  \label{sfig13}
+\end{figure}
+%
+At this point, all hardware is set up and aligned. The next step is configuring ScanImage, the software used to control the microscope \cite{Pologruto2003, Vidrio2022} to communicate with the various components. This is done through a number of coaxial lines that connect the Vidrio data acquisition system with the microscope hardware, see Fig.~\ref{sfig13}. Our system is connected, on the back, to the two PMT outputs, see Fig.~\ref{sfig13}A. The front panel links the system to eight signals, Fig.~\ref{sfig13}B. These are
+\begin{itemize}
+    \item \textbf{A)} \texttt{Analog-out}: X-resonant zoom control.
+    \item \textbf{B)} \texttt{Analog-out}: Y-slow control.
+    \item \textbf{C)} \texttt{Analog-out}: Piezo control for the objective collar.
+    \item \textbf{D)} \texttt{Analog-in}: Piezo feedback from the objective collar.
+    \item \textbf{E)} \texttt{Analog-in}: Pockels cell feedback.
+    \item \textbf{F)} \texttt{Analog-out}: Pockels cell control.
+    \item \textbf{G)} \texttt{Digital}: Resonant scanner sync.
+    \item \textbf{H)} \texttt{Digital}: Shutter control.
+\end{itemize} 
+%
+When connected, ScanImage needs to be configure to make use of these connections. The process is as follows.
+
+\begin{itemize}
+    \item Type \texttt{ScanImage} into Matlab and press Enter.
+    \item Login using the correct credentials.
+    \item Under \texttt{Machine Data File}, click \texttt{New}.
+    \item Type in a filename and click \texttt{Save}.
+    \item Select \texttt{Blank Configuration}.
+    \item Next we need to add all the devices of the microscope. Start by clicking the \texttt{Devices} tab, and pressing \texttt{+} to add each new device.
+    \item Shutter
+    \begin{itemize}
+        \item Select \texttt{Digital Shutter} and click \texttt{Add}.
+        \item Type in a name like \texttt{Shutter1}.
+        \item In the new window, select \texttt{/vDAQ0/D1.0} for \texttt{Control Channel}. This will depend on how you have wired up the control line to the front panel.
+        \item \texttt{Open time (seconds)} remains at the default of 0.5 s.
+        \item Check the \texttt{Invert Output} box.
+        \item Click \texttt{Apply}.
+        \item Make sure the shutter itself (on the driver box) is on \texttt{STD} for the key and the toggle switches (see above) are set to \texttt{N.C.} and \texttt{Remote}.
+    \end{itemize}
+    \item Pockels cell:
+    \begin{itemize}
+        \item Select \texttt{Pockels Cell} and click \texttt{Add}.
+        \item Type in a name like \texttt{Pockels1}.
+        \item In the new window, select \texttt{/vDAQ0/AO11} for \texttt{Control Channel}. Again, this will depend on the channel that the Pockels driver is connected to.
+        \item For \texttt{Feedback Channel (optional)}, select \texttt{/vDAQ0/AI4}. This is connected to the photodiode directed at the beam block for the shutter. The gain should be chosen for a good signal. In our system, a gain of 50 dB works well. If the ambient room light is too bright, a SM1-mounted infrared long-pass filter in front of the photodiode can help (e.g. FELH0850, Thorlabs). The goal of setting the gain is sigmoidal control curve in ScanImage: Light transmission starts at a minimum, and increases as the control voltage increases.
+        \item Under \texttt{Control output [Volt]}, change \texttt{Max} to \texttt{1.7}. This is the maximum control voltage applied to the Pockels cell driver.
+        \item When calibrating, notice how it takes about 1.7 V to reach 100\% laser power.
+        \item Leave the \texttt{Open shutters for calibration} field unchecked because our shutter is positioned after the Pockels cell and the reflection off the closed shutter used for calibration with a photodiode.
+        \item Leave everything else in the \texttt{Basic} tab unchanged.
+        \item Leave everything else in the \texttt{Calibration Settings} and \texttt{Advanced} tabs unchanged.
+        \item Click \texttt{Apply}.
+    \end{itemize}
+    \item Slow galvanometer:
+    \begin{itemize}
+        \item Select \texttt{Analog Galvo} and click \texttt{Add}
+        \item Type in a name like \texttt{Y-galvo}
+        \item In the new window, select \texttt{/vDAQ0/AO1} for \texttt{Control Channel}. This will depend on the port that the galvanometer is connected to.
+        \item The rest of the defaults have to be adjusted as per the Galvanometer's specifications. For our slow galvanometer, these are as follows.
+        \item Change \texttt{Volts per optical degree [V/deg]} to \texttt{0.7692}.
+        \item Change \texttt{Angular range [optical degrees]} to \texttt{26}.
+        \item Change \texttt{Park position [optical degrees} to \texttt{13}.
+    \end{itemize}
+    \item Resonant scanner:
+    \begin{itemize}
+        \item Select \texttt{Resonant Scanner} and click \texttt{Add}.
+        \item Type in a name like \texttt{X-res}.
+        \item In the new window select \texttt{/vDAQ0/D0.0} for \texttt{Sync Channel}. This will depend on your wiring.
+        \item For \texttt{Zoom Control Channel}, select \texttt{/vDAQ0/AO0}.
+        \item Leave everything else unchanged. We used a 8 kHz scanner.
+        \item Click \texttt{Apply}.
+    \end{itemize}
+    \item Piezoelectric objective collar.
+    \begin{itemize}
+        \item Select \texttt{PI E709} and click \texttt{Add}.
+        \item For \texttt{Serial port / USB}, select \texttt{COM1}.
+        \item For \texttt{Control Channel}, select \texttt{/vDAQ0/AO2}. This will depend on your wiring.
+        \item For \texttt{Feedback Channel}, select \texttt{/vDAQ0/AI2}. This will depend on your wiring.
+        \item Click \texttt{Read From Device} and numbers should automatically update.
+        \item Click \texttt{Apply}.
+        \item Click \texttt{Calib} on the new Piezo widget.
+        \item Should be able to feel piezoelectric mount vibrate with hand when it calibrates.
+        \item Check \texttt{Enable Stack} on the main ScanImage window and the \texttt{STACK CONTROLS} windows should pop up.
+        \item Better to do \texttt{step} instead of \texttt{sawtooth} for resonant scanner since we are averaging images; with \texttt{sawtooth}, we would be averaging difference Z depths together
+        \item Select 10 \texttt{Frames per Slice}, 5 \texttt{Number of Slices}, 10 \texttt{Number of Volumes}, and 5 for \texttt{Step Size [um]}.
+        \item Click \texttt{Test Waveform}.
+        \item In new window, click \texttt{Optimize Waveform}.
+        \item Ringing at the beginning and end of steps can be corrected with \texttt{Actuator lag}.
+    \end{itemize}
+
+    \item After adding the devices, we have to create an imaging system by clicking the \texttt{ScanImage} tab and click \texttt{+ Add Imaging System +}.
+    \item In the new window, under \texttt{vDAQ Scan System}, click \texttt{Add} and type in a name like \texttt{My microscope}.
+    \item In the new window, select \texttt{X-res} under \texttt{Resonant Scanner}.
+    \item For \texttt{Y-Galvo}, select \texttt{Y-galvo}.
+    \item Check off \texttt{Use} for \texttt{Shutter1}.
+    \item Check off \texttt{Use} for \texttt{Pockels1}.
+    \item Check off \texttt{Use} for \texttt{Piezo1}.
+    \item Under \texttt{Channel}, check off \texttt{Invert} for all 4 channels.
+    \item Leave everything under the \texttt{Triggers}, \texttt{Advanced}, and \texttt{I2C} tabs unchanged.
+    \item Of note: (1) Under \texttt{Advanced}, \texttt{Reverse line read} \textcolor{red}{Edward states ``reverses the image. We talked about this in the video that Esme’s scope needs this''. Why?} (2) The setting \texttt{I2C} is used for syncing with behavior.
+    \item Click \texttt{Apply}.
+\end{itemize}
+%
+
+\section{Recommendations for use}
+Make a point of regularly checking your microscope. Lenses can get dirty, the path misaligned, and components age.
+%
+\begin{itemize}
+    \item Measure (1) the laser's power levels, (2) the Pockels cell calibration and (3) check exposed lenses and mirrors for dust and fingerprints with a flashlight. This is fast and should be done before every experiment.
+    \item When the microscope is not in use, it is good practice to switch off all components, except the scanning mirror power supplies, the PMT preamplifiers, and the photodiode.
+    \item Every couple of month, switch the red and green PMTs to check for signs of aging and validate their performance on a fluorescent slide or sample of known brightness. The PMTs age and will need to be replaced, depending on use, after a few years. They should be treated with care: power ramped up and down slowly, and saturation should be avoided. We use a rotation system in which new PMTs are typically used for the green channel. When their performance becomes worse, they often have a few more months or years in the (typically brighter) red channel in them.
+    \item Every couple of month, image a bead sample to validate the PSF.
+    \item Be mindful of imaging artifacts. When suspecting an issue, go back to the basics, and isolate the error.
+\end{itemize}
+%
+Of note, for virtual reality experiments that involve a Styrofoam treadmill floating on an air cushion, or any other experiment using compressed air, make sure to place an oil trap in the air line. This avoids oil droplets being deposited onto the optics; especially the elliptic mirror right above the objective. Small Styrofoam particles also get deposited on the lenses which need to be dusted from time to time. Try to shield the laser path as much as possible to keep dust and dirt away from optical components.
+
+\nolinenumbers
+
+\begin{thebibliography}{10}
+
+\bibitem{Thorlabs}
+Two Steering Mirrors Can be Used to Walk a Laser Beam to a New Path. Thorlabs 2024. 
+\url{https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=14221} and \url{https://www.youtube.com/watch?v=qzxILY6nOmA}
+
+\bibitem{Conoptics2018}
+Pockels Cell Concepts. Conoptics 2018.
+\url{https://www.conoptics.com/wp-content/uploads/2018/06/SI2018-PockelsCellConcepts-190618-0009-18094.pdf}
+
+\bibitem{Scientifica2024}
+\#LabHacks: Aligning your Pockels cell for two-photon imaging. Scientifica 2024.
+\url{https://www.scientifica.uk.com/neurowire/labhacks-aligning-your-pockels-cell-for-two-photon-imaging}
+
+\bibitem{Vidrio2022}
+Online documentation of ScanImage. Vidrio 2024. \url{https://docs.scanimage.org/index.html}
+
+\bibitem{Pologruto2003}
+Pologruto TA, Sabatini BL, Svoboda K. ScanImage: Flexible software for operating laser scanning microscopes. BioMed Eng OnLine 2, 13 (2003). \url{https://doi.org/10.1186/1475-925X-2-13}
+
+\bibitem{Yao2023}
+Yao P, Liu R, Broggini T, Thunemann M, Kleinfeld D. Construction and use of an adaptive optics two-photon microscope with direct wavefront sensing. Nat Protoc. 2023 Dec;18(12):3732-3766. doi: 10.1038/s41596-023-00893-w. Epub 2023 Nov 1. PMID: 37914781; PMCID: PMC11033548.
+
+\bibitem{Hamamatsu2024}
+Technical note on the Photomultiplier Tube Modules Series
+H16200/H16201/H16204, Hamamatsu Photonics 2014 \url{https://www.hamamatsu.com/eu/en/product/optical-sensors/pmt/pmt-module/current-output-type/H16201-40.html}
+
+\end{thebibliography}
+
+
+\end{document}
