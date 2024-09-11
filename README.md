@@ -15,7 +15,7 @@ Design and documentation for the TWINKLE two photon microscope.
 
 ### Source files
 The CAD files are provided in two formats:
-- The Fusion 360 native format as `FullAssembly.f3d`
+- The Fusion 360 native format as `FullAssembly.f3d`. md5 sum `441e758a93336d974f597775d977376b`
 - For Autodesk Inventor. When using the Inventor folder, open the master assembly `FullAssembly.iam`.
 
 ### License
