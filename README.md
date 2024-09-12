@@ -1,5 +1,5 @@
 # Microscope
-Design and documentation for the TWINKLE two photon microscope.
+This repository contains the complete design and documentation of the TWINKLE two photon microscope.
 
 ![img](./documentation/overview.jpg)
 
@@ -27,7 +27,7 @@ The CAD files are provided in two formats:
     2. A zip file of the same data is split into three files. Assemble the data with `cat x?? > FullAssembly.iam.zip`. The file `FullAssembly.iam.zip` should be around 160 MB with md5 hash `09c5af80a2e161584779715d610bf24a`.
 
 ### Issue
-For updates and suggestion, add issues to the repository.
+Issues are tracked through this repository. For minor updates, just push. For major ones, use a PR. 
 
 ### License
 This work is free: you can redistribute it and/or modify it under the terms of the Creative Commons Attribution 4.0 International license, version 4 of the License, or (at your option) any later version (CC-BY-4.0). This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY, to the extent permitted by law; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. A copy of the License is provided in this repository.  For more details, see <http://www.gnu.org/licenses/>.
