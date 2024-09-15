@@ -1,11 +1,13 @@
-# Microscope
-This repository contains the complete design and documentation of the TWINKLE two photon microscope.
+# Twinkle <a href="https://certification.oshwa.org/us002677.html"><img src="assets/oshw_certification.png" align="right" width="200"></a>
+
+This repository documents a microscope for Two-photon Imaging in Neuroscience, and Kit for Learning and Education — "Twinkle". <br/> It offers an affordable solution for a fully open, high-performance and cost-effective research and teaching microscope. Here, you can find the complete design and documentation. 
 
 ![img](./documentation/overview.jpg)
 
 ### Repository Content
     .
     ├── article                 # Latex code and figures for the main manuscript.
+    ├── assets                  # Supporting files, OSHW certification.
     ├── cad                     # Computer-aided design (CAD) files of the entire instrument in various file formats.
     ├── documentation           # Build instructions and supplemental material.
     ├── parts                   # Detailed bill of materials (BoM), important quotes, and drawings for machining.
