@@ -2,7 +2,7 @@
 
 This repository documents a microscope for Two-photon Imaging in Neuroscience, and Kit for Learning and Education — "Twinkle". <br/> It offers an affordable solution for a fully open, high-performance and cost-effective research and teaching microscope. Here, you can find the complete design and documentation. 
 
-![img](./documentation/overview.jpg)
+![img](./assets/overview.jpg)
 
 ### Repository Content
     .
@@ -23,10 +23,10 @@ This repository documents a microscope for Two-photon Imaging in Neuroscience, a
 
 ### Computer assisted design (CAD) files
 The CAD files are provided in two formats:
-- In the Fusion 360 native format as `FullAssembly.f3d`; md5 hash `441e758a93336d974f597775d977376b`.
+- In the Fusion 360 native format as `FullAssembly.f3d`; md5 hash `cbc14d6bce3a4f311935500c3b959128`.
 - For Autodesk Inventor:
     1. When using the Inventor folder, open the master assembly `FullAssembly.iam`.
-    2. A zip file of the same data is split into three files. Assemble the data with `cat x?? > FullAssembly.iam.zip`. The file `FullAssembly.iam.zip` should be around 160 MB with md5 hash `09c5af80a2e161584779715d610bf24a`.
+    2. A zip file of the same data is split into three files. Assemble the data with `cat x?? > FullAssembly.zip`. The file `FullAssembly.zip` is 166 MB with md5 hash `130a4bcaa6f747f43ba337dc33d74409`.
 
 ### Issue
 Issues are tracked through this repository. For minor updates, just push. For major ones, use a PR. 
