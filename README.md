@@ -18,8 +18,8 @@ This repository documents a microscope for Two-photon Imaging in Neuroscience, a
         ├── Excitation          # Zemax files, drawings, and simulated performance of the excitation optics.
         ├── matlab              # Matlab scripts, using the Zemax API, measuring the performance of the excitation system.
     ├── LICENSE                 # Text file: This work is licensed under a CC Attribution 4.0 International License.
-    ├── README.md               # Text file: This info file
-    └── okh-manifest.yml        # Text file: Open Know-How manifest files   
+    ├── README.md               # Text file: This info file.
+    └── okh-manifest.yml        # Text file: Open Know-How manifest files.   
 
 ### Computer assisted design (CAD) files
 The CAD files are provided in two formats:
