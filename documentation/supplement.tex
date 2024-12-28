@@ -26,6 +26,7 @@
 \usepackage{enumerate}
 \usepackage{sidecap}
 \usepackage{wasysym}
+\usepackage{mathbbol}
 
 % create \thickcline for thick horizontal lines of variable length
 \newlength\savedwidth
@@ -69,6 +70,7 @@
 %% Include all macros below
 \newcommand{\microns}{~\textmu m~} % ALL UNITS UPRIGHT WITH SPACE
 \newcommand{\invivo}{\textit{in vivo}~}
+\newcommand{\complexi}{i}
 %% END MACROS SECTION
 
 \begin{document}
@@ -91,15 +93,16 @@ This supplemental material to the article ``TWINKLE: An open-source two-photon m
 Class 4 lasers are extremely dangerous. A reflection on a surface can be enough to inflict permanent eye damage. Safety protocols must be observed. Consult with your institution's environmental health and safety officer and take proper training before performing any work with a laser system. Learn from people experienced with these devices and work carefully.\newline
 During alignment, always wear goggles (ours were ML1 by NoIR LaserShields with an optical density $>7$ in the relevant range around $920\text{ nm}$), remove jewelry and watches, and use the low laser power (“alignment mode”) whenever possible. Once the assembly progresses further, full power mode is necessary. Extra care must be taken then. Always use Laser Viewing Cards to track the laser. We use Thorlabs VRC4. Always be conscious where the beam is, and where the beam goes. The beam must be terminated in beam blockers and should be shielded whenever possible with opaque plastic or anodized aluminium tubes to increase safety.
 
-\subsection{Miscellaneous tools}
+\subsection{Miscellaneous tools and tips}
+The following tools are used throughout the build process:
 \begin{itemize}
-    \item Use a high quality duster to remove any residue from optical surfaces. We use a Miller-Stephenson Aero-Duster Ultra MS-222L, in addition to lens tissues (MC-5, Thorlabs) and Methanol (Sigma-Aldrich).
+    \item A high quality duster to remove any residue from optical surfaces. We use a Miller-Stephenson Aero-Duster Ultra MS-222L, in addition to lens tissues (MC-5, Thorlabs) and Methanol (Sigma-Aldrich).
     \item To glue optical filters we used an extra fast setting epoxy (Hardman Double/Bubble Epoxy). To seal small gaps, we use black silicone putty (V-tie self-setting silicone rubber).
     \item We used either McMaster or Thorlabs screwdrivers and hex keys.
     \item For alignment, we used laser viewing cards (VRC4, Thorlabs), cage system alignment plates (VRC4CPT, Thorlabs), and irises (SM1 Graduated Ring-Actuated Iris Diaphragm, SM1D12C, Thorlabs).
 \end{itemize}
-
-\subsection{Miscellaneous tips}
+%
+The following general tips might be of help as well:
 \begin{itemize}
     \item Shield the beam as soon as alignment of a particular section is done. This increases safety, and avoids accidentally bumping into aligned components.
     \item \textit{Walking the beam}: Any beam can be aligned through two irises using two mirrors. The first mirror the beam meets is sometimes called the ``position'' mirror as it affects primarily the position of the beam. The second ``angle'' mirror instead primarily affects the angle. Assigning each mirror a separate function (position versus angle) and by adjusting them iteratively, is a good rule of thumb for driving the beam through the 2 irises and eventually hitting a specific point at the desired angle \cite{Thorlabs}. 
@@ -146,11 +149,11 @@ Before building your own microscope, read these instructions fully. Check the CA
 \section{Assembly on the optical table}
 %
 \subsection{Beam conditioning}
-An overview of the system for beam conditioning is shown in Fig.~\ref{sfig1} with key items labelled by capital letters. The following lines will cover the items, and their alignment.
+An overview of the system for beam conditioning is shown in Fig.~\ref{sfig1} with key items labeled by capital letters. The following lines will cover the items, and their alignment.
 %
 \begin{figure}[!t]
     \includegraphics[width=\textwidth]{sfig1.jpg}
-    \caption{{\bf Overall view of the beam conditioning path on the optical table.} Shown is a photograph of the components used to condition the beam for our microscope. Key components of the system are labelled with capital letters. The laser is shown as a red transparent line with intensity color coded. The beamsplitter cube (component D) splits the beam into two, halving its power. The Pockels cell (component G) reduces the power further. The reflections out of the Pockels cell and from the shutter (item J) are shown in yellow. The telescope (item K) magnifies the beam $\times 2$. The empty SM1 tube is an anodized aluminum SM1 lens tube cover (SC600, Thorlabs). All parts are explained in the text together with a note on their alignment.}
+    \caption{{\bf Overall view of the beam conditioning path on the optical table.} Shown is a photograph of the components used to condition the beam for our microscope. Key components of the system are labeled with capital letters. The laser is shown as a red transparent line with intensity color coded. The beamsplitter cube (component D) splits the beam into two, halving its power. The Pockels cell (component G) reduces the power further. The reflections out of the Pockels cell and from the shutter (item J) are shown in yellow. The telescope (item K) magnifies the beam $\times 2$. The empty SM1 tube is an anodized aluminum SM1 lens tube cover (SC600, Thorlabs). All parts are explained in the text together with a note on their alignment.}
     \label{sfig1}
 \end{figure}
 %
@@ -218,7 +221,7 @@ Following beam conditioning on the optical table, the beam is reflected up from 
 %
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{sfig4.jpg}
-    \caption{{\bf Overall view of the scanning post.} \textbf{A)} Side few. Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components. Importantly, the machined block (C) houses the scanning mirrors, and the scan lens assembly is placed in the SM2 house labelled (E). \textbf{B)} Frontal view. The PMT preamplifiers (component G) and the scanning mirror power supply (component H) are visible.}
+    \caption{{\bf Overall view of the scanning post.} \textbf{A)} Side few. Key components of the system are labeled with capital letters. These are explained in the text together with a note on how to align these components. Importantly, the machined block (C) houses the scanning mirrors, and the scan lens assembly is placed in the SM2 house labeled (E). \textbf{B)} Frontal view. The PMT preamplifiers (component G) and the scanning mirror power supply (component H) are visible.}
     \label{sfig4}
 \end{figure}
 %
@@ -250,7 +253,7 @@ A picture is shown in Fig.~\ref{sfig5}.
 %
 \begin{figure}[t!]
     \includegraphics[width=\textwidth]{sfig5.jpg}
-    \caption{{\bf Overall view of the microscope head.} Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components.}
+    \caption{{\bf Overall view of the microscope head.} Key components of the system are labeled with capital letters. These are explained in the text together with a note on how to align these components.}
     \label{sfig5}
 \end{figure}
 %
@@ -292,7 +295,7 @@ After the beam's alignment is confirmed by traveling through the two irises, it 
 %
 \begin{SCfigure}
     \includegraphics[width=.5\textwidth]{sfig6.jpg}
-  \caption{{\bf Side view of the microscope head.} Key components of the system are labelled with capital letters. These are explained in the text together with a note on how to align these components.\newline
+  \caption{{\bf Side view of the microscope head.} Key components of the system are labeled with capital letters. These are explained in the text together with a note on how to align these components.\newline
   Set up like this, we were measuring the amount of light traveling through the system. Note the detector taped to the objective with green tape.\newline
   Also note that the photomultiplier tubes (component C) are light sensitive and need to be installed in the dark. We recommend to switch off the room lights when handling them, and allowing your eyes to adapt to the dark over several minutes. After installation into the collection optics, the lights can safely be used. The objective is easy to install, and just screwed into the piezoelectric collar, component F.}
   \label{sfig6}
@@ -387,11 +390,11 @@ The scan lens assembly is shown in Fig.~\ref{sfig8}C. The individual steps for t
 
 \subsection{Assembly of the collection optics}
 %
-The collection optics are made from several components, including optical filters, lenses, and custom metal pieces. Fig.~\ref{sfig9}A shows a cut through the CAD drawing. The function is described in the main manuscript. A pictures of the collection optics box is shown in Fig.~\ref{sfig9}B with key components labelled. Here, we will focus on the assembly and their alignment.
+The collection optics are made from several components, including optical filters, lenses, and custom metal pieces. Fig.~\ref{sfig9}A shows a cut through the CAD drawing. The function is described in the main manuscript. A pictures of the collection optics box is shown in Fig.~\ref{sfig9}B with key components labeled. Here, we will focus on the assembly and their alignment.
 %
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{sfig9.jpg}
-    \caption{{\bf Assembly of the collection optics.} \textbf{A)} The assembled collection optics with bottom cover removed, perspective from below. \textbf{B)} The collection optics during the assembly process, similar to panel A. Key components are labelled (see text). EDITS TO MAKE IN THE ARROWS}
+    \caption{{\bf Assembly of the collection optics.} \textbf{A)} The assembled collection optics with bottom cover removed, perspective from below. \textbf{B)} The collection optics during the assembly process, similar to panel A. Key components are labeled (see text). EDITS TO MAKE IN THE ARROWS}
     \label{sfig9}
 \end{figure}
 %
@@ -419,7 +422,7 @@ The collection optics are made from several components, including optical filter
 %
 \begin{figure}[!t]
     \includegraphics[width=\textwidth]{sfig10.jpg}
-    \caption{{\bf The scanning mirror box.} \textbf{A)} The custom aluminium box housing the pair of scanning mirrors. \textbf{B)} Close-up of the same box with key parts labelled: A: Two windows (WG11010-B, Thorlabs) to keep dust out. B: Attachment of the box to the 95 mm optical rail. C: An Iris used for alignment, and D: SM1 tubing. \textbf{C)} Bottom part of the aluminium box. A: the windows, and B: screws to attach the box to the drop-on rail carriage via four 0.75 inch tall 1 inch diameter posts. \textbf{D)} The scanning mirrors are mounted to the lid using heat transfer compound. E: Anodized aluminium block holding the scanning mirrors. F: One of the scanning mirror assemblies, G: The aluminium lid and H: The scanning mirrors. \textbf{E)} Same as \textbf{D} but different angle. \textbf{F)} Same as \textbf{E} but different angle. I: Cables controlling the scanning mirrors.}
+    \caption{{\bf The scanning mirror box.} \textbf{A)} The custom aluminium box housing the pair of scanning mirrors. \textbf{B)} Close-up of the same box with key parts labeled: A: Two windows (WG11010-B, Thorlabs) to keep dust out. B: Attachment of the box to the 95 mm optical rail. C: An Iris used for alignment, and D: SM1 tubing. \textbf{C)} Bottom part of the aluminium box. A: the windows, and B: screws to attach the box to the drop-on rail carriage via four 0.75 inch tall 1 inch diameter posts. \textbf{D)} The scanning mirrors are mounted to the lid using heat transfer compound. E: Anodized aluminium block holding the scanning mirrors. F: One of the scanning mirror assemblies, G: The aluminium lid and H: The scanning mirrors. \textbf{E)} Same as \textbf{D} but different angle. \textbf{F)} Same as \textbf{E} but different angle. I: Cables controlling the scanning mirrors.}
     \label{sfig10}
 \end{figure}
 %
@@ -429,23 +432,24 @@ The two box apertures (beam input and output) have near-infrared antireflection-
 
 \subsection{Scanning mirror power supply}
 %
-The scanning mirrors come with driver circuit boards. We place them in a prototype box (EG6, Gold Box, Acopian), and connect the driver board's power supply and signal lines to connectors for easier access, see Fig.~\ref{sfig11}A. The driver boards are mounted to the aluminium walls of the prototype box with heat transfer compound (Wakefield Thermal Joint Compound Type 120-5 Silicone). The power connectors accept banana plugs. The signals are connected to BNC connectors.
+The scanning mirrors come with driver circuit boards. We place them in a prototype box (EG6, Gold Box, Acopian), and connect the driver board's power supply and signal lines to connectors for easier access, see Fig.~\ref{sfig11}A. The driver boards are mounted to the aluminium walls of the prototype box with heat transfer compound (Wakefield Thermal Joint Compound Type 120-5 Silicone). The power connectors accept banana plugs. The signals are connected to BNC connectors. 
 %
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{sfig11.jpg}
-  \caption{{\bf Scanner electronics.} \textbf{A)} Overview of all scanning mirror parts. Key parts are labelled with capital letters. Optomechanics were covered in Fig.~\ref{sfig10}. All electrical drivers were placed in the yellow circuit box. \textbf{B)} Power supply and connection of the scanning mirrors with key parts labelled by capital letters. The inset shows the scanning mirror driver boards provided by Novanta and mounted in the yellow circuit box. The smaller driver circuit (blue) powers the resonant scanner. The larger circuit board (green) drives the slow galvanometer. The circuit boards are mounted to the aluminium walls with screws and heat transfer compound.}
+  \caption{{\bf Scanner electronics.} \textbf{A)} Overview of all scanning mirror parts. Key parts are labeled with capital letters. Optomechanics were covered in Fig.~\ref{sfig10}. All electrical drivers were placed in the yellow circuit box. \textbf{B)} Power supply and connection of the scanning mirrors with key parts labeled by capital letters. \textcolor{blue}{\textbf{C)} Wiring diagram for the $\pm 28\text{ V}$ power supply, using two galvanically isolated supplies. \textbf{D)} The scanning mirror driver boards, provided by Novanta, and mounted in the yellow circuit box. The smaller driver circuit (blue) powers the resonant scanner. The larger circuit board (green) drives the slow galvanometer. The circuit boards are mounted to the aluminium walls with screws and heat transfer compound. \textbf{E)} Same box as in D, but from the outside and key parts labeled by capital letters.}}
   \label{sfig11}
 \end{figure}
 %
-Fig.~\ref{sfig11}A shows as the housing box (component A) and xy scanning mirror set (component B) that we discussed above. Components C are the cables connecting the scanning mirrors to their driver boards. These driver boards are housed in a yellow prototype box, and connected to accept power (component D), and signals (component F). Fig.~\ref{sfig11}B shows the power supply of the scanning mirrors. At time of purchase, we requested the controller of the slow galvanometer mirror to be configured for usage at $\pm 28\text{ V}$  (manufacturer default is $\pm 24\text{ V}$). This overall improves dynamical properties. The controller requires three voltage inputs, respectively -28 V, 0 V, and +28 V. The 0 V is also grounded. The second power supply to the left provides 12 V for the resonant scanner. The supplies are connected to the power supply ports on the prototype box, and the signal lines are connected to the MBF Bioscience DAQ system. Key components in the figure are labelled with capital letters. These are as follows:
+Fig.~\ref{sfig11}A shows as the housing box (component A) and xy scanning mirror set (component B) that we discussed above. Components C are the cables connecting the scanning mirrors to their driver boards. These driver boards are housed in a yellow prototype box, and connected to accept power (component D), and signals (component F). Fig.~\ref{sfig11}B shows the power supply of the scanning mirrors. At time of purchase, we requested the controller of the slow galvanometer mirror to be configured for usage at $\pm 28\text{ V}$ (manufacturer default is $\pm 24\text{ V}$). This overall improves dynamical properties. The controller for the slow scanner requires three supplies respectively: -28 V, 0 V, and +28 V. \\
+\textcolor{blue}{To provide these three signals, we used a power supply with two galvanically isolated and adjustable output channels, that can be connected in series (Note: not every power supply can do this. We used a GPD-3303D from Gw Instek that allows this function with the SER/INDEP key). The voltage of each of the two unconnected channels was set to +28 V. To produce the three supply signals, we used these two channels in series. In other words, we connect the positive terminal of the first channel to the negative terminal of the second channel. As the channels are otherwise not connected to a common ground (this is meant with the words ``galvanically isolated''), this does not produce a short circuit. Instead, this link effectively provides a new reference point, relative to which the first supply produces a negative -28 V supply, and the second supply produces the +28 V supply. This is illustrated in Fig.~\ref{sfig11}C. In this arrangement, a multimeter would read between points G and I +28 V, between G and F -28 V, and between F and I +56 V. The supply of the resonant scanners is simpler, as it only requires a single +12 V line. The supplies are connected to the power supply ports on the prototype box, in which the two driver boards reside, see Fig.~\ref{sfig11}D. Signal lines are connected on the outside with coaxial cables to the MBF Bioscience DAQ system, see Fig.~\ref{sfig11}E.} Key components in the panels are labeled with capital letters. These are as follows:
 \begin{itemize}
     \item \textbf{A)} Power supply (GPD-3303D, Gw Instek) with two channels configured in series, both set to 28 V.
     \item \textbf{B)} Have CH 1 turned on.
-    \item \textbf{C)} Press the ``Ser/Indep'' button. This wires the two channels together to a shared references to provide the $\pm 28\text{ V}$ and the 0 V reference line.
-    \item \textbf{D)} This enables our power supply unit. Only when pressed, power is sourced to the galvanometer driver board.
+    \item \textbf{C)} Press the ``Ser/Indep'' button. This wires the two channels together to a shared references to provide the $\pm 28\text{ V}$ and the 0 V reference line, see Fig.~\ref{sfig11}C.
+    \item \textbf{D)} This button enables our power supply unit. Only when pressed, power is sourced to the galvanometer driver board.
     \item \textbf{E)} CC/CV indicator light. Make sure that the device is set to CV (constant voltage).
-    \item \textbf{F)} The -28 V output line (black). This is connected to the -28 V line on the electronics box (shown below).
-    \item \textbf{G)} The reference lines, 0 V (white) connected to the 0 V line on the electronics box.
+    \item \textbf{F)} The -28 V output line (black). This is connected to the -28 V line on the electronics box (shown below in Fig.~\ref{sfig11}E).
+    \item \textbf{G)} The reference lines, 0 V (white) connected to the 0 V line on the electronics box, see Fig.~\ref{sfig11}E.
     \item \textbf{H)} Connects the reference line to ground.
     \item \textbf{I)} The +28 V output line (red) connected to the +28 V line on the electronics box. Conform the correct voltage with a reliable multimeter BEFORE powering up the galvanometer controller, e.g. with a Fluke 117.
     \item \textbf{J)} Power supply (E3630A, Keysight) set to 12 V to power the resonant scanners.
@@ -462,7 +466,7 @@ The last part to be assembled is the control circuitry for the photomultiplier t
 %
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{sfig12.jpg}
-  \caption{{\bf Custom electronics.} \textbf{A)} Picture of the control box. Component A are the displays for the control voltage for red and green channels. Component B are the two potentiometers to set the two channel gains. \textbf{B)} Inside view of the potentiometer box with key components labelled (see text). \textbf{C)} Connector attached to the controller box before plugging into the PMTs. \textbf{D)} Connector from the Control box to the PMT cables. \textbf{E)} Outputs of the PMTs. Note the four color-coded American wire gauge \#28 cables, and the coaxial signal line\cite{Hamamatsu2024}.}
+  \caption{{\bf Custom electronics.} \textbf{A)} Picture of the control box. Component A are the displays for the control voltage for red and green channels. Component B are the two potentiometers to set the two channel gains. \textbf{B)} Inside view of the potentiometer box with key components labeled (see text). \textbf{C)} Connector attached to the controller box before plugging into the PMTs. \textbf{D)} Connector from the Control box to the PMT cables. \textbf{E)} Outputs of the PMTs. Note the four color-coded American wire gauge \#28 cables, and the coaxial signal line\cite{Hamamatsu2024}.}
   \label{sfig12}
 \end{figure}
 %
@@ -628,12 +632,51 @@ Make a point of regularly checking your microscope. Lenses can get dirty, the pa
     \item Measure (1) the laser's power levels, (2) the Pockels cell calibration and (3) check exposed lenses and mirrors for dust and fingerprints with a flashlight. This is fast and should be done before every experiment.
     \item When the microscope is not in use, it is good practice to switch off all components, except the scanning mirror power supplies, the PMT preamplifiers, and the photodiode.
     \item Every once in a while, switch the red and green PMTs to check for signs of aging and validate their performance on a fluorescent slide or sample of known brightness. The PMTs can degrade and may need to be replaced, depending on use, after several years. They should be treated with care: power ramped up and down slowly, and saturation should be avoided. We use a rotation system in which new PMTs are typically used for the green channel. When their performance becomes worse, they often have a few more months or years in the (typically brighter) red channel in them.
-    \item It is recommended to periodically image a bead sample to validate the PSF, as well as a Fluorescein bath to detect possible misalignment.
+    \item It is recommended to periodically image a bead sample to validate the PSF, as well as a Fluorescein bath to detect possible misalignment. For a detailed protocol, see Lees et al. \cite{Lees2024}.
     \item Be mindful of imaging artifacts. When suspecting an issue, go back to the basics, and isolate the error.
 \end{itemize}
 %
  For safety, it is good practice to shield the laser path. In addition to safety concerns, it will also help in keeping dust and dirt away from optical components.
 
+\section{Deriving the intensity-dispersion relation}
+\textcolor{blue}{In the main article, we stated that the expected fluorescence $I(\varphi)$ as function of group delay dispersion $\varphi$ applied to a $\varphi_0$-dispersed Gaussian pulse of full-width-at-half-maximum $\Delta\tau$ can be written as
+\begin{eqnarray}
+    I(\varphi)=I_0 \left(1+16\log(2)^2\frac{(\varphi+\varphi_0)^2}{\Delta\tau^4}\right)^{-1/2}\label{main}.
+\end{eqnarray}
+To derive this expression, consider the electrical field of a Gaussian pulse of amplitude $E_0$, width $\Delta t$, center frequency $\omega_0$, phase $\Theta$, and centered at time $t=0$:
+\begin{eqnarray}
+E(t)=E_0\exp\left(-\frac{t^2}{4\Delta t^2}\right)\cdot\exp\left(-\complexi\left(\omega_0 t + \Theta\right)\right).
+\end{eqnarray}
+Its intensity is 
+\begin{eqnarray}
+P(t) = |E(t)|^2 = |E_0|^2 \exp\left(-\frac{t^2}{2\Delta t^2}\right)\label{intens}.
+\end{eqnarray}
+In the Fourier domain, the spectral content of this wave package is:
+\begin{eqnarray}
+\tilde{E}(\omega)=E_0\cdot\sqrt{2}\Delta t\, \exp\left(-\complexi\,\Theta -\Delta t^2(\omega - \omega_0)^2\right).
+\end{eqnarray}
+In the linear regime, frequency-dependent dispersion changes the electric field to
+\begin{eqnarray}
+\tilde{E}(\omega)\to\tilde{E}(\omega)\cdot\exp\left(\complexi\,\phi(\omega-\omega_0)\right)
+\end{eqnarray}
+with phase shift $\phi(\omega-\omega_0)$. We approximate this function to quadratic order $\phi(\omega-\omega_0)\approx a + b(\omega-\omega_0) + \frac{c}{2}(\omega-\omega_0)^2$. With this approximation, we obtain the Fourier representation of the electric field of the dispersed pulse:
+\begin{eqnarray}
+\tilde{E}^\text{disp}(\omega)=\tilde{E}(\omega)\cdot\exp\left(\complexi\,\left(a + b(\omega-\omega_0) + \frac{c}{2}(\omega-\omega_0)^2\right)\right).
+\end{eqnarray}
+Coefficient $a$ causes a phase shift and coefficient $b$ a time shift. Both do not change pulse width. Computing the inverse Fourier transform to obtain $E^\text{disp}(t)$ allows to compute the intensity of the dispersed pulse as 
+\begin{eqnarray}
+P^\text{disp}(t) = |E^\text{disp}(t)|^2 = |E_0|^2\frac{2\Delta t^2}{\sqrt{c^2 + 4\Delta t^4}}\exp\left(-\frac{2(b+t)^2\Delta t^2}{c^2+4\Delta t^4}\right)\label{intens_disp}.
+\end{eqnarray}
+If the average power of the laser across dispersion compensation settings $c$ is constant, the prefactor is approximately constant. Comparison with Eq. \eqref{intens} then shows that the pulse has broadened in time to $\Delta t\to \frac{\sqrt{c^2+4\Delta t^4}}{2\Delta t}$. Rewriting the widths of the dispersed pulse in the more common full-width-at-half-maximum $\Delta\tau$, using $\Delta t \to \Delta\tau/\sqrt{8\log(2)}$ for a Gaussian pulse, we obtain
+\begin{eqnarray}
+\Delta\tau^\text{disp} = \frac{\sqrt{\Delta\tau^4 + 16\log(2)^2c^2}}{2 \Delta\tau\sqrt{\log(4)}}.
+\end{eqnarray}
+The two-photon fluorescence intensity $I$ is proportional to the inverse of the pulse width, and the group delay dispersion is composed of the original dispersion $\varphi_0$ and the applied correction $\varphi$, so that $c \to \varphi_0 + \varphi$. We obtain
+\begin{eqnarray}
+I(\varphi) \propto \frac{1}{\Delta\tau^\text{disp}} = \frac{2 \Delta\tau\sqrt{\log(4)}}{\sqrt{\Delta\tau^4 + 16\log(2)^2(\varphi_0 + \varphi)^2}} = \frac{2\sqrt{\log(4)}}{\Delta\tau}\frac{1}{\sqrt{1 + 16\log(2)^2\frac{(\varphi_0 + \varphi)^2}{\Delta\tau^4}}}.
+\end{eqnarray}
+Absorbing the constants $\frac{2\sqrt{\log(4)}}{\Delta\tau}\to I_0$ yields Eq.~\eqref{main}. The same result for pulse broadening, with $16\log(2)^2\approx 7.68\dots$, is stated as Eq.~(3) in \cite{Zipfel2003}.
+}
 \nolinenumbers
 
 \begin{thebibliography}{10}
@@ -662,6 +705,12 @@ Yao P, Liu R, Broggini T, Thunemann M, Kleinfeld D. Construction and use of an a
 \bibitem{Hamamatsu2024}
 Technical note on the Photomultiplier Tube Modules Series
 H16200/H16201/H16204, Hamamatsu Photonics 2014 \url{https://www.hamamatsu.com/eu/en/product/optical-sensors/pmt/pmt-module/current-output-type/H16201-40.html}
+
+\bibitem{Lees2024}
+Lees RM, Bianco IH, Campbell RAA, Orlova N, Peterka DS, Pichler B, Smith SL, Yatsenko D, Yu CH, Packer AM. Standardised Measurements for Monitoring and Comparing Multiphoton Microscope Systems. bioRxiv [Preprint]. 2024 Jan 23:2024.01.23.576417. doi: 10.1101/2024.01.23.576417. PMID: 38328224; PMCID: PMC10849699.
+
+\bibitem{Zipfel2003}
+Zipfel WR, Williams RM, Webb WW. Nonlinear magic: multiphoton microscopy in the biosciences. Nat Biotechnol. 2003 Nov;21(11):1369-77. doi: 10.1038/nbt899. PMID: 14595365.
 
 \end{thebibliography}
 
