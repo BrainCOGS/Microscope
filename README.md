@@ -25,10 +25,10 @@ This repository documents a microscope for Two-photon Imaging in Neuroscience, a
 
 ### Computer assisted design (CAD) files
 The CAD files are provided in two formats:
-- In the Fusion 360 native format as `FullAssembly.f3d`; md5 hash `cbc14d6bce3a4f311935500c3b959128`.
+- In the Fusion 360 native format as `FullAssembly.f3d`; md5 hash `2b449ca0403f2ce7f2882990966d1d5e`.
 - For Autodesk Inventor:
     1. When using the Inventor folder, open the master assembly `FullAssembly.iam`.
-    2. A zip file of the same data is split into three files. Assemble the data with `cat x?? > FullAssembly.zip`. The file `FullAssembly.zip` is 166 MB with md5 hash `130a4bcaa6f747f43ba337dc33d74409`.
+    2. A zip file of the same data is split into three files. Assemble the data with `cat x?? > FullAssembly.zip`. The file `FullAssembly.zip` is 165 MB with md5 hash `33ba62a7fb04bc53d11bb660787301d2`.
 
 ### Issue
 Issues are tracked through this repository. For minor updates, just push. For major ones, use a PR. 
