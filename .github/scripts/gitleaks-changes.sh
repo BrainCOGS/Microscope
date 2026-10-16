@@ -4,8 +4,8 @@
 #
 # - GITLEAKS_BASE set (CI): the commits in GITLEAKS_BASE..HEAD, plus the lines that
 #   merge commits in that range introduced themselves (e.g. conflict resolutions),
-#   not what they brought in from the merged branch. Set but empty (a manual
-#   workflow_dispatch run has no base): the whole history.
+#   not what they brought in from the merged branch. Set but empty: an error, so a
+#   run without a base cannot pass without scanning anything.
 # - Merge commit in progress: what differs from the branch being merged in (this
 #   branch's changes and the conflict resolutions), not everything merged in.
 # - Otherwise: the staged changes (the upstream hook's behavior).
@@ -26,8 +26,8 @@ merge_introduced_lines() {
 
 if [[ -n "${GITLEAKS_BASE+set}" ]]; then
     if [[ -z "${GITLEAKS_BASE}" ]]; then
-        echo "gitleaks: no base given, scanning the whole history"
-        exec gitleaks git --redact --verbose
+        echo "gitleaks: GITLEAKS_BASE is set but empty, refusing to pass without scanning" >&2
+        exit 1
     elif git rev-parse --quiet --verify "${GITLEAKS_BASE}^{commit}" >/dev/null; then
         range=("${GITLEAKS_BASE}..HEAD")
     else
